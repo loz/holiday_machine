@@ -41,17 +41,6 @@ class Vacation < ActiveRecord::Base
     date_to = Time.at(end_date.to_i).to_date
 
     holidays = self.get_team_holidays_for_dates current_user, date_from, date_to
-
-#    if current_user.manager_id.nil? and current_user.user_type_id == 2
-#      p "is manager, but has no manager themselves"
-#      holidays = self.where "date_from >= ? and date_to <= ? and (user_id=? or manager_id=?)", date_from, date_to, current_user.id, current_user.manager_id
-#    elsif !current_user.manager_id.nil? and current_user.user_type_id == 2
-#      p "IS A MANAGER and has a manager but will only get self and any users with the manager id"
-#       holidays = self.where "date_from >= ? and date_to <= ? and (user_id=?)", date_from, date_to, current_user.id
-#    else
-#      p "is not a manager and has no manager"
-#      holidays = self.where "date_from >= ? and date_to <= ? and (user_id=?)", date_from, date_to, current_user.id
-#    end
     bank_holidays = BankHoliday.where "date_of_hol between ? and ? ", date_from, date_to
     self.convert_to_json holidays, bank_holidays
   end
