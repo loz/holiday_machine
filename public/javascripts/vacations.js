@@ -15,11 +15,11 @@ $(document).ready(function() {
         text: false
     });
 
-    $('.saveButton').button({
-        icons: {
-            primary: "ui-icon-circle-plus"
-        }
-    });
+//    $('.saveButton').button({
+//        icons: {
+//            primary: "ui-icon-circle-plus"
+//        }
+//    });
 
 
     $("#vacation_holiday_status_id").live('change', function() {

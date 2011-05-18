@@ -1,5 +1,7 @@
 class Vacation < ActiveRecord::Base
 
+  #TODO remove the manager from this class, get it via the user - so that if the manager is updated, there won't be a problem
+
   belongs_to :holiday_status
   belongs_to :holiday_year
   belongs_to :user
@@ -37,18 +39,33 @@ class Vacation < ActiveRecord::Base
     #TODO filter this to show all hols, by team, and by user
     date_from = Time.at(start_date.to_i).to_date
     date_to = Time.at(end_date.to_i).to_date
-    if current_user.manager_id.nil? and current_user.user_type_id == 2
-      p "NO STUFF"
-      holidays = self.where "date_from >= ? and date_to <= ? and (manager_id=? or user_id=? or manager_id=?)", date_from, date_to, current_user.id, current_user.id, current_user.manager_id
-    elsif current_user.manager_id.nil?
-      p "HAS NO MANAGER"
-       holidays = self.where "date_from >= ? and date_to <= ? and (user_id=?)", date_from, date_to, current_user.id
-    else
-      p "HAS MAANGER"
-      holidays = self.where "date_from >= ? and date_to <= ? and (manager_id=? or user_id=?)", date_from, date_to, current_user.manager_id, current_user.manager_id
-    end
+
+    holidays = self.get_team_holidays_for_dates current_user, date_from, date_to
+
+#    if current_user.manager_id.nil? and current_user.user_type_id == 2
+#      p "is manager, but has no manager themselves"
+#      holidays = self.where "date_from >= ? and date_to <= ? and (user_id=? or manager_id=?)", date_from, date_to, current_user.id, current_user.manager_id
+#    elsif !current_user.manager_id.nil? and current_user.user_type_id == 2
+#      p "IS A MANAGER and has a manager but will only get self and any users with the manager id"
+#       holidays = self.where "date_from >= ? and date_to <= ? and (user_id=?)", date_from, date_to, current_user.id
+#    else
+#      p "is not a manager and has no manager"
+#      holidays = self.where "date_from >= ? and date_to <= ? and (user_id=?)", date_from, date_to, current_user.id
+#    end
     bank_holidays = BankHoliday.where "date_of_hol between ? and ? ", date_from, date_to
     self.convert_to_json holidays, bank_holidays
+  end
+
+
+  def self.get_team_holidays_for_dates current_user, start_date, end_date
+    team_users = User.get_team_users current_user.id
+    #TODO simplify
+    team_users_array = []
+    team_users.each do |u|
+       team_users_array << u.id
+    end
+    holidays = self.where "date_from >= ? and date_to <= ? and (user_id in(?))", start_date, end_date, team_users_array
+    holidays
   end
 
   private
