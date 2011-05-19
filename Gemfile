@@ -4,7 +4,7 @@ gem 'rails', '3.0.7'
 
 gem 'mysql2'
 
-gem 'devise', '1.1.7'
+gem 'devise', '1.3.4'
 
 gem 'cancan'
 

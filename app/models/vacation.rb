@@ -1,6 +1,6 @@
 class Vacation < ActiveRecord::Base
 
-  #TODO remove the manager from this class, get it via the user - so that if the manager is updated, there won't be a problem
+  #TODO remove the manager_id from this class, get it via the user - so that if the manager is updated, there won't be a problem
 
   belongs_to :holiday_status
   belongs_to :holiday_year

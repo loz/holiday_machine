@@ -1,15 +1,19 @@
 <fieldset class="login register">
   <legend class="login register">Edit <%= resource_name.to_s.humanize %></legend>
 
-  <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+
       <%= devise_error_messages! %>
 
       </br>
       <p><%= f.input :email, :input_html => { :size => 35 } %></p>
 
-      <p><%= f.input :password %></p>
+      <p><%= f.input :password %><i>(leave blank if you don't want to change it)</i></p>
 
       <p><%= f.input :password_confirmation %></p>
+
+       <p><%= f.label :current_password %><i>(we need your current password to confirm your changes)</i><br />
+       <%= f.password_field :current_password %></p>
 
       <p><%= f.input :forename, :input_html => { :size => 40 } %></p>
 
