@@ -1,10 +1,10 @@
 <div id="holidaysTable" class="ui-grid ui-widget ui-widget-content ui-corner-all">
   <div style="float:left; width:100%;" class="ui-grid-header ui-widget-header ui-corner-top">Edit Holidays</div>
-  <table class="ui-grid-content ui-widget-content" width="100%">
+  <table class="ui-grid-content ui-widget-content" style="width:70%;">
   <% @users.each do |user| %>
       <% if user.vacations.size > 0 %>
           <tr style="display:block">
-            <th style="float:left;" colspan="7"><%= user.full_name %></th>
+            <th style="float:left; white-space: nowrap;" colspan="7"><%= user.full_name %></th>
           </tr>
           <tr>
             <th class="ui-state-default">Date From</th>
@@ -18,14 +18,14 @@
       <% end %>
       <% user.vacations.each do |holiday| %>
           <tr class='<%=holiday.id%>'>
-            <td class="ui-widget-content"><%= holiday.date_from.strftime("%d/%m/%Y") %></td>
-            <td class="ui-widget-content"><%= holiday.date_to.strftime("%d/%m/%Y") %></td>
-            <td class="ui-widget-content"><%= holiday.description %></td>
-            <td class="ui-widget-content"><%= holiday.working_days_used.to_s %></td>
+            <td class=""><%= holiday.date_from.strftime("%d/%m/%Y") %></td>
+            <td class=""><%= holiday.date_to.strftime("%d/%m/%Y") %></td>
+            <td class=""><%= holiday.description %></td>
+            <td class=""><%= holiday.working_days_used.to_s %></td>
              <%= form_for(holiday, :remote => true) do |hol| -%>
-                <td class="ui-widget-content"><%= hol.collection_select :holiday_status_id, @statuses, :id, :status %></td>
-                <td class="ui-widget-content"><%= hol.text_field :notes %></td>
-                <td class="ui-widget-content"><%= hol.submit 'Update Holiday' %></td>
+                <td class=""><%= hol.collection_select :holiday_status_id, @statuses, :id, :status %></td>
+                <td class=""><%= hol.text_field :notes %></td>
+                <td class=""><%= hol.submit 'Update Holiday' %></td>
             <% end -%>
           </tr>
       <% end %>
