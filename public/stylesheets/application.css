@@ -1,17 +1,16 @@
 body {
-    background-image: url('/images/BlueToWhiteGradient.jpg'); /*-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)"; *//*filter: alpha(opacity=50);*/
+    background-image: url('/images/BlueToWhiteGradient.jpg');
 }
 
 #container {
     overflow: auto;
     width: 70%;
-    margin: 0 auto; /*background-image: url('/images/BlueToWhiteGradient.jpg');*/
     background-color: white;
-    padding: 20px 40px;
+    padding-left: 10px;
+    margin: 30px 10% 40px;
     border: solid 1px black;
     -moz-border-radius: 10px;
     border-radius: 10px;
-    margin-top: 20px;
     height: 800px;
 }
 
@@ -85,8 +84,8 @@ body {
 .login {
     position: absolute;
     float: right;
-    top: 30px;
-    right: 15%;
+    top: 5px;
+    right: 5%;
 }
 
 .simple_form label {
@@ -131,6 +130,7 @@ body {
 }
 
 #top_navigation ul li {
+    width: 20%;
     display: inline;
 }
 
@@ -471,6 +471,7 @@ input.button:hover {
     padding-left: 5px;
     font-size: 12px;
 }
+
 
 
 
