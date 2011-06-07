@@ -122,7 +122,7 @@ body {
     border-radius: 5px;
     padding-left: 0;
     margin-left: 0;
-    background-color: #036;
+    background-color: #02A702;
     color: white;
     float: left;
     width: 100%;
@@ -136,7 +136,7 @@ body {
 
 #top_navigation ul li a {
     padding: 0.4em 2em;
-    background-color: #036;
+    background-color: #02A702;
     color: white;
     text-decoration: none;
     float: left;
@@ -144,12 +144,12 @@ body {
 }
 
 #top_navigation ul li a:hover {
-    background-color: #369;
+    background-color: #55A802;
     color: #fff;
 }
 
 #top_navigation ul li a.selected {
-    background-color: #5a94cf;
+    background-color: #93C85E;
     color: #fff;
 }
 
@@ -291,39 +291,38 @@ fieldset.update {
     top: 20px;
 }
 
-.userDayReadOnly {
-    background-color: #B3C6FF;
-    border: 1px solid #090968;
-}
+/*.userDayReadOnly {*/
+    /*background-color: #B3C6FF;*/
+    /*border: 1px solid #090968;*/
+/*}*/
 
-.userDayReadOnly1 {
-    color: white;
-    background-color: #84aff2;
-    border: 1px solid #090968;
-}
+/*.userDayReadOnly1 {*/
+    /*color: white;*/
+    /*background-color: #84aff2;*/
+    /*border: 1px solid #090968;*/
+/*}*/
 
-.userDayReadOnly1 {
-    background-color: #98a5ba;
-    border: 1px solid #090968;
-}
+/*.userDayReadOnly1 {*/
+    /*background-color: #98a5ba;*/
+    /*border: 1px solid #090968;*/
+/*}*/
 
-.userDayReadOnly2 {
-    background-color: #f8e60e;
-    border: 1px solid #68090c;
-}
+/*.userDayReadOnly2 {*/
+    /*background-color: #f8e60e;*/
+    /*border: 1px solid #68090c;*/
+/*}*/
 
-.userDaysHeader {
-    background-color: #00289E;
-    color: white;
-    border: 1px solid #001452;
-}
+/*.userDaysHeader {*/
+    /*background-color: #00289E;*/
+    /*color: white;*/
+    /*border: 1px solid #001452;*/
+/*}*/
 
-/*table#manageDays {*/
-/*-moz-border-radius: 5px;*/
-/*border-radius: 5px;*/
-/*border-collapse: collapse;*/
-/*margin: 0 0 30px -5px;*/
-
+/*#manageDays {*/
+    /*-moz-border-radius: 5px;*/
+    /*border-radius: 5px;*/
+    /*border-collapse: collapse;*/
+    /*margin: 0 0 30px -5px;*/
 /*}*/
 
 /*table#holidaysTable {*/
