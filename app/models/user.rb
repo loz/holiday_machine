@@ -20,7 +20,8 @@ class User < ActiveRecord::Base
 
   attr_accessible :email, :password, :password_confirmation, :forename, :surname, :user_type_id, :manager_id
 
-  scope :get_team_users, lambda { |manager_id| where('manager_id = ? or id = ?', manager_id, manager_id) }
+  #Includes own manager
+  scope :get_team_users, lambda { |manager_id| where('(manager_id = ? or id = ?) and confirmed_at is not null', manager_id, manager_id) }
 
   def full_name
     self[:forename] + " " + self[:surname]

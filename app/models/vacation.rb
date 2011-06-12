@@ -47,8 +47,7 @@ class Vacation < ActiveRecord::Base
 
 
   def self.get_team_holidays_for_dates current_user, start_date, end_date
-    team_users = User.get_team_users current_user.id
-    #TODO simplify
+    team_users = User.get_team_users current_user.manager_id
     team_users_array = []
     team_users.each do |u|
        team_users_array << u.id

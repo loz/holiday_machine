@@ -6,7 +6,6 @@ class CalendarController < ApplicationController
     #Populate the calendar
     respond_to do |format|
       format.json {
-        #TODO what if the current user is a manager
         holidays_json = Vacation.team_holidays_as_json current_user, params[:start], params[:end]
         render :json => holidays_json
       }
