@@ -36,6 +36,8 @@ HolidayMachine::Application.routes.draw do
 
   root :to => 'vacations#index'
 
+  get "info/registration_message"
+
 #  match '/token' => 'home#token', :as => :token
 
 end
