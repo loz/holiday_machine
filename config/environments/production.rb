@@ -14,7 +14,7 @@ HolidayMachine::Application.configure do
   # For nginx:
   config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect'
 
-  config.action_mailer.default_url_options = { :host => 'thalamouse.com' }
+  config.action_mailer.default_url_options = { :host => 'emerald.heroku.com' }
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
