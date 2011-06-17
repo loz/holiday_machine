@@ -4,6 +4,9 @@ class VacationsController < ApplicationController
 
   # GET /vacations
   def index
+
+    raise "Hello exception"
+
     @vacations ||= []
 
     @vacation = Vacation.new
