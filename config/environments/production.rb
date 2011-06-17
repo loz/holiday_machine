@@ -26,6 +26,12 @@ HolidayMachine::Application.configure do
   :authentication       => 'plain',
   :enable_starttls_auto => true  }
 
+  config.middleware.use ExceptionNotifier,
+    :email_prefix => "holiday machine exception ",
+    :sender_address => %{"notifier" <holiday.machine@gmail.com>},
+    :exception_recipients => %w{eamon_skelly@hotmail.com}
+
+
   # If you have no front-end server that supports something like X-Sendfile,
   # just comment this out and Rails will serve the files
 
