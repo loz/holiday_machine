@@ -18,7 +18,7 @@ gem "simple-navigation"
 
 gem 'client_side_validations'
 
-gem "exception_notification", :require => 'exception_notifier', :git => "https://github.com/smartinez87/exception_notification.git"
+gem "exception_notification"
 
 group :development, :test do
   gem 'rspec'
