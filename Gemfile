@@ -1,14 +1,14 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.7'
+gem 'rails', '3.0.9'
 
-#gem 'mysql2', '0.2.7' #Add 0.3.x version after Rails 3.1 upgrade
+gem 'mysql2', '0.2.7' #Add 0.3.x version after Rails 3.1 upgrade
 
-gem 'mysql' #For heroku only
+#gem 'mysql' #For heroku only
 
 gem 'devise', '1.3.4'
 
-gem 'cancan'
+#gem 'cancan'
 
 gem 'simple_form'
 
