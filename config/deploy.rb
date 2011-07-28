@@ -57,7 +57,7 @@ set :use_sudo, false
 
 # Git
 set :scm, :git
-set :repository,  "~/#{application}/.git"
+set :repository,  "git://github.com/etskelly/holiday_machine.git"
 set :branch, "master"
 
 # VPS
