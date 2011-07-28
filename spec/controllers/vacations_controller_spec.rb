@@ -9,15 +9,9 @@ describe VacationsController do
 #  end
 
   before do
-#    @request.env["devise.mapping"] = Devise.mappings[:user]
     @user = Factory.create(:user)
     @user.confirm!
     sign_in @user
-
-#    @user = Factory.create(:user)
-#    @request.env['devise.mapping'] = :user
-#    @user.confirm!
-#    sign_in @user
   end
 
   describe "GET index" do
@@ -28,8 +22,7 @@ describe VacationsController do
 
     it "has 25 days remaining since no holidays have been raised"  do
       get :index
-      days_remaining=controller.instance_variable_get(:@days_remaining)
-      days_remaining.should == 25
+      assigns(:days_remaining).should == 25
     end
   end
 

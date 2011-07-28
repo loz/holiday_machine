@@ -20,6 +20,8 @@ gem 'client_side_validations'
 
 gem "exception_notification"
 
+gem "rack-ssl"
+
 group :development, :test do
   gem 'rspec'
   gem 'rspec-rails'

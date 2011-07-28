@@ -16,6 +16,8 @@ module HolidayMachine
       g.test_framework :rspec
     end
 
+    config.middleware.insert_before ActionDispatch::Cookies, Rack::SSL
+
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
 

@@ -19,6 +19,6 @@ production:
   encoding: utf8
   database: holiday_production
   pool: 5
-  username: holiday_machine
-  password: vacation
+  username: root
+  password: admin
 
