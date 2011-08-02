@@ -65,7 +65,7 @@ HolidayMachine::Application.configure do
   config.active_support.deprecation = :notify
 
   require 'rack/ssl'
-  config.middleware.use Rack::SSL
+  #config.middleware.use Rack::SSL
 
   config.force_ssl = true
 end
