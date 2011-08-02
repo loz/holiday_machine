@@ -5,9 +5,7 @@ class User < ActiveRecord::Base
          :token_authenticatable
 
   after_create :create_allowance
-  after_destroy :delete_allowance
-
-  #TODO remove days_leave - this has been replaced by the user_days_for_years table
+  after_destroy :delete_all_allowances
 
   belongs_to :user_type
 
@@ -35,6 +33,10 @@ class User < ActiveRecord::Base
     allowance
   end
 
+  def get_holiday_allowance_for_selected_year year
+    UserDaysForYear.where("user_id = ? and holiday_year_id = ?", self.id, year.id).first
+  end
+
   def get_holiday_allowance #For current year
     today = Date.today
     holiday_year = HolidayYear.where('date_start<=? and date_end>=?', today, today).first
@@ -52,11 +54,12 @@ class User < ActiveRecord::Base
     end
   end
 
-  def delete_allowance
-    #TODO this needs to be for the current holiday year - until we allow selection
-    today = Date.today
-    holiday_year = HolidayYear.where('date_start<=? and date_end>=?', today, today).first
-    UserDaysForYear.destroy(:user_id => self.id, :holiday_year_id => holiday_year.id)
+  def delete_all_allowances
+    UserDaysForYear.destroy(:user_id => self.id)
+  end
+
+  def user_days_for_selected_year year
+    UserDay.where(:user_id => self.id, :holiday_year_id => year.id)
   end
 
 end

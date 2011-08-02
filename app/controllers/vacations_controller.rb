@@ -4,11 +4,9 @@ class VacationsController < ApplicationController
 
   # GET /vacations
   def index
-
     @vacations ||= []
 
     @vacation = Vacation.new
-    #Initially sets the current year as default - TODO ensure this is the case for the dropdown
     @vacation.holiday_year_id = HolidayYear.current_year.id
 
     @holiday_statuses = HolidayStatus.pending_only
@@ -48,7 +46,7 @@ class VacationsController < ApplicationController
     @vacation.user = current_user
     @vacation.holiday_status_id = 1
     manager_id = current_user.manager_id
-    @vacation.manager_id = manager_id # Add manager to all holidays
+    #@vacation.manager_id = manager_id # Add manager to all holidays
     manager = User.find_by_id(manager_id)
 
     respond_to do |format|
@@ -93,19 +91,16 @@ class VacationsController < ApplicationController
   def destroy
     @vacation = Vacation.find(params[:id])
 
-    manager = User.find_by_id(@vacation.manager_id)
-
     respond_to do |format|
       if @vacation.destroy
-        unless manager.nil?
-          HolidayMailer.holiday_cancellation(current_user, manager, @vacation).deliver
+        unless current_user.manager_id.nil?
+          HolidayMailer.holiday_cancellation(current_user, current_user.manager_id, @vacation).deliver
         end
         @days_remaining = current_user.get_holiday_allowance.days_remaining
         @row_id = params[:id]
         @failed = false
         flash[:notice] = "Holiday deleted"
         format.js
-        p flash[:notice]
       else
         flash[:notice] = "Could not delete a holiday which has passed"
         @failed = true

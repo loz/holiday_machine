@@ -8,12 +8,12 @@
       </br>
       <p><%= f.input :email, :input_html => { :size => 35 } %></p>
 
-      <p><%= f.input :password %><i>(leave blank if you don't want to change it)</i></p>
+      <p><%= f.input :password, :input_html => { :size => 40 } %><i>(leave blank if you don't want to change it)</i></p>
 
-      <p><%= f.input :password_confirmation %></p>
+      <p><%= f.input :password_confirmation,:input_html => { :size => 40 } %></p>
 
        <p><%= f.label :current_password %><i>(we need your current password to confirm your changes)</i><br />
-       <%= f.password_field :current_password %></p>
+       <%= f.password_field :current_password, :input_html => { :size => 40 } %></p>
 
       <p><%= f.input :forename, :input_html => { :size => 40 } %></p>
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110403211329) do
+ActiveRecord::Schema.define(:version => 20110802135359) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                             :default => "", :null => false
@@ -91,7 +91,6 @@ ActiveRecord::Schema.define(:version => 20110403211329) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "authentication_token"
-    t.integer  "days_leave"
     t.integer  "user_type_id"
     t.integer  "manager_id"
     t.string   "forename",             :limit => 80
@@ -107,7 +106,6 @@ ActiveRecord::Schema.define(:version => 20110403211329) do
     t.datetime "updated_at"
     t.integer  "holiday_status_id"
     t.integer  "user_id"
-    t.integer  "manager_id"
     t.text     "notes"
     t.string   "uuid"
     t.integer  "holiday_year_id"
