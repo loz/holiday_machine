@@ -20,5 +20,5 @@ production:
   database: holiday_production
   pool: 5
   username: root
-  password: admin
+  password: Mage114n
 
