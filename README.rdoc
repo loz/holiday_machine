@@ -2,13 +2,13 @@
 
 Create and manage holidays
 
-When installing ensure that the line:
+When installing ensure that in the line:
 
  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
-Matches that given to your server
+The host matches your server's host name
 
 
 == License
 
-MIT License. Copyright 2011 Eamon Skelly
+MIT License. Copyright 2011 - Eamon Skelly
