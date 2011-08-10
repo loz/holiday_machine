@@ -14,8 +14,6 @@ HolidayMachine::Application.routes.draw do
 
   resources :user_settings
 
-#  match 'user_settings/save' => 'user_settings#save'
-
   #TODO nest settings
 
   match 'administer/get_team_data' => 'administer#get_team_data'
@@ -25,7 +23,7 @@ HolidayMachine::Application.routes.draw do
 
   devise_for :users, :admin
 
-  match 'vacations' => 'vacations#index', :as => 'user_root'
+  #match 'vacations' => 'vacations#index', :as => 'user_root'
 
 #  devise_scope :user do
 #     get "sign_in", :to => "vacations"
@@ -34,7 +32,7 @@ HolidayMachine::Application.routes.draw do
   resources :home, :only => :index
   resources :admins, :only => :index
 
-  root :to => 'vacations#index'
+  root :to => 'home#index'
 
   get "info/registration_message"
 

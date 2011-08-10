@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
 #  unless Rails.env="DEV"
-    rescue_from Exception, :with => :handler_exception
+#    rescue_from Exception, :with => :handler_exception
 #  end
 
   #Devise override for home path

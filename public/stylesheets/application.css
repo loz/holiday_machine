@@ -16,8 +16,8 @@ body {
 
 #signin {
     position: absolute;
-    right: 170px;
-    top: 40px;
+    right: 300px;
+    top: 45px;
     font-family: tahoma arial;
     font-style: normal;
 }
@@ -26,9 +26,21 @@ body {
     padding-right: 10px;
 }
 
+#holiday_image {
+    width: 400px;
+    height: 400px;
+    margin-left: 30%;
+    margin-right: 50%;
+    margin-top: 100px;
+    top: 150px;
+    background-image: url("/images/palm_trees.gif");
+    background-repeat: no-repeat;
+}
+
 #flash_notice, #flash_alert {
     padding: 5px 8px;
     margin: 20px 0;
+    width: 75%;
 }
 
 #flash_notice {

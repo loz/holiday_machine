@@ -1,7 +1,7 @@
-<!--<%# unless admin_signed_in? -%>
-  <p><%#= link_to 'Sign up as Admin', new_admin_registration_path %></p>
-  <p><%#= link_to 'Sign in as Admin', new_admin_session_path %></p>
-<%# end -%>-->
+<%- flash.each do |name, msg| -%>
+    <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+    <br/>
+<%- end -%>
 <% unless user_signed_in? %>
     <div id="signin">
       <% unless user_signed_in? -%>
@@ -11,4 +11,7 @@
     </div>
 <% end %>
 
+<div id="holiday_image">
+  <h1>Holiday Thyme</h1>
+</div>
 

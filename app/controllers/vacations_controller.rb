@@ -72,9 +72,10 @@ class VacationsController < ApplicationController
     @vacation.notes = params[:vacation][:notes]
     @vacation.holiday_status_id = params[:vacation][:holiday_status_id]
     @vacation.save
-    manager = User.find_by_id(@vacation.manager_id)
-    #TODO prevent holiday status being switched to pending
-    if manager
+    vacation_user = @vacation.user
+    if vacation_user.manager_id
+      manager = User.find_by_id(vacation_user.manager_id)
+      #TODO prevent holiday status being switched to pending
       HolidayMailer.holiday_actioned(manager, @vacation).deliver
     end
 
