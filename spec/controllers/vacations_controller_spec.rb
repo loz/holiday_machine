@@ -24,6 +24,15 @@ describe VacationsController do
       get :index
       assigns(:days_remaining).should == 25
     end
+
+    it "should have less days remaining after taking a holiday" do
+      p HolidayYear.first
+
+      #subject.stub(:decrease_days_remaining)
+      Factory.create(:vacation, :user=>@user)
+      get :index
+      assigns(:days_remaining).should == 18
+    end
   end
 
 =begin
