@@ -2,12 +2,6 @@ require 'spec_helper'
 
 describe VacationsController do
 
-#  def mock_vacation(stubs={})
-#    (@mock_vacation ||= mock_model(Vacation).as_null_object).tap do |vacation|
-#      vacation.stub(stubs) unless stubs.empty?
-#    end
-#  end
-
   before do
     @user = Factory.create(:user)
     @user.confirm!
@@ -20,131 +14,33 @@ describe VacationsController do
       response.should be_success
     end
 
-    it "has 25 days remaining since no holidays have been raised"  do
+    it "has 25 days remaining since no holidays have been raised" do
       get :index
       assigns(:days_remaining).should == 25
     end
 
     it "should have less days remaining after taking a holiday" do
-      p HolidayYear.first
-
-      #subject.stub(:decrease_days_remaining)
-      Factory.create(:vacation, :user=>@user)
+      vacation = Factory.create(:vacation, :user=>@user)
       get :index
-      assigns(:days_remaining).should == 18
-    end
-  end
-
-=begin
-
-  describe "GET index" do
-    it "assigns the requested vacation as @vacation" do
-      Vacation.stub(:find).with("37") { mock_vacation }
-      get :show, :id => "37"
-      assigns(:vacation).should be(mock_vacation)
-    end
-  end
-
-  describe "GET new" do
-    it "assigns a new vacation as @vacation" do
-      Vacation.stub(:new) { mock_vacation }
-      get :new
-      assigns(:vacation).should be(mock_vacation)
-    end
-  end
-
-  describe "GET edit" do
-    it "assigns the requested vacation as @vacation" do
-      Vacation.stub(:find).with("37") { mock_vacation }
-      get :edit, :id => "37"
-      assigns(:vacation).should be(mock_vacation)
-    end
-  end
-
-  describe "POST create" do
-
-    describe "with valid params" do
-      it "assigns a newly created vacation as @vacation" do
-        Vacation.stub(:new).with({'these' => 'params'}) { mock_vacation(:save => true) }
-        post :create, :vacation => {'these' => 'params'}
-        assigns(:vacation).should be(mock_vacation)
-      end
-
-      it "redirects to the created vacation" do
-        Vacation.stub(:new) { mock_vacation(:save => true) }
-        post :create, :vacation => {}
-        response.should redirect_to(vacation_url(mock_vacation))
-      end
+      assigns(:days_remaining).should == 16 #Just count the business days and deduct from 25
     end
 
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved vacation as @vacation" do
-        Vacation.stub(:new).with({'these' => 'params'}) { mock_vacation(:save => false) }
-        post :create, :vacation => {'these' => 'params'}
-        assigns(:vacation).should be(mock_vacation)
-      end
+    it "should raise an error if holiday days are only on a weekend" do
+      vacation = Factory.build(:vacation, :user=>@user, :date_from => "20/08/2011", :date_to=> "21/08/2011")
+      vacation.save
+      vacation.errors { :working_days_used }.should include "This holiday request uses no working days"
+    end
 
-      it "re-renders the 'new' template" do
-        Vacation.stub(:new) { mock_vacation(:save => false) }
-        post :create, :vacation => {}
-        response.should render_template("new")
-      end
+    it "should work as the holiday is within a holiday year" do
+      user_days_for_year = Factory.build(:user_days_for_year)
+      days_remaining_before = user_days_for_year.days_remaining
+      vacation = Factory.build(:vacation, :user=>@user, :date_from => "20/08/2011", :date_to=> "23/08/2011")
+      vacation.user.stub(:get_holiday_allowance_for_dates).and_return(user_days_for_year)
+      vacation.save
+      vacation.errors.size.should == 0
+      user_days_for_year.days_remaining.should < days_remaining_before
     end
 
   end
-
-  describe "PUT update" do
-
-    describe "with valid params" do
-      it "updates the requested vacation" do
-        Vacation.should_receive(:find).with("37") { mock_vacation }
-        mock_vacation.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, :id => "37", :vacation => {'these' => 'params'}
-      end
-
-      it "assigns the requested vacation as @vacation" do
-        Vacation.stub(:find) { mock_vacation(:update_attributes => true) }
-        put :update, :id => "1"
-        assigns(:vacation).should be(mock_vacation)
-      end
-
-      it "redirects to the vacation" do
-        Vacation.stub(:find) { mock_vacation(:update_attributes => true) }
-        put :update, :id => "1"
-        response.should redirect_to(vacation_url(mock_vacation))
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns the vacation as @vacation" do
-        Vacation.stub(:find) { mock_vacation(:update_attributes => false) }
-        put :update, :id => "1"
-        assigns(:vacation).should be(mock_vacation)
-      end
-
-      it "re-renders the 'edit' template" do
-        Vacation.stub(:find) { mock_vacation(:update_attributes => false) }
-        put :update, :id => "1"
-        response.should render_template("edit")
-      end
-    end
-
-  end
-
-  describe "DELETE destroy" do
-    it "destroys the requested vacation" do
-      Vacation.should_receive(:find).with("37") { mock_vacation }
-      mock_vacation.should_receive(:destroy)
-      delete :destroy, :id => "37"
-    end
-
-    it "redirects to the vacations list" do
-      Vacation.stub(:find) { mock_vacation }
-      delete :destroy, :id => "1"
-      response.should redirect_to(vacations_url)
-    end
-  end
-
-=end
 
 end
