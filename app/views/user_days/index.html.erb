@@ -1,11 +1,12 @@
-<script src="/javascripts/userDays.js" type="text/javascript"></script>
-<h3>Choose Year:</h3>
-<div id="year_filter">
-  <%= simple_form_for('holiday_year', :remote=>true) do |f| %>
-      <%= f.collection_select :id, HolidayYear.all, :id, :description, :selected => HolidayYear.current_year.id %>
-  <% end %>
-</div>
-</br>
-<div id="user_days_holder">
-  <%= render :partial => "user_days_table" %>
-</div>
+<h2>Coming soon</h2>
+<!--<script src="/javascripts/userDays.js" type="text/javascript"></script>-->
+<!--<h3>Choose Year:</h3>-->
+<!--<div id="year_filter">-->
+  <!--<%#= simple_form_for('holiday_year', :remote=>true) do |f| %>-->
+      <!--<%#= f.collection_select :id, HolidayYear.all, :id, :description, :selected => HolidayYear.current_year.id %>-->
+  <!--<%# end %>-->
+<!--</div>-->
+<!--</br>-->
+<!--<div id="user_days_holder">-->
+  <!--<%#= render :partial => "user_days_table" %>-->
+<!--</div>-->

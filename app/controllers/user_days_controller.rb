@@ -15,8 +15,6 @@ class UserDaysController < ApplicationController
       @selected_year = HolidayYear.current_year
     end
 
-    p @selected_year
-
     @user_day = UserDay.new
 
     respond_to do |format|
@@ -55,6 +53,7 @@ end
 # POST /user_days
 # POST /user_days.xml
 def create
+
   @user_day = UserDay.new(params[:user_day])
 
   today = Date.today
