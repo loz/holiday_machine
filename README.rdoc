@@ -8,6 +8,7 @@ When installing ensure that in the line:
 
 The host matches your server's host name
 
+Also run db:create, db:migrate and db:seed
 
 == License
 
