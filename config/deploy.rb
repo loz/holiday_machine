@@ -7,7 +7,6 @@ set :rvm_type, :user
 require "bundler/capistrano"
 
 # General
-
 set :application, "holiday_machine"
 set :user, "etskelly"
 
@@ -21,13 +20,13 @@ set :scm, :git
 set :repository,  "git://github.com/etskelly/holiday_machine.git"
 set :branch, "master"
 
-set :gateway, '109.123.110.139:22'
+set :gateway, '109.123.110.23:22'
 
 # VPS
 #TODO change port?
-role :web, "109.123.110.139:22"
-role :app, "109.123.110.139:22"
-role :db,  "109.123.110.139:22", :primary => true
+role :web, "109.123.110.23:22"
+role :app, "109.123.110.23:22"
+role :db,  "109.123.110.23:22", :primary => true
 #role :db,  "109.123.110.139:30"
 
 # Passenger
