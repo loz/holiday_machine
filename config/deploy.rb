@@ -27,7 +27,6 @@ set :gateway, '109.123.110.23:22'
 role :web, "109.123.110.23:22"
 role :app, "109.123.110.23:22"
 role :db,  "109.123.110.23:22", :primary => true
-#role :db,  "109.123.110.139:30"
 
 # Passenger
 namespace :deploy do

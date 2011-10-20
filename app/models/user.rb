@@ -16,7 +16,13 @@ class User < ActiveRecord::Base
 
   validates_presence_of :email, :forename, :surname, :user_type
 
-  attr_accessible :email, :password, :password_confirmation, :forename, :surname, :user_type_id, :manager_id
+  validates_each :invite_code, :on => :create do |record, attr, value|
+    record.errors.add attr, "Please enter correct invite code" unless value && value == "Sage1nvite00"
+  end
+
+  attr_accessor :invite_code
+
+  attr_accessible :email, :password, :password_confirmation, :forename, :surname, :user_type_id, :manager_id, :invite_code
 
   #Includes own manager
   scope :get_team_users, lambda { |manager_id| where('(manager_id = ? or id = ?) and confirmed_at is not null', manager_id, manager_id) }
