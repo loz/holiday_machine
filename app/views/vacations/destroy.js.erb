@@ -4,7 +4,8 @@
     $('#error_panel').show('slide', {direction: 'right'}, 1000);
 <% else -%>
   $("table#holidays tbody tr#vacation_<%= @row_id %>").fadeOut('slow', function() {
-    $(this).remove();
+  $('table#holidays').css('visibility', 'hidden');
+//    $(this).remove();
   });
     $("#show_days").html("Days Remaining: <%= @days_remaining %>");
     $("#flash").html('<%= raw(render_flash_messages) %>');

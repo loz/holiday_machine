@@ -3,13 +3,13 @@ development:
   encoding: utf8
   database: holiday_development
   pool: 5
-  username: root
-  password:
+  username: holiday_machine
+  password: vacation
 
 test:
   adapter: mysql2
   encoding: utf8
   database: holiday_test
   pool: 5
-  username: root
-  password:
+  username: holiday_machine
+  password: vacation
