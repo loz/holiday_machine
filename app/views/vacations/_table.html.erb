@@ -1,32 +1,21 @@
-<div id="holidaysTable" class="ui-grid ui-widget ui-widget-content ui-corner-all">
-  <div class="ui-grid-header ui-widget-header ui-corner-top">&nbsp;Holidays</div>
-  <table class="ui-grid-content ui-widget-content" width="100%">
-    <thead>
-    <th class="ui-state-default">Description</th>
-    <th class="ui-state-default">Date from</th>
-    <th class="ui-state-default">Date to</th>
-    <th class="ui-state-default">Days Used</th>
-    <th class="ui-state-default">Status</th>
-    <th class="ui-state-default">Delete</th>
-    </thead>
-    <tbody>
-    <% @vacations.each do |vacation| %>
-        <tr id="<%= vacation.id %>">
-          <td class="ui-widget-content"><%= vacation.description %></td>
-          <td class="ui-widget-content"><%= vacation.date_from.strftime("%d/%m/%Y") %></td>
-          <td class="ui-widget-content"><%= vacation.date_from.strftime("%d/%m/%Y") %></td>
-          <td class="ui-widget-content"><%= vacation.working_days_used %></td>
-          <td class="ui-widget-content"><%= vacation.holiday_status.status %></td>
-          <td class="ui-widget-content">
-            <button class="deleteButton" id='vacation<%= vacation.id %>'></button>
-          </td>
-        </tr>
-    <% end %>
-    </tbody>
-  </table>
+<div id="user-holidays">
+  <% if @vacations.present? %>
+    <table id="holidays">
+      <thead>
+        <th>Start date</th>
+        <th>End date</th>
+        <th>Description</th>
+        <th>Working days used</th>
+        <th>Status</th>
+        <th>&nbsp;</th>
+      </thead>
+      <tbody>
+      <% @vacations.each do |vacation| %>
+        <%= create_holiday_row(vacation) %>
+      <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>You have no holidays planned for this calendar year yet.</p>
+  <% end %>
 </div>
-<!--<div class="ui-grid-footer ui-widget-header ui-corner-bottom ui-helper-clearfix">-->
-  <!--<div class="ui-grid-paging ui-helper-clearfix">-->
-  <!--<a class="ui-grid-paging-prev ui-state-default ui-corner-left" href="?results=1"><span title="previous set of results" class="ui-icon ui-icon-triangle-1-w"></span></a>-->
-  <!--</div>-->
-<!--</div>-->

@@ -1,489 +1,562 @@
+/* line 5, sass/application.scss */
+#flash > div {
+  display: block;
+}
+
+/* line 10, sass/application.scss */
 body {
-    background-image: url('/images/BlueToWhiteGradient.jpg');
+  background-color: #ffffff;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 18px;
+  color: #404040;
+}
+/* line 17, sass/application.scss */
+body .container {
+  width: 950px;
+  margin: 0 auto;
+  overflow: hidden;
+  *zoom: 1;
+  margin-top: 60px;
+}
+/* line 20, sass/application.scss */
+body .container .main {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 630px;
+}
+/* line 147, ../../../../.rbenv/versions/1.8.7-p352/lib/ruby/gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html body .container .main {
+  overflow-x: hidden;
+}
+/* line 23, sass/application.scss */
+body .container .sidebar {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 270px;
+  display: inline;
+  float: right;
+}
+/* line 147, ../../../../.rbenv/versions/1.8.7-p352/lib/ruby/gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html body .container .sidebar {
+  overflow-x: hidden;
 }
 
-#container {
-    overflow: auto;
-    width: 70%;
-    background-color: white;
-    padding-left: 10px;
-    margin: 30px 10% 40px;
-    border: solid 1px black;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-    height: 800px;
+/* line 32, sass/application.scss */
+form .clearfix {
+  margin-bottom: 10px;
+}
+/* line 35, sass/application.scss */
+form label {
+  font-weight: bold;
+}
+/* line 41, sass/application.scss */
+form label,
+form input,
+form select,
+form textarea {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+}
+/* line 46, sass/application.scss */
+form input[type=checkbox],
+form input[type=radio] {
+  cursor: pointer;
+}
+/* line 53, sass/application.scss */
+form input[type=text],
+form input[type=email],
+form input[type=password],
+form textarea,
+form select {
+  display: block;
+  width: 210px;
+  height: 18px;
+  padding: 4px;
+  font-size: 13px;
+  line-height: 18px;
+  color: #808080;
+  border: 1px solid #ccc;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  border-radius: 3px;
+}
+/* line 65, sass/application.scss */
+form input,
+form textarea {
+  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -ms-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+  transition: border linear 0.2s, box-shadow linear 0.2s;
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+/* line 74, sass/application.scss */
+form input:focus,
+form textarea:focus {
+  outline: 0;
+  border-color: rgba(82, 168, 236, 0.8);
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+}
+/* line 83, sass/application.scss */
+form select,
+form input[type=file] {
+  height: 27px;
+  line-height: 27px;
+}
+/* line 90, sass/application.scss */
+form input[type=file]:focus,
+form input[type=checkbox]:focus,
+form select:focus {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  outline: 1px dotted #666;
 }
 
-#signin {
-    position: absolute;
-    right: 300px;
-    top: 45px;
-    font-family: tahoma arial;
-    font-style: normal;
+/* line 98, sass/application.scss */
+.well {
+  background-color: #f5f5f5;
+  margin-bottom: 20px;
+  padding: 19px;
+  min-height: 20px;
+  border: 1px solid #eee;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -o-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -khtml-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 
-#signin a {
-    padding-right: 10px;
+/* line 111, sass/application.scss */
+.btn {
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  background-color: #e6e6e6;
+  background-repeat: no-repeat;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(white), color-stop(25%, white), to(#e6e6e6));
+  background-image: -webkit-linear-gradient(white, white 25%, #e6e6e6);
+  background-image: -moz-linear-gradient(top, white, white 25%, #e6e6e6);
+  background-image: -ms-linear-gradient(white, white 25%, #e6e6e6);
+  background-image: -o-linear-gradient(white, white 25%, #e6e6e6);
+  background-image: linear-gradient(#ffffff, #ffffff 25%, #e6e6e6);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
+  padding: 5px 14px 6px;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+  color: #333;
+  font-size: 13px;
+  line-height: normal;
+  border: 1px solid #ccc;
+  border-bottom-color: #bbb;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -o-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -khtml-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  -webkit-transition: 0.1s linear all;
+  -moz-transition: 0.1s linear all;
+  -ms-transition: 0.1s linear all;
+  -o-transition: 0.1s linear all;
+  transition: 0.1s linear all;
+}
+/* line 140, sass/application.scss */
+.btn:hover {
+  background-position: 0 -15px;
+  color: #333;
+  text-decoration: none;
+}
+/* line 145, sass/application.scss */
+.btn:focus {
+  outline: 1px dotted #666;
+}
+/* line 148, sass/application.scss */
+.btn.primary {
+  color: #ffffff;
+  background-color: #0064cd;
+  background-repeat: repeat-x;
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#049cdb), to(#0064cd));
+  background-image: -moz-linear-gradient(top, #049cdb, #0064cd);
+  background-image: -ms-linear-gradient(top, #049cdb, #0064cd);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #049cdb), color-stop(100%, #0064cd));
+  background-image: -webkit-linear-gradient(top, #049cdb, #0064cd);
+  background-image: -o-linear-gradient(top, #049cdb, #0064cd);
+  background-image: linear-gradient(top, #049cdb, #0064cd);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#049cdb', endColorstr='#0064cd', GradientType=0);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  border-color: #0064cd #0064cd #003f81;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
 
-#holiday_image {
-    width: 400px;
-    height: 400px;
-    margin-left: 30%;
-    margin-right: 50%;
-    margin-top: 100px;
-    top: 150px;
-    background-image: url("/images/palm_trees.gif");
-    background-repeat: no-repeat;
+/* line 166, sass/application.scss */
+.topbar {
+  height: 40px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+  overflow: visible;
+}
+/* line 174, sass/application.scss */
+.topbar a {
+  color: #bfbfbf;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+/* line 178, sass/application.scss */
+.topbar .topbar-inner {
+  background-color: #222;
+  background-repeat: repeat-x;
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#333333), to(#222222));
+  background-image: -moz-linear-gradient(top, #333333, #222222);
+  background-image: -ms-linear-gradient(top, #333333, #222222);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #333333), color-stop(100%, #222222));
+  background-image: -webkit-linear-gradient(top, #333333, #222222);
+  background-image: -o-linear-gradient(top, #333333, #222222);
+  background-image: linear-gradient(top, #333333, #222222);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#333333', endColorstr='#222222', GradientType=0);
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+/* line 192, sass/application.scss */
+.topbar .topbar-inner .container {
+  width: 950px;
+  margin: 0 auto;
+  overflow: hidden;
+  *zoom: 1;
+}
+/* line 194, sass/application.scss */
+.topbar .topbar-inner .container .brand {
+  float: left;
+  display: block;
+  padding: 8px 20px 12px;
+  margin-left: -20px;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 200;
+  line-height: 1;
+}
+/* line 204, sass/application.scss */
+.topbar .topbar-inner .container ul {
+  display: block;
+  float: left;
+  margin: 0 10px 0 0;
+  position: relative;
+  left: 0;
+}
+/* line 210, sass/application.scss */
+.topbar .topbar-inner .container ul > li {
+  display: block;
+  float: left;
+}
+/* line 213, sass/application.scss */
+.topbar .topbar-inner .container ul > li a {
+  display: block;
+  float: none;
+  padding: 10px 10px 11px;
+  line-height: 19px;
+  text-decoration: none;
+}
+/* line 222, sass/application.scss */
+.topbar .topbar-inner .container #secondary-nav {
+  display: inline;
+  float: right;
 }
 
-#flash_notice, #flash_alert {
-    padding: 5px 8px;
-    margin: 20px 0;
-    width: 75%;
+/* line 229, sass/application.scss */
+table {
+  width: 100%;
+  margin-bottom: 18px;
+  padding: 0;
+  font-size: 13px;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+}
+/* line 237, sass/application.scss */
+table th,
+table td {
+  padding: 10px 10px 9px;
+  line-height: 18px;
+  text-align: left;
+}
+/* line 242, sass/application.scss */
+table th {
+  padding-top: 9px;
+  font-weight: bold;
+  vertical-align: middle;
+}
+/* line 247, sass/application.scss */
+table td {
+  vertical-align: top;
+  border-top: 1px solid #ddd;
+}
+/* line 251, sass/application.scss */
+table tbody th {
+  border-top: 1px solid #ddd;
+  vertical-align: top;
+}
+/* line 256, sass/application.scss */
+table tbody tr:nth-child(odd) td,
+table tbody tr:nth-child(odd) th {
+  background-color: #f9f9f9;
+}
+/* line 260, sass/application.scss */
+table tbody tr:hover td,
+table tbody tr:hover th {
+  background-color: #f5f5f5;
 }
 
-#flash_notice {
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-    background-color: #CFC;
-    border: solid 1px #6C6;
+/* line 265, sass/application.scss */
+.alert-message {
+  position: relative;
+  padding: 7px 15px;
+  margin-bottom: 18px;
+  color: #fff;
+  background-color: #eedc94;
+  background-repeat: repeat-x;
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#fceec1), to(#eedc94));
+  background-image: -moz-linear-gradient(top, #fceec1, #eedc94);
+  background-image: -ms-linear-gradient(top, #fceec1, #eedc94);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fceec1), color-stop(100%, #eedc94));
+  background-image: -webkit-linear-gradient(top, #fceec1, #eedc94);
+  background-image: -o-linear-gradient(top, #fceec1, #eedc94);
+  background-image: linear-gradient(top, #fceec1, #eedc94);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fceec1', endColorstr='#eedc94', GradientType=0);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  border-color: #eedc94 #eedc94 #e4c652;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  border-width: 1px;
+  border-style: solid;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -o-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -khtml-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+/* line 290, sass/application.scss */
+.alert-message p {
+  margin: 0;
+}
+/* line 291, sass/application.scss */
+.alert-message ul {
+  padding-left: 20px;
+}
+/* line 293, sass/application.scss */
+.alert-message.success, .alert-message.notice {
+  background-color: #57a957;
+  background-repeat: repeat-x;
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#62c462), to(#57a957));
+  background-image: -moz-linear-gradient(top, #62c462, #57a957);
+  background-image: -ms-linear-gradient(top, #62c462, #57a957);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #62c462), color-stop(100%, #57a957));
+  background-image: -webkit-linear-gradient(top, #62c462, #57a957);
+  background-image: -o-linear-gradient(top, #62c462, #57a957);
+  background-image: linear-gradient(top, #62c462, #57a957);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#62c462', endColorstr='#57a957', GradientType=0);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  border-color: #57a957 #57a957 #3d773d;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
+/* line 309, sass/application.scss */
+.alert-message.alert, .alert-message.error {
+  background-color: #c43c35;
+  background-repeat: repeat-x;
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#ee5f5b), to(#c43c35));
+  background-image: -moz-linear-gradient(top, #ee5f5b, #c43c35);
+  background-image: -ms-linear-gradient(top, #ee5f5b, #c43c35);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ee5f5b), color-stop(100%, #c43c35));
+  background-image: -webkit-linear-gradient(top, #ee5f5b, #c43c35);
+  background-image: -o-linear-gradient(top, #ee5f5b, #c43c35);
+  background-image: linear-gradient(top, #ee5f5b, #c43c35);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ee5f5b', endColorstr='#c43c35', GradientType=0);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  border-color: #c43c35 #c43c35 #882a25;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
+/* line 325, sass/application.scss */
+.alert-message .close {
+  text-decoration: none;
+  float: right;
+  color: #000000;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 18px;
+  text-shadow: 0 1px 0 #ffffff;
+  filter: alpha(opacity=25);
+  -khtml-opacity: 0.25;
+  -moz-opacity: 0.25;
+  opacity: 0.25;
+}
+/* line 337, sass/application.scss */
+.alert-message .close:hover {
+  color: #000000;
+  text-decoration: none;
+  filter: alpha(opacity=40);
+  -khtml-opacity: 0.4;
+  -moz-opacity: 0.4;
+  opacity: 0.4;
 }
 
-#flash_alert {
-    background-color: #FCC;
-    border: solid 1px #C66;
+/* line 348, sass/application.scss */
+.label {
+  padding: 1px 3px 2px;
+  font-size: 9.75px;
+  font-weight: bold;
+  color: #ffffff;
+  text-transform: uppercase;
+  white-space: nowrap;
+  background-color: #bfbfbf;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  border-radius: 3px;
+}
+/* line 357, sass/application.scss */
+.label.important {
+  background-color: #c43c35;
+}
+/* line 360, sass/application.scss */
+.label.pending {
+  background-color: #f89406;
+}
+/* line 364, sass/application.scss */
+.label.authorised, .label.success {
+  background-color: #46a546;
+}
+/* line 367, sass/application.scss */
+.label.notice {
+  background-color: #62cffc;
 }
 
-.fieldWithErrors {
-    display: inline;
+/* line 373, sass/application.scss */
+p {
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 18px;
+  margin-bottom: 9px;
 }
 
-#errorExplanation {
-    width: 400px;
-    border: 2px solid #CF0000;
-    padding: 0px;
-    padding-bottom: 12px;
-    margin-bottom: 20px;
-    background-color: #f0f0f0;
+/* line 379, sass/application.scss */
+p small {
+  font-size: 11px;
+  color: #bfbfbf;
 }
 
-#errorExplanation h2 {
-    text-align: left;
-    font-weight: bold;
-    padding: 5px 5px 5px 15px;
-    font-size: 12px;
-    margin: 0;
-    background-color: #c00;
-    color: #fff;
+/* line 388, sass/application.scss */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: bold;
+  color: #404040;
 }
 
-#errorExplanation p {
-    color: #333;
-    margin-bottom: 0;
-    padding: 8px;
+/* line 392, sass/application.scss */
+h1 {
+  margin-bottom: 18px;
+  font-size: 30px;
+  line-height: 36px;
 }
 
-#errorExplanation ul {
-    margin: 2px 24px;
+/* line 397, sass/application.scss */
+h1 small {
+  font-size: 18px;
 }
 
-#errorExplanation ul li {
-    font-size: 12px;
-    list-style: disc;
+/* line 400, sass/application.scss */
+h2 {
+  font-size: 24px;
+  line-height: 36px;
 }
 
-.login {
-    position: absolute;
-    float: right;
-    top: 5px;
-    right: 5%;
+/* line 404, sass/application.scss */
+h2 small {
+  font-size: 14px;
 }
 
-.simple_form label {
-    float: left;
-    width: 150px;
-    text-align: right;
-    margin: 2px 10px;
+/* line 410, sass/application.scss */
+h3,
+h4,
+h5,
+h6 {
+  line-height: 36px;
 }
 
-.simple_form .vacation label{
-    width:110px;
+/* line 413, sass/application.scss */
+h3 {
+  font-size: 18px;
 }
 
-.simple_form div.input {
-    margin-bottom: 10px;
+/* line 416, sass/application.scss */
+h4 {
+  font-size: 16px;
 }
 
-.simple_form div.boolean, .simple_form input[type='submit'] {
-    margin-left: 120px;
+/* line 419, sass/application.scss */
+h5 {
+  font-size: 14px;
 }
 
-.simple_form div.boolean label {
-    float: none;
-    margin: 0;
+/* line 422, sass/application.scss */
+h6 {
+  font-size: 13px;
+  color: #bfbfbf;
+  text-transform: uppercase;
 }
 
-#top_navigation {
-    width: 90%;
-    height: 50px;
+/* line 428, sass/application.scss */
+#user-info {
+  padding: 15px;
+  background-color: #f5f5f5;
+  background-repeat: repeat-x;
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#f9f9f9), to(#f5f5f5));
+  background-image: -moz-linear-gradient(#f9f9f9, #f5f5f5);
+  background-image: -ms-linear-gradient(#f9f9f9, #f5f5f5);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f9f9f9), color-stop(100%, #f5f5f5));
+  background-image: -webkit-linear-gradient(#f9f9f9, #f5f5f5);
+  background-image: -o-linear-gradient(#f9f9f9, #f5f5f5);
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#f5f5f5', GradientType=0)";
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#f5f5f5', GradientType=0);
+  background-image: linear-gradient(#f9f9f9, #f5f5f5);
+  border: 1px solid #eee;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -o-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -khtml-border-radius: 4px;
+  border-radius: 4px;
 }
-
-#top_navigation ul {
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    padding-left: 0;
-    margin-left: 0;
-    background-color: #02A702;
-    color: white;
-    float: left;
-    width: 100%;
-    font-family: tahoma, arial, helvetica, sans-serif;
+/* line 443, sass/application.scss */
+#user-info h3 {
+  line-height: normal;
+  margin-top: 0;
 }
-
-#top_navigation ul li {
-    width: 20%;
-    display: inline;
-}
-
-#top_navigation ul li a {
-    padding: 0.4em 2em;
-    background-color: #02A702;
-    color: white;
-    text-decoration: none;
-    float: left;
-    border-right: 1px solid #fff;
-}
-
-#top_navigation ul li a:hover {
-    background-color: #55A802;
-    color: #fff;
-}
-
-#top_navigation ul li a.selected {
-    background-color: #93C85E;
-    color: #fff;
-}
-
-#error_panel {
-    position: absolute;
-    top: 10px;
-    right: 0px;
-    display: none;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    background-image: url('/images/BlueToWhiteGradient.jpg');
-    border: 1px solid #090968;
-    color: #090968;
-    height: 100%;
-    width: 300px;
-    font-size: medium;
-    font-weight: bold;
-    padding: 10px;
-}
-
-#closeButton {
-    position: absolute;
-    top: -5px;
-    left: -5px;
-    height: 25px;
-    width: 30px;
-    background-image: url('/images/close.png');
-}
-
-#closeButton:hover {
-    cursor: pointer;
-}
-
-#messages {
-    position: absolute;
-    top: 30px;
-}
-
-/*#error_panel .close {*/
-/*position: relative;*/
-/*top: 0px;*/
-/*right: 0px;*/
-/*}*/
-
-#vacations_form {
-    position: relative;
-    width: 100%;
-    height: 270px;
-    top: 30px;
-}
-
-#new_vacation {
-    width: 100%;
-    height: 215px;
-}
-
-.vacation legend {
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    margin-left: 10px;
-    padding: 0.2em 0.5em;
-    color: green;
-    font-size: 100%;
-    text-align: right;
-}
-
-fieldset.vacation {
-    float: left
-}
-
-.vacation fieldset {
-    position: relative;
-    width: 50%;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-}
-
-fieldset.create {
-    border: 2px solid green;
-}
-
-.create legend {
-    border: 2px solid green;
-    background-color: #4ca20b;
-    color: white;
-}
-
-fieldset.update {
-    border: 2px solid red;
-}
-
-.update legend {
-    border: 2px solid red;
-    background-color: #fa4242;
-    color: white;
-}
-
-.row_highlight {
-    color: red;
-    font-weight: bold;
-}
-
-/*.standard_table {*/
-/*position: relative;*/
-/*top: 5px;*/
-/*width: 600px;*/
-/*border-collapse: collapse;*/
-/*}*/
-
-/*.standard_table thead {*/
-/*background-color: green;*/
-/*}*/
-
-/*.numeric td {*/
-/*text-align: right;*/
-/*}*/
-
-#jqgrid2 {
-    position: relative;
-    top: 50px;
-}
-
-#main_login {
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    border: 1px solid #3e3636;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-    width: 50%;
-    margin-top: 120px;
-    margin-bottom: auto;
-    background-color: #097e09;
-    color: white;
-}
-
-#admin_grid {
-    top: 20px;
-}
-
-/*.userDayReadOnly {*/
-    /*background-color: #B3C6FF;*/
-    /*border: 1px solid #090968;*/
-/*}*/
-
-/*.userDayReadOnly1 {*/
-    /*color: white;*/
-    /*background-color: #84aff2;*/
-    /*border: 1px solid #090968;*/
-/*}*/
-
-/*.userDayReadOnly1 {*/
-    /*background-color: #98a5ba;*/
-    /*border: 1px solid #090968;*/
-/*}*/
-
-/*.userDayReadOnly2 {*/
-    /*background-color: #f8e60e;*/
-    /*border: 1px solid #68090c;*/
-/*}*/
-
-/*.userDaysHeader {*/
-    /*background-color: #00289E;*/
-    /*color: white;*/
-    /*border: 1px solid #001452;*/
-/*}*/
-
-/*#manageDays {*/
-    /*-moz-border-radius: 5px;*/
-    /*border-radius: 5px;*/
-    /*border-collapse: collapse;*/
-    /*margin: 0 0 30px -5px;*/
-/*}*/
-
-/*table#holidaysTable {*/
-/*font-size: 14px;*/
-/*width: 642px;*/
-/*margin: 0 0 30px -5px;*/
-/*border-collapse: collapse;*/
-/*}*/
-
-/*table#holidaysTable tbody th {*/
-/*color: white;*/
-/*text-align: left;*/
-/*width: 200px;*/
-/*}*/
-
-/*table#holidaysTable tbody tr {*/
-/*color: black;*/
-/*border-bottom: 1px solid #3399CC;*/
-/*}*/
-
-/*table#holidaysTable  tr input.deleteButton:hover {*/
-/*cursor: pointer;*/
-/*}*/
-
-/*table #holidaysTable  tr.top th {*/
-/*padding-top: 16px;*/
-/*}*/
-
-/*table #holidaysTable, tr #holidaysTable, th #holidaysTable, td #holidaysTable {*/
-/*border: 0;*/
-/*}*/
-
-.deleteButton:hover {
-    cursor: pointer;
-}
-
-.subHead {
-    padding-right: 10px;
-    color: black;
-    background-color: #097e09;
-}
-
-.subRow {
-    padding-right: 10px;
-    color: black;
-}
-
-.row_highlight {
-    color: #ff8d00;
-    font-weight: bold;
-}
-
-.highlight {
-    color: white;
-    background-color: #cec6ce !important;
-}
-
-/*TODO give this a more general class name*/
-fieldset.login {
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    background-color: #fff9e7;
-    border-width: 2px;
-    border-style: solid;
-    border-color: #7c5b47;
-
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 12px;
-
-    margin: 20px 0px 20px 0px;
-    width: 350px;
-    position: relative;
-    left: 200px;
-    display: block;
-    float: left;
-    padding: 0px 10px 10px 10px;
-}
-
-fieldset.register {
-    width: 600px;
-}
-
-fieldset.medium {
-    width: 600px;
-}
-
-legend.login {
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    background-color: #7c5b47;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #7c5b47;
-    color: #ffcc99;
-    font-weight: bold;
-    font-variant: small-caps;
-    font-size: 110%;
-    padding: 2px 5px;
-    margin: 0px 0px 10px 0px;
-    position: relative;
-    top: -12px;
-}
-
-#days_remaining {
-    background-color: green;
-    -moz-border-radius: 5px;
-    color: white;
-    border-radius: 5px;
-    background-color: green;
-    width: 350px;
-    height: 50px;
-}
-
-#days_remaining label {
-    width: 50px;
-}
-
-#year_filter {
-    height: 20px;
-}
-
-#show_days {
-    position: relative;
-    left: 0px;
-    top: 10px;
-    font-weight: bold
-}
-
-#showMessages {
-    display: none;
-}
-
-input.button:hover {
-    cursor: pointer;
-}
-
-/*TODO change login class name - used on many forms*/
-
-.field_with_errors {
-    display: inline;
-}
-
-.field_with_errors .message {
-    color: #D00;
-    padding-left: 5px;
-    font-size: 12px;
-}
-
-
-
-
-

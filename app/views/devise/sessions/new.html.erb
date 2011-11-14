@@ -1,31 +1,17 @@
-<%- flash.each do |name, msg| -%>
-    <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
-<%- end -%>
+<h3>Sign in</h3>
+<%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+    <%= devise_error_messages! %>
+    <%= f.input :email %>
+    <%= f.input :password %>
+    <% if devise_mapping.rememberable? -%>
+      <%= f.input :remember_me, :as => :boolean %>
+    <% end -%>
+    <div class="well">
+      <%= f.button :submit, "Sign in", :class => 'btn primary' %>
+      <%= link_to 'Cancel', :back, :class => 'btn' %>
+    </div>
+<% end %>
 
-<fieldset class="login">
-
-  <legend class="login">Please log in</legend>
-
-  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-
-      <%= devise_error_messages! %>
-
-      <p><%= f.label :email %><br/>
-        <%= f.text_field :email %></p>
-
-      <p><%= f.label :password %><br/>
-        <%= f.password_field :password %></p>
-
-      <% if devise_mapping.rememberable? -%>
-          <p><%= f.check_box :remember_me %> <%= f.label :remember_me %></p>
-      <% end -%>
-
-      <p><%= f.submit "Sign in" %></p>
-  <% end %>
-
+<%= content_for :sidebar do %>
   <%= render :partial => "devise/shared/links" %>
-
-</fieldset>
-
-
-
+<% end %>

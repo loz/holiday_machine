@@ -18,16 +18,16 @@ SimpleForm.setup do |config|
   # config.error_notification_tag = :p
 
   # You can wrap all inputs in a pre-defined tag.
-  # config.wrapper_tag = :div
+  # config.wrapper_tag = false
 
   # CSS class to add to all wrapper tags.
-  # config.wrapper_class = :input
+  config.wrapper_class = 'clearfix'
 
   # CSS class to add to the wrapper if the field has errors.
   # config.wrapper_error_class = :field_with_errors
 
   # How the label text should be generated altogether with the required text.
-  # config.label_text = lambda { |label, required| "#{required} #{label}" }
+  config.label_text = lambda { |label, required| "#{label} #{required}" }
 
   # Whether attributes are required by default (or not). Default is true.
   # config.required_by_default = true

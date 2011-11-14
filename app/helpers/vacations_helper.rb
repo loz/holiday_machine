@@ -1,17 +1,19 @@
 module VacationsHelper
 
-  def create_holiday_row holiday
-    html = "<tr id='#{holiday.id}'>"
-    html << "<td class='ui-widget-content'>#{holiday.description}</td>"
-    html << "<td class='ui-widget-content'>#{holiday.date_from.strftime("%d/%m/%Y")}</td>"
-    html << "<td class='ui-widget-content'>#{holiday.date_to.strftime("%d/%m/%Y")}</td>"
-    html << "<td class='ui-widget-content'>#{holiday.working_days_used}</td>"
-    html << "<td class='ui-widget-content'>#{holiday.holiday_status.status}</td>"
-    html << "<td class='ui-widget-content'>"
-    html << "<button class='deleteButton' id='vacation#{holiday.id} %>'></button>"
-    html << "</td>"
-    html << "</tr>"
-    html
+  def create_holiday_row(holiday)
+    content_tag_for :tr, holiday do
+      content_tag(:td, holiday.date_from.strftime("%d/%m/%Y")) +
+      content_tag(:td, holiday.date_to.strftime("%d/%m/%Y")) +
+      content_tag(:td, holiday.description) +
+      content_tag(:td, holiday.working_days_used) +
+      content_tag(:td, holiday_status(holiday)) +
+      content_tag(:td, link_to('Delete', vacation_path(holiday), :method => :delete, :confirm => 'Are you sure you want to delete this holiday request?', :remote => true))
+    end
+  end
+
+  def holiday_status(holiday)
+    status = holiday.holiday_status.status
+    content_tag :span, status, :class => "label #{status.downcase}"
   end
 
   private

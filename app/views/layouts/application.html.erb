@@ -1,88 +1,53 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html>
-<head>
-  <title><%= h(yield(:title)) %></title>
-  <%= csrf_meta_tag %>
-
-  <%= javascript_include_tag 'jquery-1.5.2.min.js', 'rails', 'application', 'jquery.formatdate', 'jquery-ui-1.8.12.south-street/js/jquery-ui-1.8.12.custom.min', 'rails.validations' %>
-  <link rel="stylesheet" type="text/css" media="screen" href="/javascripts/jquery-ui-1.8.12.south-street/css/south-street/jquery-ui-1.8.12.custom.css"/>
-  <link rel='stylesheet' type='text/css' href='/javascripts/fullcalendar/fullcalendar.css'/>
-  <script type='text/javascript' src='/javascripts/fullcalendar/fullcalendar.min.js'></script>
-
-  <%= stylesheet_link_tag :all %>
-
-  <style>
-      html, body {
-          margin: 0;
-          padding: 0;
-          font-size: 12px;
-      }
-  </style>
-
-  <%= yield(:head) %>
-</head>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= h(yield(:title)) %></title>
+    <%= csrf_meta_tag %>
+    <%= stylesheet_link_tag "/javascripts/jquery-ui-1.8.12.south-street/css/south-street/jquery-ui-1.8.12.custom.css", "/javascripts/fullcalendar/fullcalendar.css", "application" %>
+    <%= yield(:head) %>
+  </head>
 <body>
-
-<div id="container">
-  <%= content_tag :h1, yield(:title) if show_title? %>
-
-  <% if user_signed_in? -%>
-      <div id="top_navigation">
-        <%= render_navigation %>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="container">
+        <%= link_to 'Holiday machine', root_path, :class => 'brand' %>
+        <% if user_signed_in? %>
+          <%= render_navigation %>
+          <ul id="secondary-nav">
+            <li><%= link_to 'My info', edit_user_registration_path %></li>
+            <li><%= link_to 'Sign out', destroy_user_session_path %></li>
+          </ul>
+        <% end %>
       </div>
-      <div id="user_login_box" class="login">
-        <%= current_user.email %> |
-        <%= link_to 'My info', edit_user_registration_path %> |
-        <%= link_to 'Sign out', destroy_user_session_path %>
-      </div>
-  <% end -%>
+    </div>
+  </div>
 
-  <div id="flash_notice" style="display: none;"></div>
-
-
-  <!--<%# unless user_signed_in? -%>-->
-  <!--<div id="main_login">-->
-  <!--<%#= simple_form_for("user", :url => user_session_path) do |f| %>-->
-  <!--<%#= f.input :email, :input_html=>{:size=>30} %>-->
-  <!--<%#= f.input :password, :input_html=>{:size=>20} %>-->
-  <!--&lt;!&ndash;<%# if devise_mapping.rememberable? -%>&ndash;&gt;-->
-  <!--&lt;!&ndash;<p><%#= f.check_box :remember_me %> <%#= f.label :remember_me %></p>&ndash;&gt;-->
-  <!--&lt;!&ndash;<%# end -%>&ndash;&gt;-->
-  <!--<p><%#= f.submit "Sign in" %></p>-->
-  <!--<%# end -%>-->
-  <!--</div>-->
-  <!--<%# end -%>-->
-
-
-  <%#= render :partial => "devise/shared/links" %>
-
-
-  <!--<%# if admin_signed_in? -%>
-        <div id="admin_login_box" style="float:left">
-          <%#= current_admin.email %> |
-          <%#= link_to 'Admin section', admins_path %> |
-          <%#= link_to 'Sign out', destroy_admin_session_path %>
-        </div>
-      <%# end -%>
-      <div style="clear:both"></div>-->
-
-  <%- if show_title? -%>
+  <div class="container">
+    <%= content_tag :h1, yield(:title) if show_title? %>
+    <%- if show_title? -%>
       <h1><%= h yield(:title) %></h1>
-  <%- end -%>
+    <%- end -%>
 
-  <%= yield %>
-</div>
+    <% if content_for?(:sidebar) %>
+      <div class="sidebar"><%= yield(:sidebar) %></div>
+    <% end %>
 
-<div id="error_panel">
-  <div id="closeButton">
+    <div class="main">
+      <div id="flash">
+        <%= render_flash_messages %>
+      </div>
+      <%= yield %>
+    </div>
   </div>
-  <div id="messages">
-  </div>
-</div>
 
+  <div id="error_panel">
+    <div id="closeButton">
+    </div>
+    <div id="messages">
+    </div>
+  </div>
+
+  <%= javascript_include_tag 'jquery-1.5.2.min.js', 'rails', 'application', 'jquery.formatdate', 'jquery-ui-1.8.12.south-street/js/jquery-ui-1.8.12.custom.min', 'rails.validations', '/javascripts/fullcalendar/fullcalendar.min.js' %>
+  <%= yield(:javascripts) %>
 </body>
-
 </html>
-
-

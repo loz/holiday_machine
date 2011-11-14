@@ -1,20 +1,12 @@
-<%= simple_form_for(@vacation, :remote=>true, :validate => true) do |f| %>
-
-    <fieldset class="vacation create">
-
-      <legend class="vacation create">Register Holiday</legend>
-
-        <%= f.input :holiday_year_id, :as=>:hidden %>
-        <%= f.input :date_from, :as=>:string, :input_html => { :maxlength => 10, :size=> 10, :value => Date.today.strftime("%d/%m/%Y") }  %>
-        <%= f.input :date_to, :as=>:string, :input_html => { :maxlength => 10, :size=> 10,:value => Date.today.strftime("%d/%m/%Y") } %>
-        <%= f.input :description, :input_html => { :size=> 30 } %>
-
-      <div class="actions">
-        <%= f.button :submit, 'Create Holiday' %>
-      </div>
-
-    </fieldset>
-
+<h3>Create holiday</h3>
+<%= simple_form_for(@vacation, :remote => true, :validate => true) do |f| %>
+  <%= f.input :holiday_year_id, :as => :hidden %>
+  <%= f.input :date_from, :as => :string, :input_html => { :value => Date.today.strftime("%d/%m/%Y") }  %>
+  <%= f.input :date_to, :as => :string, :input_html => { :value => Date.today.strftime("%d/%m/%Y") } %>
+  <%= f.input :description %>
+  <div class="well">
+    <%= f.button :submit, 'Create Holiday', :class => 'btn primary' %>
+  </div>
 <% end %>
 
 

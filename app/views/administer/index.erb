@@ -1,35 +1,29 @@
-<div id="holidaysTable" class="ui-grid ui-widget ui-widget-content ui-corner-all">
-  <div style="float:left; width:100%;" class="ui-grid-header ui-widget-header ui-corner-top">Edit Holidays</div>
-  <table class="ui-grid-content ui-widget-content" style="width:70%;">
-  <% @users.each do |user| %>
-      <% if user.vacations.size > 0 %>
-          <tr style="display:block">
-            <th style="float:left; white-space: nowrap;" colspan="7"><%= user.full_name %></th>
-          </tr>
-          <tr>
-            <th class="ui-state-default">Date From</th>
-            <th class="ui-state-default">Date To</th>
-            <th class="ui-state-default">Description</th>
-            <th class="ui-state-default">Days Used</th>
-            <th class="ui-state-default">Status</th>
-            <th class="ui-state-default">Notes</th>
-            <th class="ui-state-default"></th>
-          </tr>
-      <% end %>
-      <% user.vacations.each do |holiday| %>
-          <tr class='<%=holiday.id%>'>
-            <td class=""><%= holiday.date_from.strftime("%d/%m/%Y") %></td>
-            <td class=""><%= holiday.date_to.strftime("%d/%m/%Y") %></td>
-            <td class=""><%= holiday.description %></td>
-            <td class=""><%= holiday.working_days_used.to_s %></td>
-             <%= form_for(holiday, :remote => true) do |hol| -%>
-                <td class=""><%= hol.collection_select :holiday_status_id, @statuses, :id, :status %></td>
-                <td class=""><%= hol.text_field :notes %></td>
-                <td class=""><%= hol.submit 'Update Holiday' %></td>
-            <% end -%>
-          </tr>
-      <% end %>
+<% @users.each do |user| %>
+  <% unless user.vacations.empty? %>
+    <%= content_tag :h3, user.full_name %>
+    <table>
+      <thead>
+        <tr>
+          <th>Date From</th>
+          <th>Date To</th>
+          <th>Description</th>
+          <th>Working days used</th>
+          <th>Status</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% user.vacations.each do |holiday| %>
+          <%= content_tag_for :tr, holiday do %>
+            <%= content_tag :td, holiday.date_from.strftime("%d/%m/%Y") %>
+            <%= content_tag :td, holiday.date_to.strftime("%d/%m/%Y") %>
+            <%= content_tag :td, holiday.description %>
+            <%= content_tag :td, holiday.working_days_used %>
+            <%= content_tag :td, holiday_status(holiday) %>
+            <td><%= link_to 'Approve', vacation_path(holiday, :vacation => { :holiday_status_id => 2 }), :method => :put, :remote => true %></td>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
   <% end %>
-</table>
-</div>
-
+<% end %>

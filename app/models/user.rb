@@ -4,29 +4,30 @@ class User < ActiveRecord::Base
          :rememberable, :registerable, :trackable, :timeoutable, :validatable,
          :token_authenticatable
 
+  ## Callbacks
   after_create :create_allowance
   after_destroy :delete_all_allowances
 
+  ## Associations
   belongs_to :user_type
-
   has_many :user_days
-
   has_many :vacations
   has_many :user_days_for_years
 
+  ## Validations
   validates_presence_of :email, :forename, :surname, :user_type
-
   validates_each :invite_code, :on => :create do |record, attr, value|
     record.errors.add attr, "Please enter correct invite code" unless value && value == "Sage1nvite00"
   end
 
   attr_accessor :invite_code
-
   attr_accessible :email, :password, :password_confirmation, :forename, :surname, :user_type_id, :manager_id, :invite_code
 
+  ## Scopes
   #Includes own manager
   scope :get_team_users, lambda { |manager_id| where('(manager_id = ? or id = ?) and confirmed_at is not null', manager_id, manager_id) }
 
+  ## Instance methods
   def full_name
     self[:forename] + " " + self[:surname]
   end

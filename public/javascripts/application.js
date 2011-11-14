@@ -2,14 +2,21 @@
 
 $(document).ready(function() {
 
-    $.datepicker.setDefaults({  dateFormat: 'dd/mm/yy',
-                                changeMonth: true,
-			                    changeYear: true });
+    // Flash messages
+    $('#flash').delegate('a.close', 'click', function(e) {
+      e && e.preventDefault();
+      $(this).parent().fadeOut('fast');
+    });
 
-//    var $dialog = $("#holidayFormDialog").dialog({
-//        autoOpen: false,
-//        title: 'Edit holiday'
-//    });
+    // Datepicker
+    var datepicker_defaults = {
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+        firstDay: 1,
+        beforeShowDay: $.datepicker.noWeekends
+    };
+    $.datepicker.setDefaults(datepicker_defaults);
 
     var date = new Date();
     var d = date.getDate();
@@ -59,21 +66,10 @@ $(document).ready(function() {
 
 });
 
-function clearForm(myForm) {
-    $(myForm).find(':input').each(function() {
-        switch (this.type) {
-            case 'password':
-            case 'select-multiple':
-            case 'select-one':
-            case 'text':
-            case 'textarea':
-                $(this).val('');
-                break;
-            case 'checkbox':
-            case 'radio':
-                this.checked = false;
-        }
+(function($) {
+  $.fn.resetForm = function() {
+    this.each(function(){
+      $(this)[0].reset();
     });
-}
-
-
+  }
+})(jQuery);

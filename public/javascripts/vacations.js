@@ -35,35 +35,8 @@ $(document).ready(function() {
         });
     });
 
-    $(".deleteButton").live('click', function() {
-        var thisDeleteBtn = $(this);
-        $("#dialog-confirm").dialog({
-            resizable: false,
-            height:140,
-            modal: true,
-            buttons: {
-                "Delete holiday": function() {
-                    $.ajax({
-                        type: 'DELETE',
-                        url: '/vacations/' + thisDeleteBtn.closest('tr').attr('id')
-                    });
-                    $(this).dialog("close");
-                },
-                Cancel: function() {
-                    $(this).dialog("close");
-                }
-            }
-        });
-
-    });
-
     $("#cancelUpdate").click(function() {
         clearUpdate();
     });
 
 });
-
-
-
-
-

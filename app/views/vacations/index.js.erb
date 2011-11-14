@@ -1,8 +1,2 @@
-$("#tableHolder").html('<%= escape_javascript(render 'table') %>')
-$('.deleteButton').button({
-            icons: {
-                primary: "ui-icon-trash"
-            },
-            text: false
-        });
-$("#show_days").html("Days Remaining:<%=@days_remaining%>");
+$("#user-holidays").html('<%= escape_javascript(render 'table') %>');
+$("#show_days").html("Days Remaining: <%= @days_remaining %>");
