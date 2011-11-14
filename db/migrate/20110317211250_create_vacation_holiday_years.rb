@@ -5,7 +5,7 @@ class CreateVacationHolidayYears < ActiveRecord::Migration
 
     HolidayYear.create(:description => "Oct 2010 to Sept 2011", :date_start => "2010-10-01", :date_end=> "2011-09-30")
     HolidayYear.create(:description => "Oct 2011 to Sept 2012", :date_start => "2011-10-01", :date_end=> "2012-09-30")
-    HolidayYear.create(:description => "Oct 2012 to Sept 2013", :date_start => "2011-10-01", :date_end=> "2013-09-30")
+    HolidayYear.create(:description => "Oct 2012 to Sept 2013", :date_start => "2012-10-01", :date_end=> "2013-09-30")
   end
 
   def self.down
