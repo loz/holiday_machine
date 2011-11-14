@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 module ApplicationHelper
 
   def show_errors_as_list(errors)
