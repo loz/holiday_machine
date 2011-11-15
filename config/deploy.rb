@@ -17,7 +17,7 @@ set :use_sudo, false
 
 # Git
 set :scm, :git
-set :repository,  "git://github.com/etskelly/holiday_machine.git"
+set :repository, "git://github.com/etskelly/holiday_machine.git"
 set :branch, "master"
 
 set :gateway, '109.123.110.23:22'
@@ -26,19 +26,26 @@ set :gateway, '109.123.110.23:22'
 #TODO change port?
 role :web, "109.123.110.23:22"
 role :app, "109.123.110.23:22"
-role :db,  "109.123.110.23:22", :primary => true
+role :db, "109.123.110.23:22", :primary => true
 
 # Passenger
 namespace :deploy do
- task :start do ; end
- task :stop do ; end
- task :restart, :roles => :app, :except => { :no_release => true } do
-   run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
- end
- task :seed do
+  task :start do
+    ;
+  end
+  task :stop do
+    ;
+  end
+  task :restart, :roles => :app, :except => {:no_release => true} do
+    run "#{try_sudo} touch #{File.join(current_path, 'tmp', 'restart.txt')}"
+  end
+  task :seed do
     run "cd #{current_path}; rake db:seed RAILS_ENV=production"
- end
- task :rebuild do
-   run "cd #{current_path}; rake db:reset RAILS_ENV=production"
- end
+  end
+  task :rebuild do
+    run "cd #{current_path}; rake db:reset RAILS_ENV=production"
+  end
+  task :migrate do
+    run "cd #{current_path}; rake db:migrate RAILS_ENV=production"
+  end
 end
