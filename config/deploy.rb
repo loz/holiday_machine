@@ -37,5 +37,8 @@ namespace :deploy do
  end
  task :seed do
     run "cd #{current_path}; rake db:seed RAILS_ENV=production"
-  end
+ end
+ task :rebuild do
+   run "cd #{current_path}; rake db:setup RAILS_ENV=production"
+ end
 end
