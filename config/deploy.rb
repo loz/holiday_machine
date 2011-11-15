@@ -39,6 +39,6 @@ namespace :deploy do
     run "cd #{current_path}; rake db:seed RAILS_ENV=production"
  end
  task :rebuild do
-   run "cd #{current_path}; rake db:drop RAILS_ENV=production; rake db:setup RAILS_ENV=production"
+   run "cd #{current_path}; rake db:reset RAILS_ENV=production"
  end
 end
