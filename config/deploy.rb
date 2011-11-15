@@ -43,7 +43,7 @@ namespace :deploy do
     run "cd #{current_path}; rake db:seed RAILS_ENV=production"
   end
   task :rebuild do
-    run "cd #{current_path}; rake db:reset RAILS_ENV=production"
+    run "cd #{current_path}; bundle install; rake db:reset RAILS_ENV=production"
   end
   task :migrate do
     run "cd #{current_path}; rake db:migrate RAILS_ENV=production"
