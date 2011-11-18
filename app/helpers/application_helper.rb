@@ -1,3 +1,5 @@
+require 'digest/md5'
+
 module ApplicationHelper
 
   def show_errors_as_list(errors)
@@ -26,4 +28,22 @@ module ApplicationHelper
     end
     arr.join.html_safe
   end
+
+  def gravatar(user, options = {})
+    options = { :size => 75, :default => 'identicon'}.merge(options)
+    email_address = user.email.downcase
+    hash = Digest::MD5.hexdigest(email_address)
+    image_src = "http://www.gravatar.com/avatar/#{hash}"
+    query_string = options.map {|key, value| "#{key}=#{value}"}
+    image_src << "?" << query_string.join("&")
+    image_src
+  end
+
+  def body_classes
+    arr = [params[:controller], params[:action]]
+    arr << 'no-sidebar' unless content_for?(:sidebar)
+
+    arr.join(' ')
+  end
+
 end

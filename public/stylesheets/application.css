@@ -1,9 +1,30 @@
-/* line 5, sass/application.scss */
+/* line 4, sass/application.scss */
+html {
+  overflow-y: scroll;
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+/* line 12, sass/application.scss */
+a {
+  color: #0069d6;
+  text-decoration: none;
+  line-height: inherit;
+  font-weight: inherit;
+}
+/* line 17, sass/application.scss */
+a:hover {
+  color: #00438a;
+  text-decoration: underline;
+}
+
+/* line 24, sass/application.scss */
 #flash > div {
   display: block;
 }
 
-/* line 10, sass/application.scss */
+/* line 29, sass/application.scss */
 body {
   background-color: #ffffff;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -12,7 +33,7 @@ body {
   line-height: 18px;
   color: #404040;
 }
-/* line 17, sass/application.scss */
+/* line 36, sass/application.scss */
 body .container {
   width: 950px;
   margin: 0 auto;
@@ -20,7 +41,7 @@ body .container {
   *zoom: 1;
   margin-top: 60px;
 }
-/* line 20, sass/application.scss */
+/* line 39, sass/application.scss */
 body .container .main {
   display: inline;
   float: left;
@@ -31,7 +52,7 @@ body .container .main {
 * html body .container .main {
   overflow-x: hidden;
 }
-/* line 23, sass/application.scss */
+/* line 42, sass/application.scss */
 body .container .sidebar {
   display: inline;
   float: left;
@@ -44,16 +65,27 @@ body .container .sidebar {
 * html body .container .sidebar {
   overflow-x: hidden;
 }
+/* line 48, sass/application.scss */
+body.no-sidebar .main {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 950px;
+}
+/* line 147, ../../../../.rbenv/versions/1.8.7-p352/lib/ruby/gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html body.no-sidebar .main {
+  overflow-x: hidden;
+}
 
-/* line 32, sass/application.scss */
+/* line 56, sass/application.scss */
 form .clearfix {
   margin-bottom: 10px;
 }
-/* line 35, sass/application.scss */
+/* line 59, sass/application.scss */
 form label {
   font-weight: bold;
 }
-/* line 41, sass/application.scss */
+/* line 65, sass/application.scss */
 form label,
 form input,
 form select,
@@ -61,12 +93,12 @@ form textarea {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 13px;
 }
-/* line 46, sass/application.scss */
+/* line 70, sass/application.scss */
 form input[type=checkbox],
 form input[type=radio] {
   cursor: pointer;
 }
-/* line 53, sass/application.scss */
+/* line 77, sass/application.scss */
 form input[type=text],
 form input[type=email],
 form input[type=password],
@@ -87,7 +119,7 @@ form select {
   -khtml-border-radius: 3px;
   border-radius: 3px;
 }
-/* line 65, sass/application.scss */
+/* line 89, sass/application.scss */
 form input,
 form textarea {
   -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
@@ -99,7 +131,7 @@ form textarea {
   -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
-/* line 74, sass/application.scss */
+/* line 98, sass/application.scss */
 form input:focus,
 form textarea:focus {
   outline: 0;
@@ -108,13 +140,13 @@ form textarea:focus {
   -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
 }
-/* line 83, sass/application.scss */
+/* line 107, sass/application.scss */
 form select,
 form input[type=file] {
   height: 27px;
   line-height: 27px;
 }
-/* line 90, sass/application.scss */
+/* line 114, sass/application.scss */
 form input[type=file]:focus,
 form input[type=checkbox]:focus,
 form select:focus {
@@ -124,7 +156,7 @@ form select:focus {
   outline: 1px dotted #666;
 }
 
-/* line 98, sass/application.scss */
+/* line 122, sass/application.scss */
 .well {
   background-color: #f5f5f5;
   margin-bottom: 20px;
@@ -143,7 +175,7 @@ form select:focus {
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 
-/* line 111, sass/application.scss */
+/* line 135, sass/application.scss */
 .btn {
   text-decoration: none;
   cursor: pointer;
@@ -179,17 +211,17 @@ form select:focus {
   -o-transition: 0.1s linear all;
   transition: 0.1s linear all;
 }
-/* line 140, sass/application.scss */
+/* line 164, sass/application.scss */
 .btn:hover {
   background-position: 0 -15px;
   color: #333;
   text-decoration: none;
 }
-/* line 145, sass/application.scss */
+/* line 169, sass/application.scss */
 .btn:focus {
   outline: 1px dotted #666;
 }
-/* line 148, sass/application.scss */
+/* line 172, sass/application.scss */
 .btn.primary {
   color: #ffffff;
   background-color: #0064cd;
@@ -207,7 +239,7 @@ form select:focus {
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
 
-/* line 166, sass/application.scss */
+/* line 190, sass/application.scss */
 .topbar {
   height: 40px;
   position: fixed;
@@ -217,12 +249,12 @@ form select:focus {
   z-index: 10000;
   overflow: visible;
 }
-/* line 174, sass/application.scss */
+/* line 198, sass/application.scss */
 .topbar a {
   color: #bfbfbf;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
-/* line 178, sass/application.scss */
+/* line 202, sass/application.scss */
 .topbar .topbar-inner {
   background-color: #222;
   background-repeat: repeat-x;
@@ -238,14 +270,14 @@ form select:focus {
   -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 }
-/* line 192, sass/application.scss */
+/* line 216, sass/application.scss */
 .topbar .topbar-inner .container {
   width: 950px;
   margin: 0 auto;
   overflow: hidden;
   *zoom: 1;
 }
-/* line 194, sass/application.scss */
+/* line 218, sass/application.scss */
 .topbar .topbar-inner .container .brand {
   float: left;
   display: block;
@@ -256,7 +288,7 @@ form select:focus {
   font-weight: 200;
   line-height: 1;
 }
-/* line 204, sass/application.scss */
+/* line 228, sass/application.scss */
 .topbar .topbar-inner .container ul {
   display: block;
   float: left;
@@ -264,12 +296,12 @@ form select:focus {
   position: relative;
   left: 0;
 }
-/* line 210, sass/application.scss */
+/* line 234, sass/application.scss */
 .topbar .topbar-inner .container ul > li {
   display: block;
   float: left;
 }
-/* line 213, sass/application.scss */
+/* line 237, sass/application.scss */
 .topbar .topbar-inner .container ul > li a {
   display: block;
   float: none;
@@ -277,13 +309,13 @@ form select:focus {
   line-height: 19px;
   text-decoration: none;
 }
-/* line 222, sass/application.scss */
+/* line 246, sass/application.scss */
 .topbar .topbar-inner .container #secondary-nav {
   display: inline;
   float: right;
 }
 
-/* line 229, sass/application.scss */
+/* line 253, sass/application.scss */
 table {
   width: 100%;
   margin-bottom: 18px;
@@ -292,41 +324,41 @@ table {
   border-collapse: collapse;
   border: 1px solid #ddd;
 }
-/* line 237, sass/application.scss */
+/* line 261, sass/application.scss */
 table th,
 table td {
   padding: 10px 10px 9px;
   line-height: 18px;
   text-align: left;
 }
-/* line 242, sass/application.scss */
+/* line 266, sass/application.scss */
 table th {
   padding-top: 9px;
   font-weight: bold;
   vertical-align: middle;
 }
-/* line 247, sass/application.scss */
+/* line 271, sass/application.scss */
 table td {
   vertical-align: top;
   border-top: 1px solid #ddd;
 }
-/* line 251, sass/application.scss */
+/* line 275, sass/application.scss */
 table tbody th {
   border-top: 1px solid #ddd;
   vertical-align: top;
 }
-/* line 256, sass/application.scss */
+/* line 280, sass/application.scss */
 table tbody tr:nth-child(odd) td,
 table tbody tr:nth-child(odd) th {
   background-color: #f9f9f9;
 }
-/* line 260, sass/application.scss */
+/* line 284, sass/application.scss */
 table tbody tr:hover td,
 table tbody tr:hover th {
   background-color: #f5f5f5;
 }
 
-/* line 265, sass/application.scss */
+/* line 289, sass/application.scss */
 .alert-message {
   position: relative;
   padding: 7px 15px;
@@ -358,15 +390,15 @@ table tbody tr:hover th {
   -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
-/* line 290, sass/application.scss */
+/* line 314, sass/application.scss */
 .alert-message p {
   margin: 0;
 }
-/* line 291, sass/application.scss */
+/* line 315, sass/application.scss */
 .alert-message ul {
   padding-left: 20px;
 }
-/* line 293, sass/application.scss */
+/* line 317, sass/application.scss */
 .alert-message.success, .alert-message.notice {
   background-color: #57a957;
   background-repeat: repeat-x;
@@ -382,7 +414,7 @@ table tbody tr:hover th {
   border-color: #57a957 #57a957 #3d773d;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
-/* line 309, sass/application.scss */
+/* line 333, sass/application.scss */
 .alert-message.alert, .alert-message.error {
   background-color: #c43c35;
   background-repeat: repeat-x;
@@ -398,7 +430,7 @@ table tbody tr:hover th {
   border-color: #c43c35 #c43c35 #882a25;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
-/* line 325, sass/application.scss */
+/* line 349, sass/application.scss */
 .alert-message .close {
   text-decoration: none;
   float: right;
@@ -412,7 +444,7 @@ table tbody tr:hover th {
   -moz-opacity: 0.25;
   opacity: 0.25;
 }
-/* line 337, sass/application.scss */
+/* line 361, sass/application.scss */
 .alert-message .close:hover {
   color: #000000;
   text-decoration: none;
@@ -422,7 +454,7 @@ table tbody tr:hover th {
   opacity: 0.4;
 }
 
-/* line 348, sass/application.scss */
+/* line 372, sass/application.scss */
 .label {
   padding: 1px 3px 2px;
   font-size: 9.75px;
@@ -438,24 +470,24 @@ table tbody tr:hover th {
   -khtml-border-radius: 3px;
   border-radius: 3px;
 }
-/* line 357, sass/application.scss */
-.label.important {
+/* line 382, sass/application.scss */
+.label.cancelled, .label.important {
   background-color: #c43c35;
 }
-/* line 360, sass/application.scss */
+/* line 385, sass/application.scss */
 .label.pending {
   background-color: #f89406;
 }
-/* line 364, sass/application.scss */
+/* line 389, sass/application.scss */
 .label.authorised, .label.success {
   background-color: #46a546;
 }
-/* line 367, sass/application.scss */
+/* line 392, sass/application.scss */
 .label.notice {
   background-color: #62cffc;
 }
 
-/* line 373, sass/application.scss */
+/* line 398, sass/application.scss */
 p {
   font-size: 13px;
   font-weight: normal;
@@ -463,13 +495,13 @@ p {
   margin-bottom: 9px;
 }
 
-/* line 379, sass/application.scss */
+/* line 404, sass/application.scss */
 p small {
   font-size: 11px;
   color: #bfbfbf;
 }
 
-/* line 388, sass/application.scss */
+/* line 413, sass/application.scss */
 h1,
 h2,
 h3,
@@ -480,62 +512,62 @@ h6 {
   color: #404040;
 }
 
-/* line 392, sass/application.scss */
+/* line 417, sass/application.scss */
 h1 {
   margin-bottom: 18px;
   font-size: 30px;
   line-height: 36px;
 }
 
-/* line 397, sass/application.scss */
+/* line 422, sass/application.scss */
 h1 small {
   font-size: 18px;
 }
 
-/* line 400, sass/application.scss */
+/* line 425, sass/application.scss */
 h2 {
   font-size: 24px;
   line-height: 36px;
 }
 
-/* line 404, sass/application.scss */
+/* line 429, sass/application.scss */
 h2 small {
   font-size: 14px;
 }
 
-/* line 410, sass/application.scss */
+/* line 435, sass/application.scss */
 h3,
 h4,
 h5,
 h6 {
-  line-height: 36px;
+  line-height: normal;
 }
 
-/* line 413, sass/application.scss */
+/* line 438, sass/application.scss */
 h3 {
   font-size: 18px;
 }
 
-/* line 416, sass/application.scss */
+/* line 441, sass/application.scss */
 h4 {
   font-size: 16px;
 }
 
-/* line 419, sass/application.scss */
+/* line 444, sass/application.scss */
 h5 {
   font-size: 14px;
 }
 
-/* line 422, sass/application.scss */
+/* line 447, sass/application.scss */
 h6 {
   font-size: 13px;
   color: #bfbfbf;
   text-transform: uppercase;
 }
 
-/* line 428, sass/application.scss */
+/* line 453, sass/application.scss */
 #user-info {
-  padding: 15px;
+  padding: 10px;
   background-color: #f5f5f5;
   background-repeat: repeat-x;
   background-image: -khtml-gradient(linear, left top, left bottom, from(#f9f9f9), to(#f5f5f5));
@@ -554,9 +586,73 @@ h6 {
   -ms-border-radius: 4px;
   -khtml-border-radius: 4px;
   border-radius: 4px;
+  overflow: hidden;
+  *zoom: 1;
 }
-/* line 443, sass/application.scss */
+/* line 468, sass/application.scss */
 #user-info h3 {
-  line-height: normal;
   margin-top: 0;
+}
+/* line 469, sass/application.scss */
+#user-info .gravatar-wrapper {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 110px;
+}
+/* line 147, ../../../../.rbenv/versions/1.8.7-p352/lib/ruby/gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html #user-info .gravatar-wrapper {
+  overflow-x: hidden;
+}
+/* line 472, sass/application.scss */
+#user-info .user-info-wrapper {
+  display: inline;
+  float: left;
+  margin-right: 0;
+  width: 470px;
+}
+/* line 147, ../../../../.rbenv/versions/1.8.7-p352/lib/ruby/gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html #user-info .user-info-wrapper {
+  overflow-x: hidden;
+}
+/* line 480, sass/application.scss */
+#user-info form label,
+#user-info form select,
+#user-info form #days-remaining-wrapper {
+  display: inline;
+  float: left;
+  line-height: 25px;
+  margin-right: 10px;
+}
+/* line 484, sass/application.scss */
+#user-info form label span,
+#user-info form select span,
+#user-info form #days-remaining-wrapper span {
+  font-weight: bold;
+}
+
+/* line 491, sass/application.scss */
+img.gravatar {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+/* line 503, sass/application.scss */
+tr.user form div.string,
+tr.user form input[type="submit"] {
+  float: left;
+  margin-right: 10px;
+}
+/* line 509, sass/application.scss */
+tr.user form input[type="submit"] {
+  margin: 0;
+}
+/* line 512, sass/application.scss */
+tr.user form input.update-working-days {
+  width: 25px;
+  text-align: center;
 }

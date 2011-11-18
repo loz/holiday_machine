@@ -1,36 +1,59 @@
-<table id="manageDays" class="ui-grid ui-grid-content ui-widget-content ui-corner-all">
-  <% @team_users.each do |user| %>
-      <tr class="userDayReadOnly1 ui-widget-header ui-state-default">
-        <td colspan="4"><%= user.full_name %></td>
-      </tr>
-      <tr class="userDayReadOnly2">
-        <td>Total Days Leave:</td>
-        <td colspan="4" class="totalLeave<%= user.id %>"><%= user.get_holiday_allowance_for_selected_year(@selected_year).days_remaining %></td>
-      </tr>
-      <% if user.user_days_for_selected_year(@selected_year).size > 0 %>
-          <tr class="userDaysHeader ui-widget-header">
-            <th class="">Reason</th>
-            <th class="">Days Added</th>
-            <th class="">Days Removed</th>
-            <th class=""></th>
-          </tr>
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Total days leave</th>
+      <th>Working days left</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+<% @team_users.each do |user| %>
+  <% if user.user_days_for_selected_year(@selected_year).present? %>
+    <%= content_for :dialog do %>
+      <%= content_tag_for :div, user, 'extra', :class => 'reveal-modal' do %>
+        <a class="close-reveal-modal">&#215;</a>
+        <%= content_tag :h3, "#{user.full_name}'s extra allowance" %>
+        <table>
+          <thead>
+            <tr>
+              <th>Number of days</th>
+              <th>Reason</th>
+              <th>&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% user.user_days_for_selected_year(@selected_year).each do |user_day| %>
+            <%= content_tag_for :tr, user_day do %>
+              <%= content_tag :td, user_day.reason %>
+              <%= content_tag :td, user_day.no_days %>
+              <%= content_tag :td do %>
+                <%= link_to 'Delete', user_day_path(user_day), :method => :delete %>
+              <% end %>
+            <% end %>
+          <% end %>
+          </tbody>
+        </table>
       <% end %>
-      <% user.user_days_for_selected_year(@selected_year).each do |user_day| %>
-          <tr class="userDayReadOnly">
-            <td><%= user_day.reason %></td>
-            <td><%= user_day.no_days > 0 ? user_day.no_days : '' %></td>
-            <td><%= user_day.no_days < 0 ? user_day.no_days.abs : '' %></td>
-            <td><%= button_to "Delete", {:action => "destroy", :id => user_day.id},
-                              :confirm => "Are you sure?", :method => :delete %></td>
-          </tr>
-      <% end %>
-      <tr class="userDayForm formNo<%= user.id %>">
-        <%= simple_form_for @user_day, :remote=>true do |f| %>
-            <%= f.input :user_id, :as=>:hidden, :input_html => {:value=>user.id} %>
-            <td><%= f.input :reason, :input_html => {:class=>"hideInitially", :maxlength => 40, :size=> 10} %></td>
-            <td><%= f.input :no_days, :input_html => {:class=>"hideInitially", :maxlength => 3, :size=> 3} %></td>
-            <td><%= f.submit 'Alter days', :input_html => {:class=>"hideInitially"} %></td>
-        <% end %>
-      </tr>
+    <% end %>
   <% end %>
+  <%= content_tag_for :tr, user do %>
+    <%= content_tag :td do %>
+      <%= link_to user.full_name, '#', :class => 'user-days-dialog', 'data-dialog' => "extra_user_#{user.id}" %>
+    <% end %>
+    <%# TODO Change this to a db call %>
+    <%= content_tag :td, '25.0' %>
+    <%= content_tag :td, user.get_holiday_allowance_for_selected_year(@selected_year).days_remaining, :class => 'working-days-left' %>
+    <%= content_tag :td do %>
+      <%# TODO: Namespace each form as this won't be valid html due to duplicate id's %>
+      <%= simple_form_for @user_day do |f| %>
+        <%= f.input :user_id, :as => :hidden, :input_html => { :value => user.id } %>
+        <%= f.input :reason, :label => false, :placeholder => 'e.g. Carried over from last year' %>
+        <%= f.input :no_days, :as => :string, :input_html => { :class => 'update-working-days', :value => 0 }, :label => false %>
+        <%= f.button :submit, 'Update allowance', :class => 'btn primary', :confirm => "Are you sure you want to update #{user.forename}'s holiday allowance?"  %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+  </tbody>
 </table>

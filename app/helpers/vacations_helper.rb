@@ -13,7 +13,11 @@ module VacationsHelper
 
   def holiday_status(holiday)
     status = holiday.holiday_status.status
-    content_tag :span, status, :class => "label #{status.downcase}"
+    content_tag :span, status, :class => holiday_status_class(holiday)
+  end
+
+  def holiday_status_class(holiday)
+    "label #{holiday.holiday_status.status.downcase}"
   end
 
   private
