@@ -3,10 +3,10 @@
   <head>
     <title><%= h(yield(:title)) %></title>
     <%= csrf_meta_tag %>
-    <%= stylesheet_link_tag "/javascripts/jquery-ui-1.8.12.south-street/css/south-street/jquery-ui-1.8.12.custom.css", "/javascripts/fullcalendar/fullcalendar.css", "application" %>
+    <%= stylesheet_link_tag "/javascripts/jquery-ui-1.8.12.south-street/css/south-street/jquery-ui-1.8.12.custom.css", "/javascripts/fullcalendar/fullcalendar.css", "reveal", "application" %>
     <%= yield(:head) %>
   </head>
-<body>
+  <body class="<%= body_classes %>">
   <div class="topbar">
     <div class="topbar-inner">
       <div class="container">
@@ -38,6 +38,10 @@
       </div>
       <%= yield %>
     </div>
+  </div>
+
+  <div id="dialog-content">
+    <%= yield :dialog %>
   </div>
 
   <div id="error_panel">

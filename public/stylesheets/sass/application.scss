@@ -1,6 +1,25 @@
 @import "blueprint/grid";
 @import "compass/css3/border-radius";
 
+html {
+  // Always show scrollbar
+  overflow-y: scroll;
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+a {
+  color: #0069d6;
+  text-decoration: none;
+  line-height: inherit;
+  font-weight: inherit;
+  &:hover {
+    color: #00438a;
+    text-decoration: underline;
+  }
+}
+
 #flash {
   > div {
     display: block;
@@ -23,6 +42,11 @@ body {
     .sidebar {
       @include column(7);
       @include float-right;
+    }
+  }
+  &.no-sidebar {
+    .main {
+      @include column(24);
     }
   }
 }
@@ -354,6 +378,7 @@ table {
   white-space: nowrap;
   background-color: #bfbfbf;
   @include border-radius(3px);
+  &.cancelled,
   &.important {
     background-color: #c43c35;
   }
@@ -408,7 +433,7 @@ h3,
 h4,
 h5,
 h6 {
-  line-height: 36px;
+  line-height: normal;
 }
 h3 {
   font-size: 18px;
@@ -426,7 +451,7 @@ h6 {
 }
 
 #user-info {
-  padding: 15px;
+  padding: 10px;
   background-color: #f5f5f5;
   background-repeat: repeat-x;
   background-image: -khtml-gradient(linear, left top, left bottom, from(#f9f9f9), to(#f5f5f5));
@@ -440,8 +465,54 @@ h6 {
   background-image: linear-gradient(#f9f9f9, #f5f5f5);
   border: 1px solid #eee;
   @include border-radius(4px);
-  h3 {
-    line-height: normal;
-    margin-top: 0;
+  h3 { margin-top: 0; }
+  .gravatar-wrapper {
+    @include column(3);
+  }
+  .user-info-wrapper {
+    @include column(12, true);
+  }
+  @include clearfix;
+
+  form {
+    label,
+    select,
+    #days-remaining-wrapper {
+      @include float-left;
+      line-height: 25px;
+      margin-right: 10px;
+      span {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+img.gravatar {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+tr.user {
+  form {
+    div.string,
+    input[type="submit"] {
+      float: left;
+      margin-right: 10px;
+    }
+
+    input {
+      &[type="submit"] {
+        margin: 0;
+      }
+      &.update-working-days {
+        width: 25px;
+        text-align: center;
+      }
+    }
   }
 }
