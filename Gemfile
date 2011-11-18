@@ -12,7 +12,7 @@ gem 'sass'
 gem 'compass'
 
 group :development, :test do
-  gem 'ruby-debug19'
+  # gem 'ruby-debug19'
   gem 'rspec'
   gem 'rspec-rails'
   gem 'factory_girl_rails'

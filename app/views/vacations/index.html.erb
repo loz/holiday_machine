@@ -6,13 +6,17 @@
   <%= render 'form' %>
 <% end %>
 <div id="user-info">
-  <h3>Hello <%= current_user.forename %>!</h3>
-  <%= simple_form_for 'holiday_year', :remote=>true do |f| %>
-    <%= f.label :Year %>
-    <%= f.collection_select :id, HolidayYear.all, :id, :description, :selected => HolidayYear.current_year.id %>
-  <% end %>
-  <div id="show_days">Days Remaining: <%= @days_remaining %></div>
+  <div class="gravatar-wrapper">
+    <%= image_tag(gravatar(current_user), :class => 'gravatar') %>
+  </div>
+  <div class="user-info-wrapper">
+    <h3>Hello <%= current_user.forename %></h3>
+    <%= simple_form_for 'holiday_year', :remote => true do |f| %>
+      <%= f.collection_select :id, HolidayYear.all, :id, :description, :selected => HolidayYear.current_year.id %>
+      <div id="days-remaining-wrapper">Days remaining: <%= content_tag :span, @days_remaining, :id => 'days_remaining' %></div>
+    <% end %>
+  </div>
 </div>
 
-<h3>Your holidays</h3>
+<h2>Your holidays</h2>
 <%= render 'table' %>
