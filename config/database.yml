@@ -1,0 +1,23 @@
+development:
+  adapter: mysql2
+  encoding: utf8
+  database: holiday_development
+  pool: 5
+  username: holiday_machine
+  password: vacation
+
+test:
+  adapter: mysql2
+  encoding: utf8
+  database: holiday_test
+  pool: 5
+  username: holiday_machine
+  password: vacation
+
+production:
+  adapter: mysql2
+  encoding: utf8
+  database: holiday_production
+  pool: 5
+  username: root
+  password: Mage114n

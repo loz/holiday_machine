@@ -10,4 +10,3 @@ public/system/*
 public/cache/*
 *.sqlite3
 .bundle/*
-config/*.yml
