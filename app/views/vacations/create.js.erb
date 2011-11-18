@@ -17,6 +17,7 @@ $(document).ready(function () {
 
       var holiday_year_id = $("#holiday_year_id").val();
       if (holiday_year_id == <%= @vacation.holiday_year_id %>) {
+        $('table#holidays').css('visibility', 'visible');
         $('table#holidays tbody').append('<%= raw(create_holiday_row(@vacation))%>');
         $("#days_remaining").html(" <%= @days_remaining %>");
       }
