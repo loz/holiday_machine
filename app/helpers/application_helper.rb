@@ -12,7 +12,7 @@ module ApplicationHelper
 
   def show_flash(flash_type, flash_message)
     content_tag :div, :class => "alert-message #{flash_type}" do
-      link_to('&#215;', '#', :class => 'close') +
+      link_to('&#215;'.html_safe, '#', :class => 'close') +
       content_tag(:p, flash_message)
     end
   end
@@ -21,7 +21,7 @@ module ApplicationHelper
     arr = []
     flash.each do |flash_type, flash_message|
       mssg = content_tag :div, :class => "alert-message #{flash_type}" do
-        link_to('&#215;', '#', :class => 'close') +
+        link_to('&#215;'.html_safe, '#', :class => 'close') +
         content_tag(:p, flash_message)
       end
       arr << mssg
