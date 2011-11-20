@@ -90,11 +90,11 @@ class VacationsController < ApplicationController
   # DELETE /vacations/1.xml
   def destroy
     @vacation = Vacation.find(params[:id])
-
     respond_to do |format|
       if @vacation.destroy
         unless current_user.manager_id.nil?
-          HolidayMailer.holiday_cancellation(current_user, current_user.manager_id, @vacation).deliver
+          manager = User.find_by_id(@vacation.manager_id)
+          HolidayMailer.holiday_cancellation(current_user, manager, @vacation).deliver
         end
         @days_remaining = current_user.get_holiday_allowance.days_remaining
         @row_id = params[:id]
