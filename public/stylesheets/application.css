@@ -175,7 +175,10 @@ form select:focus {
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 
-/* line 135, sass/application.scss */
+/* line 138, sass/application.scss */
+.fc-button-next,
+.fc-button-prev,
+.fc-button-today,
 .btn {
   text-decoration: none;
   cursor: pointer;
@@ -211,17 +214,26 @@ form select:focus {
   -o-transition: 0.1s linear all;
   transition: 0.1s linear all;
 }
-/* line 164, sass/application.scss */
+/* line 167, sass/application.scss */
+.fc-button-next:hover,
+.fc-button-prev:hover,
+.fc-button-today:hover,
 .btn:hover {
   background-position: 0 -15px;
   color: #333;
   text-decoration: none;
 }
-/* line 169, sass/application.scss */
+/* line 172, sass/application.scss */
+.fc-button-next:focus,
+.fc-button-prev:focus,
+.fc-button-today:focus,
 .btn:focus {
   outline: 1px dotted #666;
 }
-/* line 172, sass/application.scss */
+/* line 175, sass/application.scss */
+.fc-button-next.primary,
+.fc-button-prev.primary,
+.fc-button-today.primary,
 .btn.primary {
   color: #ffffff;
   background-color: #0064cd;
@@ -239,7 +251,7 @@ form select:focus {
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
 
-/* line 190, sass/application.scss */
+/* line 193, sass/application.scss */
 .topbar {
   height: 40px;
   position: fixed;
@@ -249,12 +261,12 @@ form select:focus {
   z-index: 10000;
   overflow: visible;
 }
-/* line 198, sass/application.scss */
+/* line 201, sass/application.scss */
 .topbar a {
   color: #bfbfbf;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
-/* line 202, sass/application.scss */
+/* line 205, sass/application.scss */
 .topbar .topbar-inner {
   background-color: #222;
   background-repeat: repeat-x;
@@ -270,14 +282,14 @@ form select:focus {
   -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 }
-/* line 216, sass/application.scss */
+/* line 219, sass/application.scss */
 .topbar .topbar-inner .container {
   width: 950px;
   margin: 0 auto;
   overflow: hidden;
   *zoom: 1;
 }
-/* line 218, sass/application.scss */
+/* line 221, sass/application.scss */
 .topbar .topbar-inner .container .brand {
   float: left;
   display: block;
@@ -288,7 +300,7 @@ form select:focus {
   font-weight: 200;
   line-height: 1;
 }
-/* line 228, sass/application.scss */
+/* line 231, sass/application.scss */
 .topbar .topbar-inner .container ul {
   display: block;
   float: left;
@@ -296,12 +308,12 @@ form select:focus {
   position: relative;
   left: 0;
 }
-/* line 234, sass/application.scss */
+/* line 237, sass/application.scss */
 .topbar .topbar-inner .container ul > li {
   display: block;
   float: left;
 }
-/* line 237, sass/application.scss */
+/* line 240, sass/application.scss */
 .topbar .topbar-inner .container ul > li a {
   display: block;
   float: none;
@@ -309,13 +321,13 @@ form select:focus {
   line-height: 19px;
   text-decoration: none;
 }
-/* line 246, sass/application.scss */
+/* line 249, sass/application.scss */
 .topbar .topbar-inner .container #secondary-nav {
   display: inline;
   float: right;
 }
 
-/* line 253, sass/application.scss */
+/* line 256, sass/application.scss */
 table {
   width: 100%;
   margin-bottom: 18px;
@@ -324,41 +336,41 @@ table {
   border-collapse: collapse;
   border: 1px solid #ddd;
 }
-/* line 261, sass/application.scss */
+/* line 264, sass/application.scss */
 table th,
 table td {
   padding: 10px 10px 9px;
   line-height: 18px;
   text-align: left;
 }
-/* line 266, sass/application.scss */
+/* line 269, sass/application.scss */
 table th {
   padding-top: 9px;
   font-weight: bold;
   vertical-align: middle;
 }
-/* line 271, sass/application.scss */
+/* line 274, sass/application.scss */
 table td {
   vertical-align: top;
   border-top: 1px solid #ddd;
 }
-/* line 275, sass/application.scss */
+/* line 278, sass/application.scss */
 table tbody th {
   border-top: 1px solid #ddd;
   vertical-align: top;
 }
-/* line 280, sass/application.scss */
+/* line 283, sass/application.scss */
 table tbody tr:nth-child(odd) td,
 table tbody tr:nth-child(odd) th {
   background-color: #f9f9f9;
 }
-/* line 284, sass/application.scss */
+/* line 287, sass/application.scss */
 table tbody tr:hover td,
 table tbody tr:hover th {
   background-color: #f5f5f5;
 }
 
-/* line 289, sass/application.scss */
+/* line 292, sass/application.scss */
 .alert-message {
   position: relative;
   padding: 7px 15px;
@@ -390,15 +402,15 @@ table tbody tr:hover th {
   -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
-/* line 314, sass/application.scss */
+/* line 317, sass/application.scss */
 .alert-message p {
   margin: 0;
 }
-/* line 315, sass/application.scss */
+/* line 318, sass/application.scss */
 .alert-message ul {
   padding-left: 20px;
 }
-/* line 317, sass/application.scss */
+/* line 320, sass/application.scss */
 .alert-message.success, .alert-message.notice {
   background-color: #57a957;
   background-repeat: repeat-x;
@@ -414,7 +426,7 @@ table tbody tr:hover th {
   border-color: #57a957 #57a957 #3d773d;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
-/* line 333, sass/application.scss */
+/* line 336, sass/application.scss */
 .alert-message.alert, .alert-message.error {
   background-color: #c43c35;
   background-repeat: repeat-x;
@@ -430,7 +442,7 @@ table tbody tr:hover th {
   border-color: #c43c35 #c43c35 #882a25;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
-/* line 349, sass/application.scss */
+/* line 352, sass/application.scss */
 .alert-message .close {
   text-decoration: none;
   float: right;
@@ -444,7 +456,7 @@ table tbody tr:hover th {
   -moz-opacity: 0.25;
   opacity: 0.25;
 }
-/* line 361, sass/application.scss */
+/* line 364, sass/application.scss */
 .alert-message .close:hover {
   color: #000000;
   text-decoration: none;
@@ -454,7 +466,7 @@ table tbody tr:hover th {
   opacity: 0.4;
 }
 
-/* line 372, sass/application.scss */
+/* line 375, sass/application.scss */
 .label {
   padding: 1px 3px 2px;
   font-size: 9.75px;
@@ -470,24 +482,24 @@ table tbody tr:hover th {
   -khtml-border-radius: 3px;
   border-radius: 3px;
 }
-/* line 382, sass/application.scss */
+/* line 385, sass/application.scss */
 .label.cancelled, .label.important {
   background-color: #c43c35;
 }
-/* line 385, sass/application.scss */
+/* line 388, sass/application.scss */
 .label.pending {
   background-color: #f89406;
 }
-/* line 389, sass/application.scss */
+/* line 392, sass/application.scss */
 .label.authorised, .label.success {
   background-color: #46a546;
 }
-/* line 392, sass/application.scss */
+/* line 395, sass/application.scss */
 .label.notice {
   background-color: #62cffc;
 }
 
-/* line 398, sass/application.scss */
+/* line 401, sass/application.scss */
 p {
   font-size: 13px;
   font-weight: normal;
@@ -495,13 +507,13 @@ p {
   margin-bottom: 9px;
 }
 
-/* line 404, sass/application.scss */
+/* line 407, sass/application.scss */
 p small {
   font-size: 11px;
   color: #bfbfbf;
 }
 
-/* line 413, sass/application.scss */
+/* line 416, sass/application.scss */
 h1,
 h2,
 h3,
@@ -512,30 +524,30 @@ h6 {
   color: #404040;
 }
 
-/* line 417, sass/application.scss */
+/* line 420, sass/application.scss */
 h1 {
   margin-bottom: 18px;
   font-size: 30px;
   line-height: 36px;
 }
 
-/* line 422, sass/application.scss */
+/* line 425, sass/application.scss */
 h1 small {
   font-size: 18px;
 }
 
-/* line 425, sass/application.scss */
+/* line 428, sass/application.scss */
 h2 {
   font-size: 24px;
   line-height: 36px;
 }
 
-/* line 429, sass/application.scss */
+/* line 432, sass/application.scss */
 h2 small {
   font-size: 14px;
 }
 
-/* line 435, sass/application.scss */
+/* line 438, sass/application.scss */
 h3,
 h4,
 h5,
@@ -543,29 +555,29 @@ h6 {
   line-height: normal;
 }
 
-/* line 438, sass/application.scss */
+/* line 441, sass/application.scss */
 h3 {
   font-size: 18px;
 }
 
-/* line 441, sass/application.scss */
+/* line 444, sass/application.scss */
 h4 {
   font-size: 16px;
 }
 
-/* line 444, sass/application.scss */
+/* line 447, sass/application.scss */
 h5 {
   font-size: 14px;
 }
 
-/* line 447, sass/application.scss */
+/* line 450, sass/application.scss */
 h6 {
   font-size: 13px;
   color: #bfbfbf;
   text-transform: uppercase;
 }
 
-/* line 453, sass/application.scss */
+/* line 456, sass/application.scss */
 #user-info {
   padding: 10px;
   background-color: #f5f5f5;
@@ -589,11 +601,11 @@ h6 {
   overflow: hidden;
   *zoom: 1;
 }
-/* line 468, sass/application.scss */
+/* line 471, sass/application.scss */
 #user-info h3 {
   margin-top: 0;
 }
-/* line 469, sass/application.scss */
+/* line 472, sass/application.scss */
 #user-info .gravatar-wrapper {
   display: inline;
   float: left;
@@ -604,7 +616,7 @@ h6 {
 * html #user-info .gravatar-wrapper {
   overflow-x: hidden;
 }
-/* line 472, sass/application.scss */
+/* line 475, sass/application.scss */
 #user-info .user-info-wrapper {
   display: inline;
   float: left;
@@ -615,7 +627,7 @@ h6 {
 * html #user-info .user-info-wrapper {
   overflow-x: hidden;
 }
-/* line 480, sass/application.scss */
+/* line 483, sass/application.scss */
 #user-info form label,
 #user-info form select,
 #user-info form #days-remaining-wrapper {
@@ -624,14 +636,14 @@ h6 {
   line-height: 25px;
   margin-right: 10px;
 }
-/* line 484, sass/application.scss */
+/* line 487, sass/application.scss */
 #user-info form label span,
 #user-info form select span,
 #user-info form #days-remaining-wrapper span {
   font-weight: bold;
 }
 
-/* line 491, sass/application.scss */
+/* line 494, sass/application.scss */
 img.gravatar {
   background-color: #fff;
   border: 1px solid #ddd;
@@ -641,18 +653,94 @@ img.gravatar {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 
-/* line 503, sass/application.scss */
+/* line 506, sass/application.scss */
 tr.user form div.string,
 tr.user form input[type="submit"] {
   float: left;
   margin-right: 10px;
 }
-/* line 509, sass/application.scss */
+/* line 512, sass/application.scss */
 tr.user form input[type="submit"] {
   margin: 0;
 }
-/* line 512, sass/application.scss */
+/* line 515, sass/application.scss */
 tr.user form input.update-working-days {
   width: 25px;
   text-align: center;
+}
+
+/* line 525, sass/application.scss */
+#calendar table {
+  border: none;
+}
+/* line 528, sass/application.scss */
+#calendar table tr.fc-last td {
+  border-bottom: 1px solid #ddd;
+}
+/* line 532, sass/application.scss */
+#calendar table.fc-header {
+  border: none;
+}
+/* line 536, sass/application.scss */
+#calendar table.fc-header tbody tr:nth-child(odd) td,
+#calendar table.fc-header tbody tr:nth-child(odd) th {
+  background-color: inherit;
+}
+/* line 540, sass/application.scss */
+#calendar table.fc-header td {
+  border-top: none;
+}
+/* line 545, sass/application.scss */
+#calendar table.fc-border-separate td {
+  border: 1px solid #ddd;
+  border-width: 1px 0 0 1px;
+}
+/* line 548, sass/application.scss */
+#calendar table.fc-border-separate td.fc-last {
+  border-right: 1px solid #ddd;
+}
+/* line 553, sass/application.scss */
+#calendar table td.fc-today {
+  background-color: #FEFBF3;
+}
+/* line 557, sass/application.scss */
+#calendar .fc-event {
+  cursor: pointer;
+}
+/* line 561, sass/application.scss */
+#calendar .fc-header-left .fc-button {
+  border: 1px solid #ddd;
+  padding: 0 14px;
+}
+/* line 565, sass/application.scss */
+#calendar .fc-header-left .fc-button-today {
+  text-transform: capitalize;
+}
+/* line 568, sass/application.scss */
+#calendar .fc-header-left .fc-button-prev {
+  -moz-border-radius: 8px 0 0 8px;
+  -webkit-border-radius: 8px 0 0 8px;
+  -o-border-radius: 8px 0 0 8px;
+  -ms-border-radius: 8px 0 0 8px;
+  -khtml-border-radius: 8px 0 0 8px;
+  border-radius: 8px 0 0 8px;
+}
+/* line 570, sass/application.scss */
+#calendar .fc-header-left .fc-button-prev .fc-button-inner {
+  background: transparent url(../images/arrow.png) no-repeat 0 4px;
+}
+/* line 574, sass/application.scss */
+#calendar .fc-header-left .fc-button-next {
+  -moz-border-radius: 0 8px 8px 0;
+  -webkit-border-radius: 0 8px 8px 0;
+  -o-border-radius: 0 8px 8px 0;
+  -ms-border-radius: 0 8px 8px 0;
+  -khtml-border-radius: 0 8px 8px 0;
+  border-radius: 0 8px 8px 0;
+}
+/* line 576, sass/application.scss */
+#calendar .fc-header-left .fc-button-next .fc-button-inner {
+  background: transparent url(../images/arrow.png) no-repeat 0 4px;
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
 }

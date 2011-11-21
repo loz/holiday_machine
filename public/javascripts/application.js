@@ -25,20 +25,20 @@ $(document).ready(function() {
 
     $('#calendar').fullCalendar({
         header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'month,agendaWeek,agendaDay'
+          left: 'prev,next today',
+          center: 'title',
+          right: false
         },
-        editable: true,
-        eventClick: function() {
-            $dialog.dialog('open');
+        eventClick: function(calEvent, jsEvent, view) {
+          window.location = "/vacations/" + calEvent.id
         },
         theme: true,
-        events: "/calendar"
+        events: "/calendar",
+        disableDragging: true,
+        weekends: false
     });
 
-    $('#vacation_date_from').datepicker();
-    $("#vacation_date_to").datepicker();
+    $('#vacation_date_from, #vacation_date_to').datepicker();
 
     $("#vacation_date_from").change(function(){
         if ($("#vacation_date_to").val() < $("#vacation_date_from").val()){
