@@ -40,6 +40,11 @@ $(document).ready(function() {
     $('#vacation_date_from').datepicker();
     $("#vacation_date_to").datepicker();
 
+    $("#vacation_date_from").change(function(){
+        if ($("#vacation_date_to").val() < $("#vacation_date_from").val()){
+          $("#vacation_date_to").val($("#vacation_date_from").val());
+        }
+    });
 
     $('a.delete').live('click', function(event) {
 
