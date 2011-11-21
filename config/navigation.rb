@@ -26,7 +26,8 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :calendar_link, 'Calendar', "/calendar/show"
     primary.item :management_area_link, "Manage Holidays", "/administer", :if=>Proc.new{current_user.user_type_id.eql?(2)}
     primary.item :user_day_link, "Manage Holiday Allowance", user_days_path, :if=>Proc.new{current_user.user_type_id.eql?(2)}
-#    primary.item :settings_link, "Settings", user_settings_path
+   # primary.item :settings_link, "Settings", user_settings_path
+    primary.item :issues_link, "Report Issues", "https://github.com/etskelly/holiday_machine/issues"
   end
 
 =begin
