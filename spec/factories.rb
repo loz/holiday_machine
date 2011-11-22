@@ -6,6 +6,7 @@ FactoryGirl.define do
     password 'password'
     password_confirmation 'password'
     user_type_id 1
+    invite_code "Sage1nvite00"
   end
 
   factory :vacation do
@@ -25,8 +26,8 @@ FactoryGirl.define do
   end
 
   factory :holiday_year do
-    date_start "2010-10-01"
-    date_end "2011-09-30"
+    date_start "2011-10-01"
+    date_end "2012-09-30"
     description "test year"
   end
 

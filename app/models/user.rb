@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
 
   ## Scopes
   #Includes own manager
+  #TODO should this not be and rather than or
   scope :get_team_users, lambda { |manager_id| where('(manager_id = ? or id = ?) and confirmed_at is not null', manager_id, manager_id) }
 
   ## Instance methods

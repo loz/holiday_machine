@@ -13,7 +13,7 @@ class Vacation < ActiveRecord::Base
   after_create :decrease_days_remaining
 
   scope :team_holidays, lambda { |manager_id| where(:manager_id => manager_id) }
-  scope :user_holidays, lambda {|user_id| where(:user_id => user_id)}
+  scope :user_holidays, lambda { |user_id| where(:user_id => user_id) }
   scope :per_holiday_year, lambda { |holiday_year_id| where(:holiday_year_id => holiday_year_id) }
 
   validates_presence_of :date_from
@@ -42,15 +42,19 @@ class Vacation < ActiveRecord::Base
 
     holidays = self.get_team_holidays_for_dates current_user, date_from, date_to
     bank_holidays = BankHoliday.where "date_of_hol between ? and ? ", date_from, date_to
-    self.convert_to_json holidays, bank_holidays
+    self.convert_to_json holidays, bank_holidays, current_user
   end
 
 
   def self.get_team_holidays_for_dates current_user, start_date, end_date
-    team_users = User.get_team_users current_user.id
+    #Allows everyone to see everyone's holidays
+    team_users = User.all
+
+    #TODO filter by team
+
     team_users_array = []
     team_users.each do |u|
-       team_users_array << u.id
+      team_users_array << u.id
     end
     holidays = self.where "date_from >= ? and date_to <= ? and (user_id in(?))", start_date, end_date, team_users_array
     holidays
@@ -59,15 +63,15 @@ class Vacation < ActiveRecord::Base
   private
 
   def check_if_holiday_has_passed
-     unless holiday_status_id == 1
-       if date_to < Date.today
-         errors.add(:base, "Holiday has passed")
-         false
-       end
-     end
+    unless holiday_status_id == 1
+      if date_to < Date.today
+        errors.add(:base, "Holiday has passed")
+        false
+      end
+    end
   end
 
-  def self.convert_to_json holidays, bank_holidays
+  def self.convert_to_json holidays, bank_holidays, current_user
     #TODO the colour class should be per user not per holiday
     hol_colors = ['yellow', 'green', 'red', 'blue']
     text_colors = ['black', 'white', 'white', 'white']
@@ -75,7 +79,11 @@ class Vacation < ActiveRecord::Base
     json = []
     holidays.each do |hol|
       email = hol.user.email
-      hol_hash = {:id => hol.id, :title=>hol.user.forename + ": "+ hol.description, :start=>hol.date_from.to_s, :end=>hol.date_to.to_s, :color=>hol_colors[hol.holiday_status_id-1], :textColor=>text_colors[hol.holiday_status_id-1], :borderColor=>'black'}
+      if hol.user == current_user
+        hol_hash = {:id => hol.id, :title=>hol.user.forename + ": "+ hol.description, :start=>hol.date_from.to_s, :end=>hol.date_to.to_s, :color=>hol_colors[hol.holiday_status_id-1], :textColor=>text_colors[hol.holiday_status_id-1], :borderColor=>'black'}
+      else
+        hol_hash = {:id => hol.id, :title=>hol.user.forename, :start=>hol.date_from.to_s, :end=>hol.date_to.to_s, :color=>hol_colors[hol.holiday_status_id-1], :textColor=>text_colors[hol.holiday_status_id-1], :borderColor=>'black'}
+      end
       json << hol_hash
     end
     bank_holidays.each do |hol|
@@ -86,8 +94,8 @@ class Vacation < ActiveRecord::Base
   end
 
   #TODO add the overlaps between team members
-#  def intra_team_holiday_clashes
-#  end
+  #  def intra_team_holiday_clashes
+  #  end
 
   def date_from_must_be_before_date_to
     errors.add(:date_from, " must be before date to.") if date_from > date_to
@@ -155,9 +163,11 @@ class Vacation < ActiveRecord::Base
   end
 
   def dont_exceed_days_remaining
-     holiday_allowance = self.user.get_holiday_allowance_for_dates self.date_from, self.date_to
-     if holiday_allowance == 0 or holiday_allowance.nil? then return end
-     errors.add(:working_days_used, "-Number of days selected exceeds your allowance!") if holiday_allowance.days_remaining < business_days_between
+    holiday_allowance = self.user.get_holiday_allowance_for_dates self.date_from, self.date_to
+    if holiday_allowance == 0 or holiday_allowance.nil? then
+      return
+    end
+    errors.add(:working_days_used, "-Number of days selected exceeds your allowance!") if holiday_allowance.days_remaining < business_days_between
   end
 
 end

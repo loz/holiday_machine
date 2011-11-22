@@ -9,8 +9,8 @@ describe Vacation do
   describe "Create holidays" do
 
     before do
-      @mgr1 = Factory(:user_manager)
-      @mgr2 = Factory(:user_manager, :manager_id => @mgr1.id)
+      @mgr1 = Factory(:user)
+      @mgr2 = Factory(:user, :manager_id => @mgr1.id)
       @user1 = Factory(:user, :manager_id => @mgr1)
       @user2 = Factory(:user)
       @user3 = Factory(:user, :manager_id => @mgr2)
@@ -31,6 +31,14 @@ describe Vacation do
       y vacations
     end
 
+    it "should return the appropriate no of users" do
+      pending
+      p @user4.id
+      p @user.manager_id
+      users = User.where("(id = ? OR manager_id = ?) AND confirmed_at is not null", @user4.id, @user4.manager_id)
+    end
+
+
   end
 
   it "should raise error if holiday has passed unless pending"
@@ -40,5 +48,6 @@ describe Vacation do
     @vacation.date_from = "2011-02-01"
     @vacation.date_to = "2011-02-01"
   end
+
 
 end
