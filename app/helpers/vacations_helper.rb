@@ -7,7 +7,10 @@ module VacationsHelper
       content_tag(:td, holiday.description) +
       content_tag(:td, holiday.working_days_used) +
       content_tag(:td, holiday_status(holiday)) +
-      content_tag(:td, link_to('Delete', vacation_path(holiday), :method => :delete, :confirm => 'Are you sure you want to delete this holiday request?', :remote => true))
+      content_tag(:td, :class => "actions") do
+        link_to('View', vacation_path(holiday)) +
+        link_to('Delete', vacation_path(holiday), :method => :delete, :confirm => 'Are you sure you want to delete this holiday request?', :remote => true)
+      end
     end
   end
 
