@@ -10,7 +10,9 @@
   From: <%= @holiday.date_from.strftime("%d/%m/%y") %> to <%= @holiday.date_to.strftime("%d/%m/%y") %>
 </p>
 
+<% unless @holiday.notes.blank? %>
 <p>Reason:<%= @holiday.notes%></p>
+<% end %>
 
 </body>
 </html>
