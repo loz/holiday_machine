@@ -10,7 +10,7 @@ The host matches your server's host name
 
 Also run 
 
- db:setup
+ rake db:setup
 
 == License
 
