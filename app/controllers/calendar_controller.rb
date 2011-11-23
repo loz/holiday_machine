@@ -12,4 +12,8 @@ class CalendarController < ApplicationController
     end
   end
 
+  def show
+    @holiday_status = HolidayStatus.order(:status)
+  end
+
 end
