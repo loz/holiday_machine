@@ -4,8 +4,8 @@ $(document).ready(function() {
 
     // Flash messages
     $('#flash').delegate('a.close', 'click', function(e) {
-      e && e.preventDefault();
-      $(this).parent().fadeOut('fast');
+        e && e.preventDefault();
+        $(this).parent().fadeOut('fast');
     });
 
     // Datepicker
@@ -25,12 +25,12 @@ $(document).ready(function() {
 
     $('#calendar').fullCalendar({
         header: {
-          left: 'prev,next today',
-          center: 'title',
-          right: false
+            left: 'prev,next today',
+            center: 'title',
+            right: false
         },
         eventClick: function(calEvent, jsEvent, view) {
-          window.location = "/vacations/" + calEvent.id
+            window.location = "/vacations/" + calEvent.id
         },
         theme: true,
         events: "/calendar",
@@ -40,9 +40,9 @@ $(document).ready(function() {
 
     $('#vacation_date_from, #vacation_date_to').datepicker();
 
-    $("#vacation_date_from").change(function(){
-        if ($("#vacation_date_to").val() < $("#vacation_date_from").val()){
-          $("#vacation_date_to").val($("#vacation_date_from").val());
+    $("#vacation_date_from").change(function() {
+        if ($("#vacation_date_to").val() < $("#vacation_date_from").val()) {
+            $("#vacation_date_to").val($("#vacation_date_from").val());
         }
     });
 
@@ -69,12 +69,17 @@ $(document).ready(function() {
         $("#error_panel").hide('slide', {direction: 'right'}, 1000);
     });
 
+//  Opens the menu link in a new browser tab
+    $("li.blank_target a").click(function(event) {
+        $(this).attr('target', '_blank');
+    });
+
 });
 
 (function($) {
-  $.fn.resetForm = function() {
-    this.each(function(){
-      $(this)[0].reset();
-    });
-  }
+    $.fn.resetForm = function() {
+        this.each(function() {
+            $(this)[0].reset();
+        });
+    }
 })(jQuery);
