@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   end
 
   attr_accessor :invite_code
-  attr_accessible :email, :password, :password_confirmation, :forename, :surname, :user_type_id, :manager_id, :invite_code
+  attr_accessible :email, :password, :password_confirmation, :forename, :surname, :user_type_id, :manager_id, :invite_code, :invitation_token
 
   ## Scopes
   #Includes own manager
