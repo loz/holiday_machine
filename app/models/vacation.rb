@@ -1,5 +1,8 @@
 class Vacation < ActiveRecord::Base
 
+  HOL_COLOURS = %W{#FDF5D9 #D1EED1 #FDDFDE #DDF4Fb}
+  BORDER_COLOURS = %W{#FCEEC1 #BFE7Bf #FBC7C6 #C6EDF9}
+
   #TODO remove the manager_id from this class, get it via the user - so that if the manager is updated, there won't be a problem
 
   belongs_to :holiday_status
@@ -71,23 +74,20 @@ class Vacation < ActiveRecord::Base
     end
   end
 
-  def self.convert_to_json holidays, bank_holidays, current_user
-    #TODO the colour class should be per user not per holiday
-    hol_colors = ['yellow', 'green', 'red', 'blue']
-    text_colors = ['black', 'white', 'white', 'white']
-
+  def self.convert_to_json(holidays, bank_holidays, current_user)
     json = []
     holidays.each do |hol|
       email = hol.user.email
       if hol.user == current_user
-        hol_hash = {:id => hol.id, :title=>hol.user.forename + ": "+ hol.description, :start=>hol.date_from.to_s, :end=>hol.date_to.to_s, :color=>hol_colors[hol.holiday_status_id-1], :textColor=>text_colors[hol.holiday_status_id-1], :borderColor=>'black'}
+        hol_hash = { :id => hol.id, :title => [hol.user.forename, hol.description].join(": "), :start => hol.date_from.to_s, :end => hol.date_to.to_s, :color => HOL_COLOURS[hol.holiday_status_id - 1], :textColor => '#404040', :borderColor => BORDER_COLOURS[hol.holiday_status_id - 1] }
       else
-        hol_hash = {:id => hol.id, :title=>hol.user.forename, :start=>hol.date_from.to_s, :end=>hol.date_to.to_s, :color=>hol_colors[hol.holiday_status_id-1], :textColor=>text_colors[hol.holiday_status_id-1], :borderColor=>'black'}
+        hol_hash = { :id => hol.id, :title=> hol.user.full_name, :start => hol.date_from.to_s, :end => hol.date_to.to_s, :color => HOL_COLOURS[hol.holiday_status_id - 1], :textColor => '#404040', :borderColor => BORDER_COLOURS[hol.holiday_status_id - 1] }
       end
       json << hol_hash
     end
+
     bank_holidays.each do |hol|
-      hol_hash = {:id => hol.id, :title=>hol.name, :start=>hol.date_of_hol.to_s, :color=>"black"}
+      hol_hash = { :id => hol.id, :title => hol.name, :start => hol.date_of_hol.to_s, :color =>"black" }
       json << hol_hash
     end
     json

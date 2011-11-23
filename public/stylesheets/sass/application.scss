@@ -38,6 +38,7 @@ body {
     margin-top: 60px;
     .main {
       @include column(16);
+      position: relative;
     }
     .sidebar {
       @include column(7);
@@ -517,6 +518,8 @@ img.gravatar {
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
   -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+  width: 75px;
+  height: 75px;
 }
 
 tr.user {
@@ -541,6 +544,7 @@ tr.user {
 
 // Fullcalendar overrrides
 #calendar {
+  margin-top: 20px;
   table {
     border: none;
     tr.fc-last {
@@ -611,5 +615,25 @@ dl {
     font-weight: bold;
     float: left;
     clear: left;
+  }
+}
+
+#calendar-key {
+  position: absolute;
+  right: 2px;
+  width: 150px;
+  margin: 0;
+  dt,
+  dd {
+    margin-bottom: 2px;
+  }
+  dt {
+    width: 90px;
+  }
+  dd {
+    width: 60px;
+    height: 18px;
+    text-indent: -9999px;
+    margin: 0 0 2px 90px;
   }
 }
