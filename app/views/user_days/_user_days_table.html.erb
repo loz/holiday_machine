@@ -1,59 +1,58 @@
 <table>
   <thead>
-    <tr>
-      <th>User</th>
-      <th>Total days leave</th>
-      <th>Working days left</th>
-      <th>Reason</th>
-    </tr>
+  <tr>
+    <th>User</th>
+    <th>Total days leave</th>
+    <th>Working days left</th>
+    <th>Reason</th>
+  </tr>
   </thead>
   <tbody>
-<% @team_users.each do |user| %>
-  <% if user.user_days_for_selected_year(@selected_year).present? %>
-    <%= content_for :dialog do %>
-      <%= content_tag_for :div, user, 'extra', :class => 'reveal-modal' do %>
-        <a class="close-reveal-modal">&#215;</a>
-        <%= content_tag :h3, "#{user.full_name}'s extra allowance" %>
-        <table>
-          <thead>
-            <tr>
-              <th>Number of days</th>
-              <th>Reason</th>
-              <th>&nbsp;</th>
-            </tr>
-          </thead>
-          <tbody>
-          <% user.user_days_for_selected_year(@selected_year).each do |user_day| %>
-            <%= content_tag_for :tr, user_day do %>
-              <%= content_tag :td, user_day.reason %>
-              <%= content_tag :td, user_day.no_days %>
-              <%= content_tag :td do %>
-                <%= link_to 'Delete', user_day_path(user_day), :method => :delete %>
+  <% @team_users.each do |user| %>
+      <% if user.user_days_for_selected_year(@selected_year).present? %>
+          <%= content_for :dialog do %>
+              <%= content_tag_for :div, user, 'extra', :class => 'reveal-modal' do %>
+                  <a class="close-reveal-modal">&#215;</a>
+                  <%= content_tag :h3, "#{user.full_name}'s extra allowance" %>
+                  <table>
+                    <thead>
+                    <tr>
+                      <th>Number of days</th>
+                      <th>Reason</th>
+                      <th>&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% user.user_days_for_selected_year(@selected_year).each do |user_day| %>
+                        <%= content_tag_for :tr, user_day do %>
+                            <%= content_tag :td, user_day.reason %>
+                            <%= content_tag :td, user_day.no_days %>
+                            <%= content_tag :td do %>
+                                <%= link_to 'Delete', user_day_path(user_day), :method => :delete %>
+                            <% end %>
+                        <% end %>
+                    <% end %>
+                    </tbody>
+                  </table>
               <% end %>
-            <% end %>
           <% end %>
-          </tbody>
-        </table>
       <% end %>
-    <% end %>
-  <% end %>
-  <%= content_tag_for :tr, user do %>
-    <%= content_tag :td do %>
-      <%= link_to user.full_name, '#', :class => 'user-days-dialog', 'data-dialog' => "extra_user_#{user.id}" %>
-    <% end %>
-    <%# TODO Change this to a db call %>
-    <%= content_tag :td, '25.0' %>
-    <%= content_tag :td, user.get_holiday_allowance_for_selected_year(@selected_year).days_remaining, :class => 'working-days-left' %>
-    <%= content_tag :td do %>
-      <%# TODO: Namespace each form as this won't be valid html due to duplicate id's %>
-      <%= simple_form_for @user_day do |f| %>
-        <%= f.input :user_id, :as => :hidden, :input_html => { :value => user.id } %>
-        <%= f.input :reason, :label => false, :placeholder => 'e.g. Carried over from last year' %>
-        <%= f.input :no_days, :as => :string, :input_html => { :class => 'update-working-days', :value => 0 }, :label => false %>
-        <%= f.button :submit, 'Update allowance', :class => 'btn primary', :confirm => "Are you sure you want to update #{user.forename}'s holiday allowance?"  %>
+      <%= content_tag_for :tr, user do %>
+          <%= content_tag :td do %>
+              <%= link_to user.full_name, '#', :class => 'user-days-dialog', 'data-dialog' => "extra_user_#{user.id}" %>
+          <% end %>
+          <%= content_tag :td, overall_days_for_year(user, @selected_year) %>
+          <%= content_tag :td, days_remaining(user, @selected_year), :class => 'working-days-left' %>
+          <%= content_tag :td do %>
+              <%# TODO: Namespace each form as this won't be valid html due to duplicate id's %>
+              <%= simple_form_for @user_day do |f| %>
+                  <%= f.input :user_id, :as => :hidden, :input_html => {:value => user.id} %>
+                  <%= f.input :reason, :label => false, :placeholder => 'e.g. Carried over from last year' %>
+                  <%= f.input :no_days, :as => :string, :input_html => {:class => 'update-working-days', :value => 0}, :label => false %>
+                  <%= f.button :submit, 'Update allowance', :class => 'btn primary', :confirm => "Are you sure you want to update #{user.forename}'s holiday allowance?" %>
+              <% end %>
+          <% end %>
       <% end %>
-    <% end %>
   <% end %>
-<% end %>
   </tbody>
 </table>

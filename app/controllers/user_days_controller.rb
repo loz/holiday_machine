@@ -52,6 +52,8 @@ end
   def create
 
     @user_day = UserDay.new(params[:user_day])
+
+    #TODO move this line to the model
     @user_day.holiday_year = HolidayYear.current_year
 
     @user = @user_day.user
