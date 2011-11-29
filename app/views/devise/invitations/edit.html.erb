@@ -10,7 +10,8 @@
     <%= f.input :surname %>
     <%= f.input :invite_code %>
     <%= f.association :user_type, :collection => UserType.all, :prompt => "Choose a user type" %>
-    <%= f.hidden_field :manager_id, :input_html => {:value => User.find_by_invitation_token(params[:invitation_token]).invited_by_id} %>
+    <%#= f.input :manager_id, :input_html => {:value => User.find_by_invitation_token(params[:invitation_token]).invited_by_id} %>
+    <%# p "Invitation id", User.find_by_invitation_token(params[:invitation_token]).invited_by_id  %>
     <div class="well">
       <%= f.button :submit, "Sign up", :class => 'btn primary' %>
     </div>

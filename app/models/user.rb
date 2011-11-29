@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :token_authenticatable
 
   ## Callbacks
+  before_update :add_inviting_manager
   after_create :create_allowance
   after_destroy :delete_all_allowances
 
@@ -21,7 +22,7 @@ class User < ActiveRecord::Base
   end
 
   attr_accessor :invite_code
-  attr_accessible :email, :password, :password_confirmation, :forename, :surname, :user_type_id, :manager_id, :invite_code, :invitation_token
+  attr_accessible :email, :password, :password_confirmation, :forename, :surname, :user_type_id, :manager_id, :invite_code, :invitation_token, :remember_me
 
   ## Scopes
   #Includes own manager
@@ -68,6 +69,13 @@ class User < ActiveRecord::Base
 
   def user_days_for_selected_year year
     UserDay.where(:user_id => self.id, :holiday_year_id => year.id)
+  end
+
+  def add_inviting_manager
+    unless invited_by_id.blank?
+      self.manager_id = self.invited_by_id
+      self.invited_by_id = nil
+    end
   end
 
 end
