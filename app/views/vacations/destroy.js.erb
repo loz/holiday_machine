@@ -8,6 +8,6 @@
 //    $(this).remove();
   });
     $("#show_days").html("Days Remaining: <%= @days_remaining %>");
-    $("#flash").html('<%= raw(render_flash_messages) %>');
+    $("#flash").html('<%= escape_javascript(render_flash_messages) %>');
     $("#flash").show();
 <% end -%>
