@@ -30,7 +30,9 @@ $(document).ready(function() {
             right: false
         },
         eventClick: function(calEvent, jsEvent, view) {
-            window.location = "/vacations/" + calEvent.id
+            if (calEvent.className["0"] != "bankHol") {
+                window.location = "/vacations/" + calEvent.id;
+            }
         },
         theme: true,
         events: "/calendar",

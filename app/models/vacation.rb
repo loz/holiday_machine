@@ -87,7 +87,7 @@ class Vacation < ActiveRecord::Base
     end
 
     bank_holidays.each do |hol|
-      hol_hash = { :id => hol.id, :title => hol.name, :start => hol.date_of_hol.to_s, :color =>"black" }
+      hol_hash = { :id => hol.id, :title => hol.name, :start => hol.date_of_hol.to_s, :color =>"black", :className => "bankHol" }
       json << hol_hash
     end
     json
@@ -114,7 +114,7 @@ class Vacation < ActiveRecord::Base
   end
 
   def no_overlapping_holidays
-    holidays = Vacation.where("user_id = ?", self.user_id)
+    holidays = Vacation.find_all_by_user_id(self.user_id)
     holidays.each do |holiday|
       errors.add(:base, "A holiday already exists within this date range") if overlaps?(holiday)
     end
