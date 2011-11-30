@@ -30,6 +30,7 @@ $(document).ready(function() {
             right: false
         },
         eventClick: function(calEvent, jsEvent, view) {
+            if (calEvent.type === 'bank-holiday') return false;
             window.location = "/vacations/" + calEvent.id
         },
         theme: true,
