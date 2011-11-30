@@ -1,17 +1,17 @@
 <% if @user_day.errors.any? -%>
-  var error_html = '<%= raw(render_flash_messages) %>';
-  var error_list = '<%= raw(show_errors_as_list(@vacation.errors)) %>';
+  var error_html = '<%= escape_javascript(render_flash_messages) %>';
+  var error_list = '<%= escape_javascript(show_errors_as_list(@vacation.errors)) %>';
   var full_error_html = $(error_html).append(error_list);
   $("#flash").html(full_error_html);
 <% else -%>
   // Render the flash message
-  $('#flash').html('<%= raw(render_flash_messages) %>');
+  $('#flash').html('<%= escape_javascript(render_flash_messages) %>');
 
   // Reset all the forms
   $('form.user_day').resetForm();
 
   // Update the users working days left
-  var changed_row = $('tr#user_<%= raw(@user.id) %>').find('.working-days-left'),
-      working_days_left = '<%= raw(@allowance.days_remaining) %>';
+  var changed_row = $('tr#user_<%= escape_javascript(@user.id) %>').find('.working-days-left'),
+      working_days_left = '<%= escape_javascript(@allowance.days_remaining) %>';
   changed_row.html(working_days_left);
 <% end -%>
