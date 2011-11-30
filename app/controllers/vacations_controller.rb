@@ -28,7 +28,11 @@ class VacationsController < ApplicationController
 
   # GET /vacations/1
   def show
-    @vacation = Vacation.find(params[:id])
+    @vacation = Vacation.find_by_id(params[:id])
+    if @vacation.blank?
+      redirect_to calendar_path
+      return
+    end
 
     respond_to do |format|
       format.html
