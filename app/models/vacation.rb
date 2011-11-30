@@ -79,7 +79,7 @@ class Vacation < ActiveRecord::Base
     holidays.each do |hol|
       email = hol.user.email
       if hol.user == current_user
-        hol_hash = { :id => hol.id, :title => [hol.user.forename, hol.description].join(": "), :start => hol.date_from.to_s, :end => hol.date_to.to_s, :color => HOL_COLOURS[hol.holiday_status_id - 1], :textColor => '#404040', :borderColor => BORDER_COLOURS[hol.holiday_status_id - 1] }
+        hol_hash = { :id => hol.id, :title => [hol.user.forename, hol.description].join(": "), :start => hol.date_from.to_s, :end => hol.date_to.to_s, :color => HOL_COLOURS[hol.holiday_status_id - 1], :textColor => '#404040', :borderColor => BORDER_COLOURS[hol.holiday_status_id - 1], :type => 'holiday' }
       else
         hol_hash = { :id => hol.id, :title=> hol.user.full_name, :start => hol.date_from.to_s, :end => hol.date_to.to_s, :color => HOL_COLOURS[hol.holiday_status_id - 1], :textColor => '#404040', :borderColor => BORDER_COLOURS[hol.holiday_status_id - 1] }
       end
@@ -87,7 +87,7 @@ class Vacation < ActiveRecord::Base
     end
 
     bank_holidays.each do |hol|
-      hol_hash = { :id => hol.id, :title => hol.name, :start => hol.date_of_hol.to_s, :color =>"black" }
+      hol_hash = { :id => hol.id, :title => hol.name, :start => hol.date_of_hol.to_s, :color =>"black", :type => 'bank-holiday' }
       json << hol_hash
     end
     json
