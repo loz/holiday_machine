@@ -1,11 +1,11 @@
 $(document).ready(function () {
   <% if @vacation.errors.any? %>
     $("#flash_notice").hide(300);
-    $("#messages").html("<%= raw(show_errors_as_list(@vacation.errors)) %>");
+    $("#messages").html("<%= escape_javascript(show_errors_as_list(@vacation.errors)) %>");
     $('#error_panel').show('slide', {direction: 'right'}, 1000);
   <% else %>
     $("#error_panel").hide(300);
-    $("#flash").html('<%= raw(render_flash_messages) %>');
+    $("#flash").html('<%= escape_javascript(render_flash_messages) %>');
     $("#flash").show();
     $('#vacation_<%= @vacation.id %>').find('span.label').text('<%= @vacation.holiday_status.status %>').attr('class', '<%= holiday_status_class(@vacation) %>');
   <% end %>
