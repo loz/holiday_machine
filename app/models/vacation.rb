@@ -3,13 +3,11 @@ class Vacation < ActiveRecord::Base
   HOL_COLOURS = %W{#FDF5D9 #D1EED1 #FDDFDE #DDF4Fb}
   BORDER_COLOURS = %W{#FCEEC1 #BFE7Bf #FBC7C6 #C6EDF9}
 
-  #TODO remove the manager_id from this class, get it via the user - so that if the manager is updated, there won't be a problem
-
   belongs_to :holiday_status
   belongs_to :holiday_year
   belongs_to :user
 
-  before_save :save_working_days
+  before_save :set_half_days, :save_working_days
   before_destroy :check_if_holiday_has_passed
 
   after_destroy :add_days_remaining
@@ -30,21 +28,25 @@ class Vacation < ActiveRecord::Base
   validate :working_days_greater_than_zero
   validate :no_overlapping_holidays, :on => :create
 
+  attr_accessor :half_day_from, :half_day_to
+
   def date_from= val
-    self[:date_from] = convert_uk_date_to_iso val
+    self[:date_from] = (convert_uk_date_to_iso val, true)
   end
 
   def date_to= val
-    self[:date_to] = convert_uk_date_to_iso val
+    self[:date_to] = (convert_uk_date_to_iso val, false)
   end
 
   def self.team_holidays_as_json current_user, start_date, end_date
+
     #TODO filter this to show all hols, by team, and by user
-    date_from = Time.at(start_date.to_i).to_date
-    date_to = Time.at(end_date.to_i).to_date
+    date_from = DateTime.parse(Time.at(start_date.to_i).to_s)
+    date_to = DateTime.parse(Time.at(end_date.to_i).to_s)
 
     holidays = self.get_team_holidays_for_dates current_user, date_from, date_to
     bank_holidays = BankHoliday.where "date_of_hol between ? and ? ", date_from, date_to
+
     self.convert_to_json holidays, bank_holidays, current_user
   end
 
@@ -52,7 +54,6 @@ class Vacation < ActiveRecord::Base
   def self.get_team_holidays_for_dates current_user, start_date, end_date
     #Allows everyone to see everyone's holidays
     team_users = User.all
-
     #TODO filter by team
 
     team_users_array = []
@@ -79,15 +80,15 @@ class Vacation < ActiveRecord::Base
     holidays.each do |hol|
       email = hol.user.email
       if hol.user == current_user
-        hol_hash = { :id => hol.id, :title => [hol.user.forename, hol.description].join(": "), :start => hol.date_from.to_s, :end => hol.date_to.to_s, :color => HOL_COLOURS[hol.holiday_status_id - 1], :textColor => '#404040', :borderColor => BORDER_COLOURS[hol.holiday_status_id - 1], :type => 'holiday' }
+        hol_hash = {:id => hol.id, :title => [hol.user.forename, hol.description].join(": "), :start => hol.date_from.to_date.to_s, :end => hol.date_to.to_date.to_s, :color => HOL_COLOURS[hol.holiday_status_id - 1], :textColor => '#404040', :borderColor => BORDER_COLOURS[hol.holiday_status_id - 1], :type => 'holiday'}
       else
-        hol_hash = { :id => hol.id, :title=> hol.user.full_name, :start => hol.date_from.to_s, :end => hol.date_to.to_s, :color => HOL_COLOURS[hol.holiday_status_id - 1], :textColor => '#404040', :borderColor => BORDER_COLOURS[hol.holiday_status_id - 1] }
+        hol_hash = {:id => hol.id, :title=> hol.user.full_name, :start => hol.date_from.to_date.to_s, :end => hol.date_to.to_date.to_s, :color => HOL_COLOURS[hol.holiday_status_id - 1], :textColor => '#404040', :borderColor => BORDER_COLOURS[hol.holiday_status_id - 1]}
       end
       json << hol_hash
     end
 
     bank_holidays.each do |hol|
-      hol_hash = { :id => hol.id, :title => hol.name, :start => hol.date_of_hol.to_s, :color =>"black", :type => 'bank-holiday' }
+      hol_hash = {:id => hol.id, :title => hol.name, :start => hol.date_of_hol.to_s, :color =>"black", :type => 'bank-holiday'}
       json << hol_hash
     end
     json
@@ -108,7 +109,6 @@ class Vacation < ActiveRecord::Base
 
 
   def holiday_must_not_straddle_holiday_years
-    #TODO this query will not be right - test with sql
     number_years = HolidayYear.holiday_years_containing_holiday(date_from, date_to).count
     errors.add(:base, "Holiday must not cross years") if number_years> 1
   end
@@ -121,16 +121,21 @@ class Vacation < ActiveRecord::Base
   end
 
   def overlaps?(holiday)
-    (date_from - holiday.date_to) * (holiday.date_from - date_to) >= 0
+    (date_from.to_date - holiday.date_to.to_date) * (holiday.date_from.to_date - date_to.to_date) >= 0
   end
 
-  def convert_uk_date_to_iso date_str
+  def convert_uk_date_to_iso date_str, is_date_from
     split_date=date_str.split("/")
-    Date.new(split_date[2].to_i, split_date[1].to_i, split_date[0].to_i)
+    if is_date_from
+      DateTime.new(split_date[2].to_i, split_date[1].to_i, split_date[0].to_i, 9)
+    else
+      DateTime.new(split_date[2].to_i, split_date[1].to_i, split_date[0].to_i, 17)
+    end
   end
 
   def save_working_days #TODO rename method
-    self[:working_days_used] = @working_days
+
+    self[:working_days_used] = @working_days - half_day_adjustment
 
     unless self[:uuid]
       guid = UUID.new
@@ -146,8 +151,9 @@ class Vacation < ActiveRecord::Base
   def business_days_between
     holidays = BankHoliday.where("date_of_hol BETWEEN ? AND ?", date_from, date_to)
     holidays_array = holidays.collect { |hol| hol.date_of_hol }
-    weekdays = (date_from..date_to).reject { |d| [0, 6].include? d.wday or holidays_array.include?(d) }
-    business_days = weekdays.length
+    weekdays = (date_from.to_date..date_to.to_date).reject { |d| [0, 6].include? d.wday or holidays_array.include?(d) }
+    business_days = weekdays.length - half_day_adjustment
+    business_days
   end
 
   def decrease_days_remaining
@@ -168,6 +174,60 @@ class Vacation < ActiveRecord::Base
       return
     end
     errors.add(:working_days_used, "-Number of days selected exceeds your allowance!") if holiday_allowance.days_remaining < business_days_between
+  end
+
+  def set_half_days
+    if date_from.to_date == date_to.to_date
+      #Ensure the half days match
+      if (half_day_from != half_day_to) && (half_day_from != "Full Day" || half_day_to != "Full Day")
+        errors.add(:base, "You cannot select a half day for both the morning and the evening")
+        return false
+      else
+        if half_day_from == "Half Day AM"
+          #E.g 2011-01-01 09:00 to 2011-01-01 12:00
+          write_attribute(:date_to, DateTime.new(date_to.year, date_to.month, date_to.day, 12))
+        elsif half_day_from == "Half Day PM"
+          #E.g 2011-01-01 13:00 to 2011-01-01 17:00
+          write_attribute(:date_from, DateTime.new(date_to.year, date_to.month, date_to.day, 13))
+        end
+      end
+    else
+      if half_day_from != "Full Day" && half_day_from != "Half Day PM"
+        errors.add(:base, "A holiday can only begin with a half day in the afternoon")
+        return false
+      elsif half_day_to != "Full Day" && half_day_to != "Half Day AM"
+        errors.add(:base, "A holiday can only end with a half day in the morning")
+        return false
+      else
+        if half_day_from == "Half Day PM"
+          #e.g 2011-01-01 13:00
+          write_attribute(:date_from, DateTime.new(date_from.year, date_from.month, date_from.day, 13))
+        end
+        if half_day_to == "Half Day AM"
+          #e.g 2011-05-01 12:00
+          write_attribute(:date_to, DateTime.new(date_to.year, date_to.month, date_to.day, 12))
+        end
+      end
+    end
+  end
+
+  def half_day_adjustment
+    half_day_adjustment = 0.0
+    if self.date_from.to_date == self.date_to.to_date
+      if self.date_from.hour == 13 || self.date_to.hour == 12
+        half_day_adjustment += 0.5
+      end
+    else
+      #p "DateFrom hour", self.date_from.hour
+      if self.date_from.hour == 13
+        half_day_adjustment += 0.5
+      end
+      #p "Dateto hour", self.date_to.hour
+      if self.date_to.hour == 12
+        half_day_adjustment += 0.5
+      end
+    end
+    half_day_adjustment
   end
 
 end

@@ -101,6 +101,9 @@ class VacationsController < ApplicationController
           HolidayMailer.holiday_cancellation(current_user, manager, @vacation).deliver
         end
         @days_remaining = current_user.get_holiday_allowance.days_remaining
+
+        p "Days remaining",  @days_remaining
+
         @row_id = params[:id]
         @failed = false
         flash.now[:success] = "Holiday deleted"

@@ -4,10 +4,9 @@
     $('#error_panel').show('slide', {direction: 'right'}, 1000);
 <% else -%>
   $("table#holidays tbody tr#vacation_<%= @row_id %>").fadeOut('slow', function() {
-  $('table#holidays').css('visibility', 'hidden');
-//    $(this).remove();
+  $('table#holidays tbody tr#vacation_<%= @row_id %>').css('visibility', 'hidden');
   });
-    $("#show_days").html("Days Remaining: <%= @days_remaining %>");
+    $("#days_remaining").html(" <%= @days_remaining %>");
     $("#flash").html('<%= escape_javascript(render_flash_messages) %>');
     $("#flash").show();
 <% end -%>

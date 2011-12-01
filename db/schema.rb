@@ -11,14 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111122134607) do
+ActiveRecord::Schema.define(:version => 20111130113949) do
 
   create_table "admins", :force => true do |t|
-    t.string   "email",                             :default => "", :null => false
-    t.string   "encrypted_password", :limit => 128, :default => "", :null => false
+    t.string   "email",                                                           :default => "", :null => false
+    t.string   "encrypted_password", :limit => 128,                               :default => "", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "days_leave"
+    t.decimal  "days_leave",                        :precision => 4, :scale => 1
   end
 
   create_table "bank_holidays", :force => true do |t|
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(:version => 20111122134607) do
 
   create_table "user_days", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "no_days"
+    t.decimal  "no_days",                        :precision => 4, :scale => 1
     t.string   "reason",          :limit => 100
     t.integer  "holiday_year_id"
     t.datetime "created_at"
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(:version => 20111122134607) do
   end
 
   create_table "user_days_for_years", :force => true do |t|
-    t.integer  "days_remaining"
+    t.decimal  "days_remaining",  :precision => 4, :scale => 1
     t.integer  "user_id"
     t.integer  "holiday_year_id"
     t.datetime "created_at"
@@ -108,10 +108,10 @@ ActiveRecord::Schema.define(:version => 20111122134607) do
   add_index "users", ["invited_by_id"], :name => "index_users_on_invited_by_id"
 
   create_table "vacations", :force => true do |t|
-    t.date     "date_from"
-    t.date     "date_to"
+    t.datetime "date_from"
+    t.datetime "date_to"
     t.string   "description"
-    t.integer  "working_days_used"
+    t.decimal  "working_days_used", :precision => 4, :scale => 1
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "holiday_status_id"
