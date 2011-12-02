@@ -62,6 +62,7 @@ class Vacation < ActiveRecord::Base
     end
     holidays = self.where "date_from >= ? and date_to <= ? and (user_id in(?))", start_date, end_date, team_users_array
     holidays
+
   end
 
   private
@@ -79,10 +80,18 @@ class Vacation < ActiveRecord::Base
     json = []
     holidays.each do |hol|
       email = hol.user.email
+      half_day_afternoon = hol.date_from.hour == 13 ? "Half Day PM" : ""
+      half_day_morning = hol.date_to.hour == 12 ? "Half Day AM" : ""
+
+      half_day = half_day_afternoon + half_day_morning
+      unless half_day.blank?
+        half_day = "\n"+half_day
+      end
+
       if hol.user == current_user
-        hol_hash = {:id => hol.id, :title => [hol.user.forename, hol.description].join(": "), :start => hol.date_from.to_date.to_s, :end => hol.date_to.to_date.to_s, :color => HOL_COLOURS[hol.holiday_status_id - 1], :textColor => '#404040', :borderColor => BORDER_COLOURS[hol.holiday_status_id - 1], :type => 'holiday'}
+        hol_hash = {:id => hol.id, :title => [hol.user.forename, hol.description].join(": ") + " " + half_day, :start => hol.date_from.iso8601, :end => hol.date_to.iso8601, :color => HOL_COLOURS[hol.holiday_status_id - 1], :textColor => '#404040', :borderColor => BORDER_COLOURS[hol.holiday_status_id - 1], :type => 'holiday'}
       else
-        hol_hash = {:id => hol.id, :title=> hol.user.full_name, :start => hol.date_from.to_date.to_s, :end => hol.date_to.to_date.to_s, :color => HOL_COLOURS[hol.holiday_status_id - 1], :textColor => '#404040', :borderColor => BORDER_COLOURS[hol.holiday_status_id - 1]}
+        hol_hash = {:id => hol.id, :title=> hol.user.full_name + " " + half_day, :start => hol.date_from.iso8601, :end => hol.date_to.iso8601, :color => HOL_COLOURS[hol.holiday_status_id - 1], :textColor => '#404040', :borderColor => BORDER_COLOURS[hol.holiday_status_id - 1]}
       end
       json << hol_hash
     end
@@ -179,8 +188,8 @@ class Vacation < ActiveRecord::Base
   def set_half_days
     if date_from.to_date == date_to.to_date
       #Ensure the half days match
-      if (half_day_from != half_day_to) && (half_day_from != "Full Day" || half_day_to != "Full Day")
-        errors.add(:base, "You cannot select a half day for both the morning and the evening")
+      if (half_day_from != half_day_to)# && (half_day_from != "Full Day" || half_day_to != "Full Day")
+        errors.add(:base, "Please ensure you select the same type of half day from both drop downs")
         return false
       else
         if half_day_from == "Half Day AM"
