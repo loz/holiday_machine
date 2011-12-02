@@ -52,15 +52,15 @@ module VacationsHelper
 
     if is_date_from
       if date_from.hour == 13
-        date_from.strftime("%d/%m/%Y")
+        date_from.strftime("%d/%m/%Y") + " - Afternoon"
       else
-        date_from.strftime("%d/%m/%Y") + " - Half Day PM"
+        date_from.strftime("%d/%m/%Y")
       end
     else
       if date_to.hour == 12
-        date_to.strftime("%d/%m/%Y")
+        date_to.strftime("%d/%m/%Y") + " - Morning"
       else
-        date_to.strftime("%d/%m/%Y") + " - Half Day AM"
+        date_to.strftime("%d/%m/%Y")
       end
     end
 
