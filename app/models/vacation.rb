@@ -211,10 +211,10 @@ class Vacation < ActiveRecord::Base
       end
     else
       if half_day_from != "Full Day" && half_day_from != "Half Day PM"
-        errors.add(:base, "A holiday can only begin with a half day in the afternoon")
+        errors.add(:base, "A holiday can only begin with a half day in the afternoon, since this would mean you would be coming in on the afternoon of the first day of your holiday")
         return false
       elsif half_day_to != "Full Day" && half_day_to != "Half Day AM"
-        errors.add(:base, "A holiday can only end with a half day in the morning")
+        errors.add(:base, "A holiday cannot end with a half day in the afternoon, since you would be at work in the morning on the last day of your holiday")
         return false
       else
         if half_day_from == "Half Day PM"
