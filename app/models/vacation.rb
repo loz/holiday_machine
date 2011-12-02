@@ -62,7 +62,16 @@ class Vacation < ActiveRecord::Base
     end
     holidays = self.where "date_from >= ? and date_to <= ? and (user_id in(?))", start_date, end_date, team_users_array
     holidays
+  end
 
+  def self.mark_as_taken current_user
+    holidays = self.where "date_to < ? and user_id =?", DateTime.now, current_user.id
+    holidays.each do |h|
+      if h.holiday_status == HolidayStatus.find_by_status("Authorised")
+        h.holiday_status = HolidayStatus.find_by_status("Taken")
+        h.save
+      end
+    end
   end
 
   private
@@ -188,7 +197,7 @@ class Vacation < ActiveRecord::Base
   def set_half_days
     if date_from.to_date == date_to.to_date
       #Ensure the half days match
-      if (half_day_from != half_day_to)# && (half_day_from != "Full Day" || half_day_to != "Full Day")
+      if (half_day_from != half_day_to) # && (half_day_from != "Full Day" || half_day_to != "Full Day")
         errors.add(:base, "Please ensure you select the same type of half day from both drop downs")
         return false
       else

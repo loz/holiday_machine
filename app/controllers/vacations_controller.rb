@@ -49,7 +49,6 @@ class VacationsController < ApplicationController
     @vacation.user = current_user
     @vacation.holiday_status_id = 1
     manager_id = current_user.manager_id
-    #@vacation.manager_id = manager_id # Add manager to all holidays
     manager = User.find_by_id(manager_id)
 
     respond_to do |format|
@@ -71,11 +70,12 @@ class VacationsController < ApplicationController
   end
 
   def update
+    #TODO temp - to bypass the validation around half-days
+    ActiveRecord::Base.connection.execute("update vacations set holiday_status_id = #{params[:vacation][:holiday_status_id]} where id = #{params[:id]}")
+
     @vacation = Vacation.find_by_id(params[:id])
-    @vacation.notes = params[:vacation][:notes]
-    @vacation.holiday_status_id = params[:vacation][:holiday_status_id]
-    @vacation.save
     vacation_user = @vacation.user
+
     if vacation_user.manager_id
       manager = User.find_by_id(vacation_user.manager_id)
       #TODO prevent holiday status being switched to pending
