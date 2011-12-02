@@ -39,6 +39,27 @@ $(document).ready(function() {
         weekends: false
     });
 
+    $('.fc-button-next, .fc-button-prev, .fc-button-today').bind('click', monthNavigation);
+
+    function monthNavigation(e) {
+      var currentDate = $('#calendar').fullCalendar('getDate')
+        , currentMonth = currentDate.getMonth()
+        , currentYear = currentDate.getFullYear()
+        , urlString = '/calendar/show?year=' + currentYear + '&month=' + currentMonth
+
+      e.preventDefault();
+      history.pushState('', '', urlString);
+      $('#calendar').fullCalendar('gotoDate', currentYear, currentMonth);
+    }
+
+    var monthParam = getParameterByName('month')
+      , yearParam = getParameterByName('year')
+      , monthAndYearParam = monthParam && yearParam;
+
+    if (monthAndYearParam) {
+      $('#calendar').fullCalendar('gotoDate', yearParam, monthParam);
+    }
+
     $('#vacation_date_from, #vacation_date_to').datepicker();
 
     $("#vacation_date_from").change(function() {
@@ -84,3 +105,8 @@ $(document).ready(function() {
         });
     }
 })(jQuery);
+
+function getParameterByName(name) {
+  var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+  return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
