@@ -1,5 +1,5 @@
 class CreateVacationHolidayYears < ActiveRecord::Migration
-  def self.up  years
+  def self.up
     add_column :holiday_years, :description, :string, :length=>50
     add_column :vacations, :holiday_year_id, :integer
   end
