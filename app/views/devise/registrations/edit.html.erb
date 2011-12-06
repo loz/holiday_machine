@@ -1,37 +1,23 @@
-<fieldset class="login register">
-  <legend class="login register">Edit <%= resource_name.to_s.humanize %></legend>
+<h1>Edit your settings</h1>
 
-  <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+  <%= devise_error_messages! %>
+  <%= f.input :email %>
+  <%= f.input :password %>
+  <%= f.input :password_confirmation %>
+  <%= f.input :current_password, :hint => 'We need your current password to confirm your changes' %>
+  <%= f.input :forename %>
+  <%= f.input :surname %>
+  <%= f.input :manager_id, :as => :select, :collection => User.where("user_type_id = 2"), :label_method => :full_name, :value_method => :id, :prompt => "Choose a manager" %>
 
-      <%= devise_error_messages! %>
-
-      </br>
-      <p><%= f.input :email, :input_html => { :size => 35 } %></p>
-
-      <p><%= f.input :password, :input_html => { :size => 40 } %></p>
-
-      <p><%= f.input :password_confirmation,:input_html => { :size => 40 } %></p>
-
-       <p><%= f.label :current_password %><i>(we need your current password to confirm your changes)</i><br />
-       <%= f.password_field :current_password, :input_html => { :size => 40 } %></p>
-
-      <p><%= f.input :forename, :input_html => { :size => 40 } %></p>
-
-      <p><%= f.input :surname, :input_html => { :size => 40 } %></p>
-
-      <p><%= f.label :manager_id, :name=>"Manager" %>
-      <%= f.collection_select :manager_id, User.where("user_type_id = 2"), :id, :email, :prompt => "Choose a manager" %></p>
-
-      <p><%= f.submit "Save" %></p>
-
-  <% end %>
+  <div class="well">
+    <%= f.button :submit, "Save", :class => 'btn primary' %>
+    <%= link_to 'Cancel', :back, :class => 'btn' %>
+  </div>
+<% end %>
 
 
+<%= content_for :sidebar do %>
   <h3>Cancel my account</h3>
-
   <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %></p>
-
-  <%= link_to "Back", :back %>
-
-</fieldset>
-
+<% end %>
