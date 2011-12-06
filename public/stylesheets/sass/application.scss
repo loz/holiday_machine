@@ -238,8 +238,7 @@ form {
       .brand {
         float: left;
         display: block;
-        padding: 8px 20px 12px;
-        margin-left: -20px;
+        padding: 8px 0;
         color: #ffffff;
         font-size: 20px;
         font-weight: 200;
@@ -250,6 +249,7 @@ form {
         float: left;
         margin: 0 10px 0 0;
         position: relative;
+        padding-left: 0;
         left: 0;
         > li {
           display: block;
