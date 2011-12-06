@@ -51,7 +51,6 @@ describe Vacation do
 
   context "Holiday Status" do
     it "should mark holidays as taken if they are in the past and the existing status is authorised" do
-      #debug
       @user1 = Factory.stub(:user, :manager_id => @mgr1)
       holiday_status = stub_model(HolidayStatus, :status => "Authorised")
       vacation = Factory.stub(:vacation, :user_id => @user1.id, :holiday_status => holiday_status)
@@ -64,15 +63,29 @@ describe Vacation do
     end
     
     it "should not change the status if the holiday is not in the past" do
-
+      pending
     end
     
     it "should not change the status of the holiday if the existing status is not authorised" do
-
+      pending
     end
   end  
   
   context "Half Days" do
+
+    let(:user){FactoryGirl.create(:user)}
+
+    it "should raise error message when date from falls on non-working day" do
+      vacation = FactoryGirl.build(:vacation, :user_id=> user.id, :date_from => "04/12/2011", :date_to => "07/12/2011", :half_day_from=> "Half Day PM")
+      vacation.save
+      vacation.errors[:date_from].first.should include('your half day falls on a non-working day')
+    end
+
+    it "should raise error message when date to falls on non-working day" do
+      vacation = FactoryGirl.build(:vacation, :user_id=> user.id, :date_from => "05/12/2011", :date_to => "10/12/2011", :half_day_to=> "Half Day AM")
+      vacation.save
+      vacation.errors[:date_to].first.should include('your half day falls on a non-working day')
+    end 
   
     it "should not allow a half day on a weekend" do
       subject.send(:date_on_non_working_day, Date.today.end_of_week).should == true 
@@ -83,7 +96,7 @@ describe Vacation do
     end
    
     it "should allow a half day on a normal day" do
-      subject.send(:date_on_non_working_day, Date.today).should == false
+      subject.send(:date_on_non_working_day, Date.new(2011, 12, 7)).should == false
     end
   
   end

@@ -12,6 +12,8 @@ FactoryGirl.define do
   factory :vacation do
     #date_from Date.today
     #date_to Date.today+1.week
+    half_day_from "Full Day"
+    half_day_to "Full Day"
     date_from "14/08/2011"
     date_to "25/08/2011"
     holiday_status_id 1

@@ -259,7 +259,7 @@ class Vacation < ActiveRecord::Base
   end
 
   def date_on_non_working_day date_to_check
-    return true if date_to_check.wday == 7 or date_to_check.wday == 0
+    return true if date_to_check.wday == 6 or date_to_check.wday == 0
     bank_holidays = BankHoliday.all
     return bank_holidays.collect{|hol| hol.date_of_hol}.include?(date_to_check.to_date)
     false
