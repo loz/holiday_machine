@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Holiday Machine</title>
+    <title>Holiday Thyme</title>:w
     <%= csrf_meta_tag %>
     <%# We dont' want jquery UI css on the calendar as it screws up the styling/ layout %>
     <% if params[:controller] != 'calendar' %>
@@ -14,7 +14,7 @@
   <div class="topbar">
     <div class="topbar-inner">
       <div class="container">
-        <%= link_to 'Holiday machine', root_path, :class => 'brand' %>
+        <%= link_to 'Holiday Thyme', root_path, :class => 'brand' %>
         <% if user_signed_in? %>
           <%= render_navigation %>
           <ul id="secondary-nav">
