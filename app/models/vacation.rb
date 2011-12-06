@@ -22,7 +22,7 @@ class Vacation < ActiveRecord::Base
   validates_presence_of :description
 
   validate :holiday_must_not_straddle_holiday_years
-
+  validate :half_days_not_on_working_days, :on => :create
   validate :dont_exceed_days_remaining, :on => :create
   validate :date_from_must_be_before_date_to
   validate :working_days_greater_than_zero
@@ -75,6 +75,16 @@ class Vacation < ActiveRecord::Base
   end
 
   private
+
+  def half_days_not_on_working_days
+   if date_on_non_working_day(date_from) && half_day_from != "Full Day"
+     errors.add(:date_from, "- your half day falls on a non-working day")
+     false
+   elsif date_on_non_working_day(date_to) && half_day_to != "Full Day"
+     errors.add(:date_to, "- your half day falls on a non-working day")   
+     false
+   end
+  end
 
   def check_if_holiday_has_passed
     unless holiday_status_id == 1
@@ -246,6 +256,13 @@ class Vacation < ActiveRecord::Base
       end
     end
     half_day_adjustment
+  end
+
+  def date_on_non_working_day date_to_check
+    return true if date_to_check.wday == 7 or date_to_check.wday == 0
+    bank_holidays = BankHoliday.all
+    return bank_holidays.collect{|hol| hol.date_of_hol}.include?(date_to_check.to_date)
+    false
   end
 
 end
