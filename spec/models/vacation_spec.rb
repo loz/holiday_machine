@@ -70,7 +70,41 @@ describe Vacation do
       pending
     end
   end  
+
+  context "Holiday does not straddle different year" do
+
+    let(:user){FactoryGirl.create(:user)}
+    
+    it "should raise error if holiday crosses years" do
+     expect{ 
+     FactoryGirl.create(:vacation, :user_id=> user.id, :date_from => "28/09/2011", :date_to => "01/10/2011")
+     }.to raise_exception(ActiveRecord::RecordInvalid) 
+    end
+
+    it "should not raise an error if the holiday is in one year" do
+     holiday = FactoryGirl.create(:vacation, :user_id=> user.id, :date_from => "01/10/2011", :date_to => "03/10/2011")
+     holiday.errors.should == {} 
+    end
+ 
+  end
+
+  context "overlapping holidays" do
+    
+    let(:user){FactoryGirl.create(:user)}
+
+    it "should fail if holidays overlap" do
+     holiday1 = FactoryGirl.create(:vacation, :user_id=> user.id, :date_from => "01/10/2011", :date_to => "07/10/2011")
+     holiday2 = FactoryGirl.build(:vacation, :user_id=> user.id, :date_from => "06/10/2011", :date_to => "16/10/2011")
+     holiday2.errors[:base].first.should include("A holiday already exists within this date range")
+    end
   
+    it "should succeed if holidays do not overlap" do
+     holiday1 = FactoryGirl.create(:vacation, :user_id=> user.id, :date_from => "01/10/2011", :date_to => "07/10/2011")
+     holiday2 = FactoryGirl.build(:vacation, :user_id=> user.id, :date_from => "08/10/2011", :date_to => "16/10/2011")
+     holiday2.errors[:base].should == [] 
+     end
+  end  
+
   context "Half Days" do
 
     let(:user){FactoryGirl.create(:user)}
