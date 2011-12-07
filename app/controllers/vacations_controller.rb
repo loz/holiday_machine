@@ -17,7 +17,7 @@ class VacationsController < ApplicationController
       @vacations = Vacation.user_holidays(current_user.id).per_holiday_year(params[:holiday_year_id])
     else
       @days_remaining = current_user.get_holiday_allowance.days_remaining
-      @vacations = Vacation.user_holidays current_user.id
+      @vacations = Vacation.user_holidays(current_user.id).per_holiday_year(@vacation.holiday_year_id)
     end
 
     respond_to do |format|
