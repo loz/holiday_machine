@@ -2,10 +2,6 @@ require 'spec_helper'
 
 describe Vacation do
 
-#  before do
-#    @vacation = Vacation.new
-#  end
-
   describe "Create holidays" do
 
     before do
@@ -16,13 +12,31 @@ describe Vacation do
       @user3 = Factory(:user, :manager_id => @mgr2)
       @user4 = Factory(:user, :manager_id => @mgr1)
 
-      @vacation1 = Factory(:vacation, :user_id => @user1)
-      @vacation2 = Factory(:vacation, :user_id => @mgr2)
-      @vacation3 = Factory(:vacation, :user_id => @user2)
-      @vacation4 = Factory(:vacation, :user_id => @user3)
-      @vacation5 = Factory(:vacation, :user_id => @user4)
-      @vacation6 = Factory(:vacation, :user_id => @mgr1)
+      #@vacation1 = Factory(:vacation, :user_id => @user1)
+      #@vacation2 = Factory(:vacation, :user_id => @mgr2)
+      #@vacation3 = Factory(:vacation, :user_id => @user2)
+      #@vacation4 = Factory(:vacation, :user_id => @user3)
+      #@vacation5 = Factory(:vacation, :user_id => @user4)
+      #@vacation6 = Factory(:vacation, :user_id => @mgr1)
+    end
 
+    it "marks the correct number of days as taken for a holiday with two bank holidays" do
+     user1 = Factory.create(:user)
+     holiday = FactoryGirl.create(:vacation, :user_id=> user1.id, :date_from => "04/06/2012", :date_to => "08/06/2012")
+     holiday.working_days_used.should == 3
+    end
+
+    it "raises validation exception when holiday is taken which is only on a bank holiday" do
+     user = Factory.create(:user)
+     expect{
+     FactoryGirl.create(:vacation, :user_id=> user.id, :date_from => "04/06/2012", :date_to => "05/06/2012")
+     }.to raise_exception(ActiveRecord::RecordInvalid)#, ["Working days used  - This holiday request uses no working days"]) 
+    end
+
+    it "uses the appropriate number of days around christmas" do
+     user = Factory.create(:user)
+     holiday =  FactoryGirl.create(:vacation, :user_id=> user.id, :date_from => "22/12/2011", :date_to => "02/01/2012")
+     holiday.working_days_used.should == 5
     end
 
     it "retrieves the correct holidays for my team within specific dates" do
@@ -37,7 +51,6 @@ describe Vacation do
       p @user.manager_id
       users = User.where("(id = ? OR manager_id = ?) AND confirmed_at is not null", @user4.id, @user4.manager_id)
     end
-
 
   end
 
@@ -63,7 +76,16 @@ describe Vacation do
     end
     
     it "should not change the status if the holiday is not in the past" do
-      pending
+      @user1 = Factory.stub(:user, :manager_id => @mgr1)
+      holiday_status = stub_model(HolidayStatus, :status => "Authorised")
+      date_from = (DateTime.now + 1.month).strftime("%d/%m/%Y")
+      date_to = (DateTime.now + 1.month + 4.days).strftime("%d/%m/%Y")
+      vacation = Factory.stub(:vacation, :user_id => @user1.id, :date_from=> date_from, :date_to=> date_to, :holiday_status => holiday_status)
+      vacations = []
+      vacations << vacation
+      Vacation.stub(:where).and_return(vacations)
+      Vacation.mark_as_taken @user1
+      vacation.holiday_status.should_not == HolidayStatus.find_by_status("Taken")
     end
     
     it "should not change the status of the holiday if the existing status is not authorised" do
@@ -102,7 +124,7 @@ describe Vacation do
      holiday1 = FactoryGirl.create(:vacation, :user_id=> user.id, :date_from => "01/10/2011", :date_to => "07/10/2011")
      holiday2 = FactoryGirl.build(:vacation, :user_id=> user.id, :date_from => "08/10/2011", :date_to => "16/10/2011")
      holiday2.errors[:base].should == [] 
-     end
+    end
   end  
 
   context "Half Days" do

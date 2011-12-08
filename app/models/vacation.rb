@@ -177,8 +177,8 @@ class Vacation < ActiveRecord::Base
   end
 
   def business_days_between
-    holidays = BankHoliday.where("date_of_hol BETWEEN ? AND ?", date_from, date_to)
-    holidays_array = holidays.collect { |hol| hol.date_of_hol }
+    bank_holidays = BankHoliday.where("date_of_hol BETWEEN ? AND ?", date_from - 1.day, date_to + 1.day)
+    holidays_array = bank_holidays.collect { |hol| hol.date_of_hol }
     weekdays = (date_from.to_date..date_to.to_date).reject { |d| [0, 6].include? d.wday or holidays_array.include?(d) }
     business_days = weekdays.length - half_day_adjustment
     business_days
