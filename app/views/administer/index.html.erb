@@ -25,6 +25,7 @@
             <%= content_tag :td, holiday.working_days_used %>
             <%= content_tag :td, holiday_status(holiday) %>
             <td>
+              <%= link_to 'View', "/calendar/show?year=#{holiday.date_from.year}&month=#{holiday.date_from.month - 1}" %>
               <%= link_to 'Approve', vacation_path(holiday, :vacation => { :holiday_status_id => 2 }), :method => :put, :remote => true %>
               <%= link_to 'Reject', vacation_path(holiday, :vacation => { :holiday_status_id => 3 }), :method => :put, :remote => true %>
               <%= link_to 'Pending', vacation_path(holiday, :vacation => { :holiday_status_id => 1 }), :method => :put, :remote => true %>
