@@ -1,7 +1,10 @@
 <h3>This shows the holidays for your employees</h3>
 <% @users.each do |user| %>
   <% unless user.vacations.empty? %>
-    <%= content_tag :h3, user.full_name %>
+    <div class="gravatar-wrapper">
+      <%= image_tag(gravatar(user, { :size => 35 }), :class => 'gravatar') %>
+      <%= content_tag :h3, user.full_name %>
+    </div>
     <table>
       <thead>
         <tr>

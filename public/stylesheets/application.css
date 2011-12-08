@@ -635,7 +635,7 @@ h6 {
   display: inline;
   float: left;
   margin-right: 10px;
-  width: 110px;
+  width: 70px;
 }
 /* line 147, ../../../../.rbenv/versions/1.9.2-p290/lib/ruby/gems/1.9.1/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html #user-info .gravatar-wrapper {
@@ -676,78 +676,76 @@ img.gravatar {
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
   -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
-  width: 75px;
-  height: 75px;
 }
 
-/* line 528, sass/application.scss */
+/* line 526, sass/application.scss */
 tr.user form div.string,
 tr.user form input[type="submit"] {
   float: left;
   margin-right: 10px;
 }
-/* line 534, sass/application.scss */
+/* line 532, sass/application.scss */
 tr.user form input[type="submit"] {
   margin: 0;
 }
-/* line 537, sass/application.scss */
+/* line 535, sass/application.scss */
 tr.user form input.update-working-days {
   width: 25px;
   text-align: center;
 }
 
-/* line 546, sass/application.scss */
+/* line 544, sass/application.scss */
 #calendar {
   margin-top: 20px;
 }
-/* line 548, sass/application.scss */
+/* line 546, sass/application.scss */
 #calendar table {
   border: none;
 }
-/* line 551, sass/application.scss */
+/* line 549, sass/application.scss */
 #calendar table tr.fc-last td {
   border-bottom: 1px solid #ddd;
 }
-/* line 555, sass/application.scss */
+/* line 553, sass/application.scss */
 #calendar table.fc-header {
   border: none;
 }
-/* line 559, sass/application.scss */
+/* line 557, sass/application.scss */
 #calendar table.fc-header tbody tr:nth-child(odd) td,
 #calendar table.fc-header tbody tr:nth-child(odd) th {
   background-color: inherit;
 }
-/* line 563, sass/application.scss */
+/* line 561, sass/application.scss */
 #calendar table.fc-header td {
   border-top: none;
 }
-/* line 568, sass/application.scss */
+/* line 566, sass/application.scss */
 #calendar table.fc-border-separate td {
   border: 1px solid #ddd;
   border-width: 1px 0 0 1px;
 }
-/* line 571, sass/application.scss */
+/* line 569, sass/application.scss */
 #calendar table.fc-border-separate td.fc-last {
   border-right: 1px solid #ddd;
 }
-/* line 576, sass/application.scss */
+/* line 574, sass/application.scss */
 #calendar table td.fc-today {
   background-color: #FEFBF3;
 }
-/* line 580, sass/application.scss */
+/* line 578, sass/application.scss */
 #calendar .fc-event {
   cursor: pointer;
 }
-/* line 584, sass/application.scss */
+/* line 582, sass/application.scss */
 #calendar .fc-header-left .fc-button {
   border: 1px solid #ddd;
   padding: 0 14px;
 }
-/* line 588, sass/application.scss */
+/* line 586, sass/application.scss */
 #calendar .fc-header-left .fc-button-today {
   text-transform: capitalize;
 }
-/* line 591, sass/application.scss */
+/* line 589, sass/application.scss */
 #calendar .fc-header-left .fc-button-prev {
   -moz-border-radius: 8px 0 0 8px;
   -webkit-border-radius: 8px 0 0 8px;
@@ -756,11 +754,11 @@ tr.user form input.update-working-days {
   -khtml-border-radius: 8px 0 0 8px;
   border-radius: 8px 0 0 8px;
 }
-/* line 593, sass/application.scss */
+/* line 591, sass/application.scss */
 #calendar .fc-header-left .fc-button-prev .fc-button-inner {
   background: transparent url(../images/arrow.png) no-repeat 0 4px;
 }
-/* line 597, sass/application.scss */
+/* line 595, sass/application.scss */
 #calendar .fc-header-left .fc-button-next {
   -moz-border-radius: 0 8px 8px 0;
   -webkit-border-radius: 0 8px 8px 0;
@@ -769,19 +767,19 @@ tr.user form input.update-working-days {
   -khtml-border-radius: 0 8px 8px 0;
   border-radius: 0 8px 8px 0;
 }
-/* line 599, sass/application.scss */
+/* line 597, sass/application.scss */
 #calendar .fc-header-left .fc-button-next .fc-button-inner {
   background: transparent url(../images/arrow.png) no-repeat 0 4px;
   -webkit-transform: rotate(180deg);
   -moz-transform: rotate(180deg);
 }
 
-/* line 610, sass/application.scss */
+/* line 608, sass/application.scss */
 dl dt,
 dl dd {
   margin-bottom: 10px;
 }
-/* line 613, sass/application.scss */
+/* line 611, sass/application.scss */
 dl dt {
   width: 140px;
   font-weight: bold;
@@ -789,26 +787,36 @@ dl dt {
   clear: left;
 }
 
-/* line 621, sass/application.scss */
+/* line 619, sass/application.scss */
 #calendar-key {
   position: absolute;
   right: 2px;
   width: 150px;
   margin: 0;
 }
-/* line 627, sass/application.scss */
+/* line 625, sass/application.scss */
 #calendar-key dt,
 #calendar-key dd {
   margin-bottom: 2px;
 }
-/* line 630, sass/application.scss */
+/* line 628, sass/application.scss */
 #calendar-key dt {
   width: 90px;
 }
-/* line 633, sass/application.scss */
+/* line 631, sass/application.scss */
 #calendar-key dd {
   width: 60px;
   height: 18px;
   text-indent: -9999px;
   margin: 0 0 2px 90px;
+}
+
+/* line 640, sass/application.scss */
+.administer img {
+  float: left;
+  margin-right: 10px;
+}
+/* line 644, sass/application.scss */
+.administer h3 {
+  line-height: 45px;
 }
