@@ -490,7 +490,7 @@ h6 {
   @include border-radius(4px);
   h3 { margin-top: 0; }
   .gravatar-wrapper {
-    @include column(3);
+    @include column(2);
   }
   .user-info-wrapper {
     @include column(12, true);
@@ -518,8 +518,6 @@ img.gravatar {
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
   -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
-  width: 75px;
-  height: 75px;
 }
 
 tr.user {
@@ -635,5 +633,15 @@ dl {
     height: 18px;
     text-indent: -9999px;
     margin: 0 0 2px 90px;
+  }
+}
+
+.administer {
+  img {
+    float: left;
+    margin-right: 10px;
+  }
+  h3 {
+    line-height: 45px;
   }
 }
