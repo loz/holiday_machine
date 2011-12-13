@@ -66,7 +66,8 @@ end
         format.html { redirect_to(user_days_url) }
       else
         flash.now[:error] = "There was a problem updating this persons holiday allowance."
-        format.html
+        #TODO below prevents error, but loses the validation messages
+        format.html { redirect_to(user_days_url) }
       end
     end
   end
