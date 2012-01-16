@@ -66,10 +66,12 @@ class Vacation < ActiveRecord::Base
 
   def self.mark_as_taken current_user
     holidays = self.where "date_to < ? and user_id =?", DateTime.now, current_user.id
-    holidays.each do |h|
-      if h.holiday_status == HolidayStatus.find_by_status("Authorised")
-        h.holiday_status = HolidayStatus.find_by_status("Taken")
-        h.save
+    status_taken = HolidayStatus.find_by_status("Taken")
+    status_authorised = HolidayStatus.find_by_status("Authorised")
+    holidays.each do |hol|
+      if hol.holiday_status == status_authorised
+        exec_sql = ActiveRecord::Base.connection
+        exec_sql.execute("UPDATE vacations SET holiday_status_id = #{status_taken.id} WHERE vacations.id = #{hol.id}")
       end
     end
   end
