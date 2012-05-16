@@ -1,23 +1,23 @@
-class VacationsController < ApplicationController
+class AbsencesController < ApplicationController
 
   before_filter :authenticate_user!
 
   # GET /vacations
   def index
-    @vacations ||= []
+    @absences ||= []
 
-    @vacation = Vacation.new
-    @vacation.holiday_year_id = HolidayYear.current_year.id
+    @absence = Absence.new
+    @absence.holiday_year_id = HolidayYear.current_year.id
 
     @holiday_statuses = HolidayStatus.pending_only
 
     if params[:holiday_year_id]
       user_days_per_year = UserDaysForYear.where(:user_id=> current_user.id, :holiday_year_id=>params[:holiday_year_id]).first
       @days_remaining = user_days_per_year.days_remaining
-      @vacations = Vacation.user_holidays(current_user.id).per_holiday_year(params[:holiday_year_id])
+      @absences = Absence.user_holidays(current_user.id).per_holiday_year(params[:holiday_year_id])
     else
       @days_remaining = current_user.get_holiday_allowance.days_remaining
-      @vacations = Vacation.user_holidays(current_user.id).per_holiday_year(@vacation.holiday_year_id)
+      @absences = Absence.user_holidays(current_user.id).per_holiday_year(@absence.holiday_year_id)
     end
 
     respond_to do |format|
@@ -28,8 +28,8 @@ class VacationsController < ApplicationController
 
   # GET /vacations/1
   def show
-    @vacation = Vacation.find_by_id(params[:id])
-    if @vacation.blank?
+    @absence = Absence.find_by_id(params[:id])
+    if @absence.blank?
       redirect_to calendar_path
       return
     end
@@ -44,20 +44,20 @@ class VacationsController < ApplicationController
   # POST /vacations
   # POST /vacations.xml
   def create
-    @vacation = Vacation.new(params[:vacation])
-    @vacation.holiday_year_id = nil #THIS MUST BE REMOVED OR WILL BE PASSED FROM THE FILTER
-    @vacation.user = current_user
-    @vacation.holiday_status_id = 1
+    @absence = Absence.new(params[:absence])
+    @absence.holiday_year_id = nil #THIS MUST BE REMOVED OR WILL BE PASSED FROM THE FILTER
+    @absence.user = current_user
+    @absence.holiday_status_id = 1
     manager_id = current_user.manager_id
     manager = User.find_by_id(manager_id)
 
     respond_to do |format|
-      if @vacation.save
+      if @absence.save
         unless manager.nil?
-          HolidayMailer.holiday_request(current_user, manager, @vacation).deliver
+          HolidayMailer.holiday_request(current_user, manager, @absence).deliver
         end
 
-        user_days_per_year = UserDaysForYear.where(:user_id=> current_user.id, :holiday_year_id => params[:vacation][:holiday_year_id]).first
+        user_days_per_year = UserDaysForYear.where(:user_id=> current_user.id, :holiday_year_id => params[:absence][:holiday_year_id]).first
         @days_remaining = user_days_per_year.days_remaining
 
         flash.now[:success] = "Successfully created holiday."
@@ -71,15 +71,15 @@ class VacationsController < ApplicationController
 
   def update
     #TODO temp - to bypass the validation around half-days
-    ActiveRecord::Base.connection.execute("update vacations set holiday_status_id = #{params[:vacation][:holiday_status_id]} where id = #{params[:id]}")
+    ActiveRecord::Base.connection.execute("update vacations set holiday_status_id = #{params[:absence][:holiday_status_id]} where id = #{params[:id]}")
 
-    @vacation = Vacation.find_by_id(params[:id])
-    vacation_user = @vacation.user
+    @absence = Absence.find_by_id(params[:id])
+    vacation_user = @absence.user
 
     if vacation_user.manager_id
       manager = User.find_by_id(vacation_user.manager_id)
       #TODO prevent holiday status being switched to pending
-      HolidayMailer.holiday_actioned(manager, @vacation).deliver
+      HolidayMailer.holiday_actioned(manager, @absence).deliver
     end
 
     respond_to do |format|
@@ -90,15 +90,15 @@ class VacationsController < ApplicationController
   end
 
 
-  # DELETE /vacations/1
-  # DELETE /vacations/1.xml
+  # DELETE /absences/1
+  # DELETE /absences/1.xml
   def destroy
-    @vacation = Vacation.find(params[:id])
+    @absence = Absence.find(params[:id])
     respond_to do |format|
-      if @vacation.destroy
+      if @absence.destroy
         unless current_user.manager_id.nil?
-          manager = User.find_by_id(@vacation.user.manager_id)
-          HolidayMailer.holiday_cancellation(current_user, manager, @vacation).deliver
+          manager = User.find_by_id(@absence.user.manager_id)
+          HolidayMailer.holiday_cancellation(current_user, manager, @absence).deliver
         end
         @days_remaining = current_user.get_holiday_allowance.days_remaining
 

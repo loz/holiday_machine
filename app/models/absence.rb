@@ -1,11 +1,14 @@
-class Vacation < ActiveRecord::Base
+class Absence < ActiveRecord::Base
 
   HOL_COLOURS = %W{#FDF5D9 #D1EED1 #FDDFDE #DDF4Fb}
   BORDER_COLOURS = %W{#FCEEC1 #BFE7Bf #FBC7C6 #C6EDF9}
+  
+  #TODO add absence colors
 
   belongs_to :holiday_status
   belongs_to :holiday_year
   belongs_to :user
+  belongs_to :absence_type
 
   before_save :set_half_days, :save_working_days
   before_destroy :check_if_holiday_has_passed
@@ -144,14 +147,14 @@ class Vacation < ActiveRecord::Base
   end
 
   def no_overlapping_holidays
-    holidays = Vacation.find_all_by_user_id(self.user_id)
-    holidays.each do |holiday|
-      errors.add(:base, "A holiday already exists within this date range") if overlaps?(holiday)
+    absences = Absence.find_all_by_user_id(self.user_id)
+    absences.each do |absence|
+      errors.add(:base, "Some leave already exists within this date range") if overlaps?(absence)
     end
   end
 
-  def overlaps?(holiday)
-    (date_from.to_date - holiday.date_to.to_date) * (holiday.date_from.to_date - date_to.to_date) >= 0
+  def overlaps?(absence)
+    (date_from.to_date - absence.date_to.to_date) * (absence.date_from.to_date - date_to.to_date) >= 0
   end
 
   def convert_uk_date_to_iso date_str, is_date_from
@@ -223,10 +226,10 @@ class Vacation < ActiveRecord::Base
       end
     else
       if half_day_from != "Full Day" && half_day_from != "Half Day PM"
-        errors.add(:base, "A holiday can only begin with a half day in the afternoon, since this would mean you would be coming in on the afternoon of the first day of your holiday")
+        errors.add(:base, "Leave can only begin with a half day in the afternoon, since this would mean you would be coming in on the afternoon of the first day of your leave")
         return false
       elsif half_day_to != "Full Day" && half_day_to != "Half Day AM"
-        errors.add(:base, "A holiday cannot end with a half day in the afternoon, since you would be at work in the morning on the last day of your holiday")
+        errors.add(:base, "A holiday cannot end with a half day in the afternoon, since you would be at work in the morning on the last day of your leave")
         return false
       else
         if half_day_from == "Half Day PM"

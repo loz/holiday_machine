@@ -1,8 +1,8 @@
 HolidayMachine::Application.routes.draw do
   get "user_settings/change_manager"
   resources :calendar
-  match 'vacations/holiday_json' => 'vacations#holiday_json'
-  resources :vacations
+  match 'absences/holiday_json' => 'absencess#holiday_json'
+  resources :absences
   resources :user_days
   resources :settings
   resources :user_settings
@@ -12,6 +12,6 @@ HolidayMachine::Application.routes.draw do
   devise_for :users, :admin
   resources :home, :only => :index
   resources :admins, :only => :index
-  root :to => 'vacations#index'
+  root :to => 'absences#index'
   get "info/registration_message"
 end

@@ -11,7 +11,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111130113949) do
+ActiveRecord::Schema.define(:version => 20120516133346) do
+
+  create_table "absence_types", :force => true do |t|
+    t.string "description"
+  end
+
+  create_table "absences", :force => true do |t|
+    t.datetime "date_from"
+    t.datetime "date_to"
+    t.string   "description"
+    t.decimal  "working_days_used", :precision => 4, :scale => 1
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "holiday_status_id"
+    t.integer  "user_id"
+    t.text     "notes"
+    t.string   "uuid"
+    t.integer  "holiday_year_id"
+    t.integer  "absence_type_id"
+  end
 
   create_table "admins", :force => true do |t|
     t.string   "email",                                                           :default => "", :null => false
@@ -107,18 +126,8 @@ ActiveRecord::Schema.define(:version => 20111130113949) do
   add_index "users", ["invitation_token"], :name => "index_users_on_invitation_token"
   add_index "users", ["invited_by_id"], :name => "index_users_on_invited_by_id"
 
-  create_table "vacations", :force => true do |t|
-    t.datetime "date_from"
-    t.datetime "date_to"
-    t.string   "description"
-    t.decimal  "working_days_used", :precision => 4, :scale => 1
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "holiday_status_id"
-    t.integer  "user_id"
-    t.text     "notes"
-    t.string   "uuid"
-    t.integer  "holiday_year_id"
+  create_table "vacation_types", :force => true do |t|
+    t.string "description"
   end
 
 end

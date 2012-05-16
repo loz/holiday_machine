@@ -1,26 +1,28 @@
-module VacationsHelper
+module AbsencesHelper
 
-  def create_holiday_row(holiday)
-    content_tag_for :tr, holiday do
-      content_tag(:td, show_date_with_details(holiday)) +
-          content_tag(:td, show_date_with_details(holiday, false)) +
-          content_tag(:td, holiday.description) +
-          content_tag(:td, holiday.working_days_used) +
-          content_tag(:td, holiday_status(holiday)) +
-          content_tag(:td, :class => "actions") do
-            link_to('View', vacation_path(holiday)) +
-                link_to('Delete', vacation_path(holiday), :method => :delete, :confirm => 'Are you sure you want to delete this holiday request?', :remote => true)
+  def create_absence_row(absence)
+    debugger
+    content_tag_for :tr, absence do
+      content_tag(:td, absence.absence_type.name) +
+        content_tag(:td, show_date_with_details(absence)) +
+        content_tag(:td, show_date_with_details(absence, false)) +
+        content_tag(:td, absence.description) +
+        content_tag(:td, absence.working_days_used) +
+        content_tag(:td, holiday_status(absence)) +
+        content_tag(:td, :class => "actions") do
+          link_to('View', absence_path(absence)) +
+             link_to('Delete', absence_path(absence), :method => :delete, :confirm => 'Are you sure you want to delete this request?', :remote => true)
           end
     end
   end
 
-  def holiday_status(holiday)
-    status = holiday.holiday_status.status
-    content_tag :span, status, :class => holiday_status_class(holiday)
+  def holiday_status(absence)
+    status = absence.holiday_status.status
+    content_tag :span, status, :class => holiday_status_class(absence)
   end
 
-  def holiday_status_class(holiday)
-    "label #{holiday.holiday_status.status.downcase}"
+  def holiday_status_class(absence)
+    "label #{absence.holiday_status.status.downcase}"
   end
 
   private
@@ -46,7 +48,6 @@ module VacationsHelper
 
 
   def show_date_with_details hol, is_date_from = true
-
     date_from = hol.date_from
     date_to = hol.date_to
 

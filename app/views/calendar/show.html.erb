@@ -3,7 +3,7 @@
 <dl id="calendar-key">
 <% @holiday_status.each do |status| %>
   <%= content_tag :dt, status.status %>
-  <%= content_tag :dd, '&nbsp;', :style => "background-color: #{Vacation::HOL_COLOURS[status.id - 1]}; border: 1px solid #{Vacation::BORDER_COLOURS[status.id - 1]};".html_safe %>
+  <%= content_tag :dd, '&nbsp;', :style => "background-color: #{Absence::HOL_COLOURS[status.id - 1]}; border: 1px solid #{Absence::BORDER_COLOURS[status.id - 1]};".html_safe %>
 <% end %>
 </dl>
 <div id="calendar"></div>
