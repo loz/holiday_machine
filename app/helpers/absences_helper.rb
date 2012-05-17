@@ -1,7 +1,6 @@
 module AbsencesHelper
 
   def create_absence_row(absence)
-    debugger
     content_tag_for :tr, absence do
       content_tag(:td, absence.absence_type.name) +
         content_tag(:td, show_date_with_details(absence)) +

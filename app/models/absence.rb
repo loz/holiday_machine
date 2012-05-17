@@ -3,14 +3,12 @@ class Absence < ActiveRecord::Base
   HOL_COLOURS = %W{#FDF5D9 #D1EED1 #FDDFDE #DDF4Fb}
   BORDER_COLOURS = %W{#FCEEC1 #BFE7Bf #FBC7C6 #C6EDF9}
   
-  #TODO add absence colors
-
   belongs_to :holiday_status
   belongs_to :holiday_year
   belongs_to :user
   belongs_to :absence_type
 
-  before_save :set_half_days, :save_working_days
+  before_save :set_half_days, :set_working_days
   before_destroy :check_if_holiday_has_passed
 
   after_destroy :add_days_remaining
@@ -166,8 +164,7 @@ class Absence < ActiveRecord::Base
     end
   end
 
-  def save_working_days #TODO rename method
-
+  def set_working_days
     self[:working_days_used] = @working_days - half_day_adjustment
 
     unless self[:uuid]
@@ -190,18 +187,21 @@ class Absence < ActiveRecord::Base
   end
 
   def decrease_days_remaining
+    return unless self.absence_type_id == 1 #Only holidays affect the days remaining
     holiday_allowance = self.user.get_holiday_allowance_for_dates self.date_from, self.date_to
     holiday_allowance.days_remaining -= business_days_between
     holiday_allowance.save
   end
 
   def add_days_remaining
+    return unless self.absence_type_id == 1 #Only holidays affect the days remaining
     holiday_allowance = self.user.get_holiday_allowance_for_dates self.date_from, self.date_to
     holiday_allowance.days_remaining += business_days_between
     holiday_allowance.save
   end
 
   def dont_exceed_days_remaining
+    return unless self.absence_type_id == 1 #Only holidays affect the days remaining
     holiday_allowance = self.user.get_holiday_allowance_for_dates self.date_from, self.date_to
     if holiday_allowance == 0 or holiday_allowance.nil? then
       return
@@ -267,7 +267,6 @@ class Absence < ActiveRecord::Base
     return true if date_to_check.wday == 6 or date_to_check.wday == 0
     bank_holidays = BankHoliday.all
     return bank_holidays.collect{|hol| hol.date_of_hol}.include?(date_to_check.to_date)
-    false
   end
 
 end

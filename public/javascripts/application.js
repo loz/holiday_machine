@@ -1,7 +1,7 @@
 // Place your application-specific JavaScript functions and classes here
 
 $(document).ready(function() {
-
+	
     // Flash messages
     $('#flash').delegate('a.close', 'click', function(e) {
         e && e.preventDefault();
@@ -60,11 +60,11 @@ $(document).ready(function() {
       $('#calendar').fullCalendar('gotoDate', yearParam, monthParam);
     }
 
-    $('#vacation_date_from, #vacation_date_to').datepicker();
+    $('#absence_date_from, #absence_date_to').datepicker();
 
-    $("#vacation_date_from").change(function() {
-        if ($("#vacation_date_to").val() < $("#vacation_date_from").val()) {
-            $("#vacation_date_to").val($("#vacation_date_from").val());
+    $("#absence_date_from").change(function() {
+        if ($("#absence_date_to").val() < $("#absence_date_from").val()) {
+            $("#absence_date_to").val($("#absence_date_from").val());
         }
     });
 

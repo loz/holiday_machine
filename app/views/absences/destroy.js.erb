@@ -1,10 +1,16 @@
 <% if @failed -%>
-    $("#flash_notice").hide(300);
-    $("#messages").html("<%= escape_javascript(@absence.errors.full_messages.to_sentence) %>");
-    $('#error_panel').show('slide', {direction: 'right'}, 1000);
+     var error_html = '<%= escape_javascript(render_flash_messages) %>';
+     var error_list = '<%= escape_javascript(show_errors_as_list(@absence.errors)) %>';
+     var full_error_html = $(error_html).append(error_list);
+     $("#flash").html(full_error_html);
+     $("#flash").show();
 <% else -%>
   $("table#holidays tbody tr#absence_<%= @row_id %>").fadeOut('slow', function() {
   $('table#holidays tbody tr#absence_<%= @row_id %>').css('visibility', 'hidden');
+  });
+  
+  $("table#absences tbody tr#absence_<%= @row_id %>").fadeOut('slow', function() {
+  $('table#absences tbody tr#absence_<%= @row_id %>').css('visibility', 'hidden');
   });
     $("#days_remaining").html(" <%= @days_remaining %>");
     $("#flash").html('<%= escape_javascript(render_flash_messages) %>');

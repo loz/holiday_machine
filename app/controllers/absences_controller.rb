@@ -4,7 +4,9 @@ class AbsencesController < ApplicationController
 
   # GET /vacations
   def index
-    @absences ||= []
+    @holidays ||= []
+    
+    @other_absences ||= []
 
     @absence = Absence.new
     @absence.holiday_year_id = HolidayYear.current_year.id
@@ -14,10 +16,13 @@ class AbsencesController < ApplicationController
     if params[:holiday_year_id]
       user_days_per_year = UserDaysForYear.where(:user_id=> current_user.id, :holiday_year_id=>params[:holiday_year_id]).first
       @days_remaining = user_days_per_year.days_remaining
-      @absences = Absence.user_holidays(current_user.id).per_holiday_year(params[:holiday_year_id])
+      
+      @holidays = Absence.user_holidays(current_user.id).per_holiday_year(params[:holiday_year_id]).where("absence_type_id = 1")
+      @other_absences = Absence.user_holidays(current_user.id).per_holiday_year(params[:holiday_year_id]).where("absence_type_id != 1")
     else
       @days_remaining = current_user.get_holiday_allowance.days_remaining
-      @absences = Absence.user_holidays(current_user.id).per_holiday_year(@absence.holiday_year_id)
+      @holidays = Absence.user_holidays(current_user.id).per_holiday_year(@absence.holiday_year_id).where("absence_type_id = 1")
+      @other_absences = Absence.user_holidays(current_user.id).per_holiday_year(@absence.holiday_year_id).where("absence_type_id != 1")
     end
 
     respond_to do |format|
