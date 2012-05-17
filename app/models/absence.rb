@@ -72,7 +72,7 @@ class Absence < ActiveRecord::Base
     holidays.each do |hol|
       if hol.holiday_status == status_authorised
         exec_sql = ActiveRecord::Base.connection
-        exec_sql.execute("UPDATE vacations SET holiday_status_id = #{status_taken.id} WHERE vacations.id = #{hol.id}")
+        exec_sql.execute("UPDATE absences SET holiday_status_id = #{status_taken.id} WHERE absences.id = #{hol.id}")
       end
     end
   end

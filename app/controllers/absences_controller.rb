@@ -76,7 +76,7 @@ class AbsencesController < ApplicationController
 
   def update
     #TODO temp - to bypass the validation around half-days
-    ActiveRecord::Base.connection.execute("update vacations set holiday_status_id = #{params[:absence][:holiday_status_id]} where id = #{params[:id]}")
+    ActiveRecord::Base.connection.execute("update absences set holiday_status_id = #{params[:absence][:holiday_status_id]} where id = #{params[:id]}")
 
     @absence = Absence.find_by_id(params[:id])
     vacation_user = @absence.user
@@ -88,7 +88,7 @@ class AbsencesController < ApplicationController
     end
 
     respond_to do |format|
-      flash[:notice] = "Holiday status has been changed"
+      flash[:notice] = "Status has been changed"
       format.js
     end
 
@@ -109,10 +109,10 @@ class AbsencesController < ApplicationController
 
         @row_id = params[:id]
         @failed = false
-        flash.now[:success] = "Holiday deleted"
+        flash.now[:success] = "Absence deleted"
         format.js
       else
-        flash[:error] = "Could not delete a holiday which has passed"
+        flash[:error] = "Could not delete an absence which has passed"
         @failed = true
         format.js
       end

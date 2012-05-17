@@ -9,6 +9,6 @@ $(document).ready(function () {
     $("#error_panel").hide(300);
     $("#flash").html('<%= escape_javascript(render_flash_messages) %>');
     $("#flash").show();
-    $('#vacation_<%= @vacation.id %>').find('span.label').text('<%= @vacation.holiday_status.status %>').attr('class', '<%= holiday_status_class(@vacation) %>');
+    $('#absence_<%= @absence.id %>').find('span.label').text('<%= @absence.holiday_status.status %>').attr('class', '<%= holiday_status_class(@absence) %>');
   <% end %>
 });
