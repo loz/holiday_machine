@@ -65,10 +65,10 @@ class AbsencesController < ApplicationController
         user_days_per_year = UserDaysForYear.where(:user_id=> current_user.id, :holiday_year_id => params[:absence][:holiday_year_id]).first
         @days_remaining = user_days_per_year.days_remaining
 
-        flash.now[:success] = "Successfully created holiday."
+        flash.now[:success] = "Successfully created time off."
         format.js
       else
-        flash.now[:error] = "There was a problem creating your holiday request"
+        flash.now[:error] = "There was a problem creating your request"
         format.js
       end
     end
@@ -109,8 +109,13 @@ class AbsencesController < ApplicationController
 
         @row_id = params[:id]
         @failed = false
+        
+        @other_absence_count = current_user.absences.where('absence_type_id !=1').count
+        @holiday_count = current_user.absences.where('absence_type_id =1').count
+        
         flash.now[:success] = "Absence deleted"
         format.js
+        
       else
         flash[:error] = "Could not delete an absence which has passed"
         @failed = true
