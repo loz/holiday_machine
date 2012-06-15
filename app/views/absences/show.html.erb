@@ -1,14 +1,14 @@
-<h2><%=@vacation.user.full_name%> holiday request</h2>
+<h2><%=@absence.user.full_name%> holiday request</h2>
 
 <dl>
   <%= content_tag :dt, 'Start date' %>
-  <%= content_tag :dd, @vacation.date_from.strftime("%d/%m/%Y") %>
+  <%= content_tag :dd, @absence.date_from.strftime("%d/%m/%Y") %>
   <%= content_tag :dt, 'End date' %>
-  <%= content_tag :dd, @vacation.date_to.strftime("%d/%m/%Y") %>
+  <%= content_tag :dd, @absence.date_to.strftime("%d/%m/%Y") %>
   <%= content_tag :dt, 'Working days used' %>
-  <%= content_tag :dd, @vacation.working_days_used %>
+  <%= content_tag :dd, @absence.working_days_used %>
   <%= content_tag :dt, 'Status' %>
-  <%= content_tag :dd, holiday_status(@vacation) %>
+  <%= content_tag :dd, holiday_status(@absence) %>
 </dl>
 
 <div class="well">

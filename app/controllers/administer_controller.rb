@@ -7,7 +7,7 @@ class AdministerController < ApplicationController
   def index
     #TODO restrict holidays by year
     @statuses = HolidayStatus.all
-    @users = User.get_team_users(current_user.id).includes(:vacations)
+    @users = User.get_team_users(current_user.id).includes(:absences)
     respond_to do |format|
        format.html
     end

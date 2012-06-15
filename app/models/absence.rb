@@ -1,13 +1,14 @@
-class Vacation < ActiveRecord::Base
+class Absence < ActiveRecord::Base
 
   HOL_COLOURS = %W{#FDF5D9 #D1EED1 #FDDFDE #DDF4Fb}
   BORDER_COLOURS = %W{#FCEEC1 #BFE7Bf #FBC7C6 #C6EDF9}
-
+  
   belongs_to :holiday_status
   belongs_to :holiday_year
   belongs_to :user
+  belongs_to :absence_type
 
-  before_save :set_half_days, :save_working_days
+  before_save :set_half_days, :set_working_days
   before_destroy :check_if_holiday_has_passed
 
   after_destroy :add_days_remaining
@@ -71,7 +72,7 @@ class Vacation < ActiveRecord::Base
     holidays.each do |hol|
       if hol.holiday_status == status_authorised
         exec_sql = ActiveRecord::Base.connection
-        exec_sql.execute("UPDATE vacations SET holiday_status_id = #{status_taken.id} WHERE vacations.id = #{hol.id}")
+        exec_sql.execute("UPDATE absences SET holiday_status_id = #{status_taken.id} WHERE absences.id = #{hol.id}")
       end
     end
   end
@@ -144,14 +145,14 @@ class Vacation < ActiveRecord::Base
   end
 
   def no_overlapping_holidays
-    holidays = Vacation.find_all_by_user_id(self.user_id)
-    holidays.each do |holiday|
-      errors.add(:base, "A holiday already exists within this date range") if overlaps?(holiday)
+    absences = Absence.find_all_by_user_id(self.user_id)
+    absences.each do |absence|
+      errors.add(:base, "Some leave already exists within this date range") if overlaps?(absence)
     end
   end
 
-  def overlaps?(holiday)
-    (date_from.to_date - holiday.date_to.to_date) * (holiday.date_from.to_date - date_to.to_date) >= 0
+  def overlaps?(absence)
+    (date_from.to_date - absence.date_to.to_date) * (absence.date_from.to_date - date_to.to_date) >= 0
   end
 
   def convert_uk_date_to_iso date_str, is_date_from
@@ -163,8 +164,7 @@ class Vacation < ActiveRecord::Base
     end
   end
 
-  def save_working_days #TODO rename method
-
+  def set_working_days
     self[:working_days_used] = @working_days - half_day_adjustment
 
     unless self[:uuid]
@@ -187,18 +187,21 @@ class Vacation < ActiveRecord::Base
   end
 
   def decrease_days_remaining
+    return unless self.absence_type_id == 1 #Only holidays affect the days remaining
     holiday_allowance = self.user.get_holiday_allowance_for_dates self.date_from, self.date_to
     holiday_allowance.days_remaining -= business_days_between
     holiday_allowance.save
   end
 
   def add_days_remaining
+    return unless self.absence_type_id == 1 #Only holidays affect the days remaining
     holiday_allowance = self.user.get_holiday_allowance_for_dates self.date_from, self.date_to
     holiday_allowance.days_remaining += business_days_between
     holiday_allowance.save
   end
 
   def dont_exceed_days_remaining
+    return unless self.absence_type_id == 1 #Only holidays affect the days remaining
     holiday_allowance = self.user.get_holiday_allowance_for_dates self.date_from, self.date_to
     if holiday_allowance == 0 or holiday_allowance.nil? then
       return
@@ -223,10 +226,10 @@ class Vacation < ActiveRecord::Base
       end
     else
       if half_day_from != "Full Day" && half_day_from != "Half Day PM"
-        errors.add(:base, "A holiday can only begin with a half day in the afternoon, since this would mean you would be coming in on the afternoon of the first day of your holiday")
+        errors.add(:base, "Leave can only begin with a half day in the afternoon, since this would mean you would be coming in on the afternoon of the first day of your leave")
         return false
       elsif half_day_to != "Full Day" && half_day_to != "Half Day AM"
-        errors.add(:base, "A holiday cannot end with a half day in the afternoon, since you would be at work in the morning on the last day of your holiday")
+        errors.add(:base, "A holiday cannot end with a half day in the afternoon, since you would be at work in the morning on the last day of your leave")
         return false
       else
         if half_day_from == "Half Day PM"
@@ -264,7 +267,6 @@ class Vacation < ActiveRecord::Base
     return true if date_to_check.wday == 6 or date_to_check.wday == 0
     bank_holidays = BankHoliday.all
     return bank_holidays.collect{|hol| hol.date_of_hol}.include?(date_to_check.to_date)
-    false
   end
 
 end

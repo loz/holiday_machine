@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe VacationsController do
+describe AbsencesController do
 
   before do
     @user = Factory.create(:user)
@@ -9,7 +9,7 @@ describe VacationsController do
   end
 
   describe "GET index" do
-    it "assigns all vacations as @vacations" do
+    it "assigns all absences as @absences" do
       get :index
       response.should be_success
     end

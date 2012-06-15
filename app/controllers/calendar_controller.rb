@@ -6,7 +6,7 @@ class CalendarController < ApplicationController
     #Populate the calendar
     respond_to do |format|
       format.js {
-        holidays_json = Vacation.team_holidays_as_json current_user, params[:start], params[:end]
+        holidays_json = Absence.team_holidays_as_json current_user, params[:start], params[:end]
         render :json => holidays_json
       }
     end

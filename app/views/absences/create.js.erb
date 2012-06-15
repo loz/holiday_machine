@@ -1,0 +1,34 @@
+$(document).ready(function () {
+    <% if @absence.errors.any? %>
+      var error_html = '<%= escape_javascript(render_flash_messages) %>';
+      var error_list = '<%= escape_javascript(show_errors_as_list(@absence.errors)) %>';
+      var full_error_html = $(error_html).append(error_list);
+      $("#flash").html(full_error_html);
+      $("#flash").show();
+    <% else %>
+      // Render the flash message
+      $("#flash").html('<%= escape_javascript(render_flash_messages) %>');
+      $("#flash").show();
+
+      // Reset the form
+      $('#new_absence').resetForm();
+
+      // Reset the date fields to today
+      $("#vacation_date_from, #vacation_date_to").val($.formatDate(new Date(), "dd/MM/yyyy"));
+		
+      var holiday_year_id = $("#holiday_year_id").val();
+      if (holiday_year_id == <%= @absence.holiday_year_id %>) {
+      	
+      	if (<%=@absence.absence_type_id%>==1){
+	        $('table#holidays').css('visibility', 'visible');
+	        $('table#holidays').show();
+	        $('table#holidays tbody').append('<%= escape_javascript(create_absence_row(@absence))%>');
+	        $("#days_remaining").html(" <%= @days_remaining %>");
+	      }else{
+	      	$('table#absences').css('visibility', 'visible');
+	      	$('table#absences').show();
+	        $('table#absences tbody').append('<%= escape_javascript(create_absence_row(@absence))%>');
+	      }
+      }
+    <% end %>
+});

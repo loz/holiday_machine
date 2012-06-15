@@ -1,0 +1,14 @@
+$(document).ready(function () {
+  <% if @absence.errors.any? %>
+     var error_html = '<%= escape_javascript(render_flash_messages) %>';
+     var error_list = '<%= escape_javascript(show_errors_as_list(@absence.errors)) %>';
+     var full_error_html = $(error_html).append(error_list);
+     $("#flash").html(full_error_html);
+     $("#flash").show();
+  <% else %>
+    $("#error_panel").hide(300);
+    $("#flash").html('<%= escape_javascript(render_flash_messages) %>');
+    $("#flash").show();
+    $('#absence_<%= @absence.id %>').find('span.label').text('<%= @absence.holiday_status.status %>').attr('class', '<%= holiday_status_class(@absence) %>');
+  <% end %>
+});

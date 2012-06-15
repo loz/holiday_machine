@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   ## Associations
   belongs_to :user_type
   has_many :user_days
-  has_many :vacations
+  has_many :absences
   has_many :user_days_for_years
 
   ## Validations

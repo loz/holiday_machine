@@ -1,0 +1,67 @@
+<div id="user-holidays">
+	<h3>Your holidays</h3>
+	<% if @holidays.present? %>
+		<table id="holidays" style="visibility: visible;">
+			<thead>
+				<th>Absence Type</th>
+				<th>Start date</th>
+				<th>End date</th>
+				<th>Description</th>
+				<th>Working days</th>
+				<th>Status</th>
+				<th>&nbsp;</th>
+			</thead>
+			<tbody>
+				<% @holidays.each do |holiday| %>
+					<%= create_absence_row(holiday) %>
+				<% end %>
+			</tbody>
+		</table>
+	<% else %>
+		<table id="holidays" style="visibility: hidden;">
+			<thead>
+				<th>Absence Type</th>
+				<th>Start date</th>
+				<th>End date</th>
+				<th>Description</th>
+				<th>Working days used</th>
+				<th>Status</th>
+				<th>&nbsp;</th>
+			</thead>
+			<tbody></tbody>
+		</table>
+	<% end %>
+
+	<h3>Other absences<h3>
+	<% if @other_absences.present? %>
+		<table id="absences" style="visibility: visible;">
+			<thead>
+				<th>Absence Type</th>
+				<th>Start date</th>
+				<th>End date</th>
+				<th>Description</th>
+				<th>Working days</th>
+				<th>Status</th>
+				<th>&nbsp;</th>
+			</thead>
+			<tbody>
+				<% @other_absences.each do |absence| %>
+					<%= create_absence_row(absence) %>
+				<% end %>
+			</tbody>
+		</table>
+	<% else %>
+		<table id="absences" style="visibility: hidden;">
+			<thead>
+				<th>Absence Type</th>
+				<th>Start date</th>
+				<th>End date</th>
+				<th>Description</th>
+				<th>Working days used</th>
+				<th>Status</th>
+				<th>&nbsp;</th>
+			</thead>
+			<tbody></tbody>
+		</table>
+	<% end %>
+</div>

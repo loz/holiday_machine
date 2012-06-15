@@ -1,0 +1,31 @@
+<% if @failed -%>
+     var error_html = '<%= escape_javascript(render_flash_messages) %>';
+     var error_list = '<%= escape_javascript(show_errors_as_list(@absence.errors)) %>';
+     var full_error_html = $(error_html).append(error_list);
+     $("#flash").html(full_error_html);
+     $("#flash").show();
+<% else -%>
+  $("table#holidays tbody tr#absence_<%= @row_id %>").fadeOut('slow', function() {
+  $('table#holidays tbody tr#absence_<%= @row_id %>').css('visibility', 'hidden');
+  });
+  
+  if (<%=@holiday_count%> == 0) {
+  	 $("table#holidays").fadeOut('slow', function() {
+	 	 $('table#holidays').css('visibility', 'hidden');
+	 });
+  }
+  
+  $("table#absences tbody tr#absence_<%= @row_id %>").fadeOut('slow', function() {
+  	$('table#absences tbody tr#absence_<%= @row_id %>').css('visibility', 'hidden');
+  });
+  
+  if (<%=@other_absence_count%> == 0) {
+  	 $("table#absences").fadeOut('slow', function() {
+	 	 $('table#absences').css('visibility', 'hidden');
+	 });
+  }
+  
+  $("#days_remaining").html(" <%= @days_remaining %>");
+  $("#flash").html('<%= escape_javascript(render_flash_messages) %>');
+  $("#flash").show();
+<% end -%>

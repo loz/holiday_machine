@@ -1,6 +1,6 @@
-<h3>This shows the holidays for your employees</h3>
+<h3>This shows the absences for your team</h3>
 <% @users.each do |user| %>
-  <% unless user.vacations.empty? %>
+  <% unless user.absences.empty? %>
     <div class="gravatar-wrapper">
       <%= image_tag(gravatar(user, { :size => 35 }), :class => 'gravatar') %>
       <%= content_tag :h3, user.full_name %>
@@ -8,27 +8,29 @@
     <table>
       <thead>
         <tr>
+          <th>Absence Type</th>	
           <th>Date From</th>
           <th>Date To</th>
           <th>Description</th>
-          <th>Working days used</th>
+          <th>Working days</th>
           <th>Status</th>
           <th>&nbsp;</th>
         </tr>
       </thead>
       <tbody>
-        <% user.vacations.each do |holiday| %>
-          <%= content_tag_for :tr, holiday do %>
-            <%= content_tag :td, holiday.date_from.strftime("%d/%m/%Y") %>
-            <%= content_tag :td, holiday.date_to.strftime("%d/%m/%Y") %>
-            <%= content_tag :td, holiday.description %>
-            <%= content_tag :td, holiday.working_days_used %>
-            <%= content_tag :td, holiday_status(holiday) %>
+        <% user.absences.each do |absence| %>
+          <%= content_tag_for :tr, absence do %>
+          	<%= content_tag :td, absence.absence_type.name%>
+            <%= content_tag :td, absence.date_from.strftime("%d/%m/%Y") %>
+            <%= content_tag :td, absence.date_to.strftime("%d/%m/%Y") %>
+            <%= content_tag :td, absence.description %>
+            <%= content_tag :td, absence.working_days_used %>
+            <%= content_tag :td, holiday_status(absence) %>
             <td>
-              <%= link_to 'View', "/calendar/show?year=#{holiday.date_from.year}&month=#{holiday.date_from.month - 1}" %>
-              <%= link_to 'Approve', vacation_path(holiday, :vacation => { :holiday_status_id => 2 }), :method => :put, :remote => true %>
-              <%= link_to 'Reject', vacation_path(holiday, :vacation => { :holiday_status_id => 3 }), :method => :put, :remote => true %>
-              <%= link_to 'Pending', vacation_path(holiday, :vacation => { :holiday_status_id => 1 }), :method => :put, :remote => true %>
+              <%= link_to 'View', "/calendar/show?year=#{absence.date_from.year}&month=#{absence.date_from.month - 1}" %>
+              <%= link_to 'Approve', absence_path(absence, :absence => { :holiday_status_id => 2 }), :method => :put, :remote => true %>
+              <%= link_to 'Reject', absence_path(absence, :absence => { :holiday_status_id => 3 }), :method => :put, :remote => true %>
+              <%= link_to 'Pending', absence_path(absence, :absence => { :holiday_status_id => 1 }), :method => :put, :remote => true %>
             </td>
           <% end %>
         <% end %>

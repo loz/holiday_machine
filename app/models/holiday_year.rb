@@ -1,7 +1,7 @@
 class HolidayYear < ActiveRecord::Base
 
   ## Associations
-  has_many :vacations
+  has_many :absences
   has_many :user_days_for_years
 
   ## Scopes

@@ -1,5 +1,5 @@
 class HolidayStatus < ActiveRecord::Base
-  has_one :vacation
+  has_one :absence
 
   scope :pending_only, where('status = "Pending"')
 
