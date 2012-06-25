@@ -1,9 +1,9 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.11'
-# gem 'mysql2', '0.2.7' #Add 0.3.x version after Rails 3.1 upgrade
-gem 'pg'
-gem 'devise', '1.5.0'
+gem 'rails', '3.2.6'
+gem 'mysql2'
+#gem 'pg'
+gem 'devise', '2.0.4'
 gem 'devise_invitable'
 gem 'simple_form'
 gem 'uuid'
