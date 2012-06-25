@@ -11,11 +11,30 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111130113949) do
+ActiveRecord::Schema.define(:version => 20120625214734) do
+
+  create_table "absence_types", :force => true do |t|
+    t.string "name"
+  end
+
+  create_table "absences", :force => true do |t|
+    t.datetime "date_from"
+    t.datetime "date_to"
+    t.string   "description"
+    t.decimal  "working_days_used", :precision => 4, :scale => 1
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "holiday_status_id"
+    t.integer  "user_id"
+    t.text     "notes"
+    t.string   "uuid"
+    t.integer  "holiday_year_id"
+    t.integer  "absence_type_id"
+  end
 
   create_table "admins", :force => true do |t|
-    t.string   "email",                                                           :default => "", :null => false
-    t.string   "encrypted_password", :limit => 128,                               :default => "", :null => false
+    t.string   "email",                                                           :null => false
+    t.string   "encrypted_password", :limit => 128,                               :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.decimal  "days_leave",                        :precision => 4, :scale => 1
@@ -73,14 +92,12 @@ ActiveRecord::Schema.define(:version => 20111130113949) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                                 :default => "", :null => false
-    t.string   "encrypted_password",     :limit => 128, :default => ""
+    t.string   "email",                                                :null => false
+    t.string   "encrypted_password",     :limit => 128
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "reset_password_token"
-    t.string   "remember_token"
-    t.datetime "remember_created_at"
     t.integer  "sign_in_count",                         :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
@@ -106,19 +123,5 @@ ActiveRecord::Schema.define(:version => 20111130113949) do
 
   add_index "users", ["invitation_token"], :name => "index_users_on_invitation_token"
   add_index "users", ["invited_by_id"], :name => "index_users_on_invited_by_id"
-
-  create_table "vacations", :force => true do |t|
-    t.datetime "date_from"
-    t.datetime "date_to"
-    t.string   "description"
-    t.decimal  "working_days_used", :precision => 4, :scale => 1
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "holiday_status_id"
-    t.integer  "user_id"
-    t.text     "notes"
-    t.string   "uuid"
-    t.integer  "holiday_year_id"
-  end
 
 end

@@ -3,9 +3,6 @@
     <%= devise_error_messages! %>
     <%= f.input :email %>
     <%= f.input :password %>
-    <% if devise_mapping.rememberable? -%>
-      <%= f.input :remember_me, :as => :boolean %>
-    <% end -%>
     <div class="well">
       <%= f.button :submit, "Sign in", :class => 'btn primary' %>
     </div>
