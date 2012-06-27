@@ -9,7 +9,6 @@ module AbsencesHelper
         content_tag(:td, absence.working_days_used) +
         content_tag(:td, holiday_status(absence)) +
         content_tag(:td, :class => "actions") do
-         # link_to('View', absence_path(absence)) +
         link_to('Delete', absence_path(absence), :method => :delete, :confirm => 'Are you sure you want to delete this request?', :remote => true)
           end
     end
