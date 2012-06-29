@@ -1,8 +1,8 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.2.6'
-gem 'mysql2'
-#gem 'pg'
+# gem 'mysql2'
+gem 'pg'
 gem "devise", "~> 2.1.2"
 gem 'devise_invitable'
 gem 'simple_form'
