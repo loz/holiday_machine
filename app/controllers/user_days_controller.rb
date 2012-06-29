@@ -20,7 +20,7 @@ class UserDaysController < ApplicationController
       format.js # index.js.erb
       format.html # index.html.erb
     end
-end
+  end
 
   # GET /user_days/1
   def show
@@ -34,11 +34,20 @@ end
 
   # GET /user_days/new
   def new
+    #The user viewing this is a manager and wants his own team
+    @team_users = User.get_team_users(current_user.id)
+
+    if params[:holiday_year_id]
+      @selected_year = HolidayYear.find(params[:holiday_year_id])
+    else
+      @selected_year = HolidayYear.current_year
+    end
+
     @user_day = UserDay.new
 
     respond_to do |format|
+      format.js # new.js.erb
       format.html # new.html.erb
-      format.xml { render :xml => @user_day }
     end
   end
 
@@ -50,7 +59,6 @@ end
   # POST /user_days
   # POST /user_days.xml
   def create
-
     @user_day = UserDay.new(params[:user_day])
 
     #TODO move this line to the model
@@ -74,17 +82,17 @@ end
 
   # DELETE /user_days/1
   # DELETE /user_days/1.xml
-  def destroy
-    @user_day = UserDay.find(params[:id])
-    @allowance = @user_day.user.get_holiday_allowance_for_dates(Date.today, Date.today)
-    @allowance.days_remaining -= @user_day.no_days
-    @user_day.destroy
-    @allowance.save
-    flash[:success] = "This persons extra days leave has been successfully deleted."
-    respond_to do |format|
-      format.html { redirect_to(user_days_url) }
-      format.xml { head :ok }
-    end
-  end
+  # def destroy
+  #   @user_day = UserDay.find(params[:id])
+  #   @allowance = @user_day.user.get_holiday_allowance_for_dates(Date.today, Date.today)
+  #   @allowance.days_remaining -= @user_day.no_days
+  #   @user_day.destroy
+  #   @allowance.save
+  #   flash[:success] = "This persons extra days leave has been successfully deleted."
+  #   respond_to do |format|
+  #     format.html { redirect_to(user_days_url) }
+  #     format.xml { head :ok }
+  #   end
+  # end
 
 end

@@ -48,7 +48,11 @@
     <%= yield :dialog %>
   </div>
 
-  <%= javascript_include_tag 'jquery-1.5.2.min.js', 'rails', 'application', 'jquery.formatdate', 'jquery-ui-1.8.12.south-street/js/jquery-ui-1.8.12.custom.min', 'rails.validations', '/javascripts/fullcalendar.min.js' %>
+  <div id="dialog-confirm" title="Do you wish to continue?">
+    <p class ="content"></p>
+  </div>
+
+  <%= javascript_include_tag 'jquery-1.7.2.min.js', 'rails', 'application', 'jquery.formatdate', 'jquery-ui-1.8.12.south-street/js/jquery-ui-1.8.12.custom.min', 'rails.validations', '/javascripts/fullcalendar.min.js' %>
   <%= yield(:javascripts) %>
 </body>
 </html>

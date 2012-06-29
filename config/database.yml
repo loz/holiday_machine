@@ -3,18 +3,18 @@ development:
   encoding: utf8
   database: holiday_development
   pool: 5
-  username: holiday_machine
-  password: vacation
+  username: root
+  password: admin
 
 test:
   adapter: mysql2
   encoding: utf8
   database: holiday_test
   pool: 5
-  username: holiday_machine
-  password: vacation
+  username: root
+  password: admin
 
-production:
+production: 
   adapter: mysql2
   encoding: utf8
   database: holiday_production

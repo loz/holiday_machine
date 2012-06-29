@@ -9,12 +9,8 @@
 <p>
   From: <%= @holiday.date_from.strftime("%d/%m/%y") %> to <%= @holiday.date_to.strftime("%d/%m/%y") %>
 </p>
-<!--<p>-->
-<!--To authorize this holiday, just follow this link: <%#= @url %>.-->
-<!--Or log in to the application and do it from there.-->
-<!--</p>-->
 <p>
-  To authorize this holiday, please log in to the application.
+To authorize, follow the link to <%= I18n.t('app_url') %>
 </p>
 </body>
 </html>
