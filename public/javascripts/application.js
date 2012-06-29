@@ -1,7 +1,43 @@
 // Place your application-specific JavaScript functions and classes here
 
 $(document).ready(function() {
-	
+
+//Replaces the alert with a rails ui dialog
+/*
+	var myCustomConfirmBox;
+	$.rails.allowAction = function(element) {
+		var answer, callback, message;
+		message = element.data("confirm");
+		answer = false;
+		callback = void 0;
+		if (!message) {
+			return true;
+		}
+		if ($.rails.fire(element, "confirm")) {
+			myCustomConfirmBox(message, element);
+		}
+		return false;
+	};
+	myCustomConfirmBox = function(message, callback) {
+		$("#dialog-confirm .content").html(message);
+		return $("#dialog-confirm").dialog({
+			resizable: false,
+		       height: 160,
+		       modal: true,
+		       buttons: {
+			       Continue: function() {
+				       $.rails.handleRemote(callback);
+				       return $(this).dialog("close");
+			       },
+			       Cancel: function() {
+				       return $(this).dialog("close");
+			       }
+		       }
+		});
+	};
+
+*/
+
     // Flash messages
     $('#flash').delegate('a.close', 'click', function(e) {
         e && e.preventDefault();
