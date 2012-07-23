@@ -119,6 +119,7 @@ form select {
   -ms-border-radius: 3px;
   -khtml-border-radius: 3px;
   border-radius: 3px;
+  margin-bottom: 5px;
 }
 /* line 90, sass/application.scss */
 form input,

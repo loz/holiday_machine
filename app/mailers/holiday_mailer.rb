@@ -34,7 +34,7 @@ class HolidayMailer < ActionMailer::Base
     @holiday = holiday
     @user = @holiday.user
     @manager = manager
-    @subject = if holiday.holiday_status_id == 2
+    subject = if holiday.holiday_status_id == 2
                 "Your holiday has been accepted"
               elsif holiday.holiday_status_id == 3
                 "Your holiday request has been rejected"
