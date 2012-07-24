@@ -184,7 +184,7 @@ class Absence < ActiveRecord::Base
     weekdays = (date_from.to_date..date_to.to_date).reject { |d| [0, 6].include? d.wday or holidays_array.include?(d) }
     business_days = weekdays.length - half_day_adjustment
     debugger
-    business_days = 0.5 if business_days == 1 && half_day_from == half_day_to 
+    business_days = 0.5 if business_days == 1 && half_day_from == half_day_to && half_day_from.include?("Half Day")
     business_days
   end
 
