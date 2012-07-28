@@ -183,8 +183,7 @@ class Absence < ActiveRecord::Base
     holidays_array = bank_holidays.collect { |hol| hol.date_of_hol }
     weekdays = (date_from.to_date..date_to.to_date).reject { |d| [0, 6].include? d.wday or holidays_array.include?(d) }
     business_days = weekdays.length - half_day_adjustment
-    debugger
-    business_days = 0.5 if business_days == 1 && half_day_from == half_day_to 
+    #business_days = 0.5 if business_days == 1 && half_day_from == half_day_to 
     business_days
   end
 
@@ -208,7 +207,6 @@ class Absence < ActiveRecord::Base
     if holiday_allowance == 0 or holiday_allowance.nil? then
       return
     end
-    debugger
     errors.add(:working_days_used, "-Number of days selected exceeds your allowance!") if holiday_allowance.days_remaining < business_days_between
   end
 
