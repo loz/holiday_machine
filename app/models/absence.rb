@@ -40,7 +40,6 @@ class Absence < ActiveRecord::Base
   end
 
   def self.team_holidays_as_json current_user, start_date, end_date
-
     #TODO filter this to show all hols, by team, and by user
     date_from = DateTime.parse(Time.at(start_date.to_i).to_s)
     date_to = DateTime.parse(Time.at(end_date.to_i).to_s)
@@ -138,7 +137,6 @@ class Absence < ActiveRecord::Base
     errors.add(:working_days_used, " - This holiday request uses no working days") if @working_days==0
   end
 
-
   def holiday_must_not_straddle_holiday_years
     number_years = HolidayYear.holiday_years_containing_holiday(date_from, date_to).count
     errors.add(:base, "Holiday must not cross years") if number_years> 1
@@ -183,7 +181,8 @@ class Absence < ActiveRecord::Base
     holidays_array = bank_holidays.collect { |hol| hol.date_of_hol }
     weekdays = (date_from.to_date..date_to.to_date).reject { |d| [0, 6].include? d.wday or holidays_array.include?(d) }
     business_days = weekdays.length - half_day_adjustment
-    #business_days = 0.5 if business_days == 1 && half_day_from == half_day_to 
+    # TODO need better solution to this bug
+    # business_days = 0.5 if business_days == 1 && half_day_from == half_day_to && half_day_from.include?("Half Day")
     business_days
   end
 
@@ -252,11 +251,9 @@ class Absence < ActiveRecord::Base
         half_day_adjustment += 0.5
       end
     else
-      #p "DateFrom hour", self.date_from.hour
       if self.date_from.hour == 13
         half_day_adjustment += 0.5
       end
-      #p "Dateto hour", self.date_to.hour
       if self.date_to.hour == 12
         half_day_adjustment += 0.5
       end
