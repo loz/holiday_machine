@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120625214734) do
+ActiveRecord::Schema.define(:version => 20120723104243) do
 
   create_table "absence_types", :force => true do |t|
     t.string "name"
@@ -119,9 +119,24 @@ ActiveRecord::Schema.define(:version => 20120625214734) do
     t.integer  "invitation_limit"
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
+    t.datetime "remember_created_at"
   end
 
   add_index "users", ["invitation_token"], :name => "index_users_on_invitation_token"
   add_index "users", ["invited_by_id"], :name => "index_users_on_invited_by_id"
+
+  create_table "vacations", :force => true do |t|
+    t.datetime "date_from"
+    t.datetime "date_to"
+    t.string   "description"
+    t.decimal  "working_days_used", :precision => 4, :scale => 1
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "holiday_status_id"
+    t.integer  "user_id"
+    t.text     "notes"
+    t.string   "uuid"
+    t.integer  "holiday_year_id"
+  end
 
 end

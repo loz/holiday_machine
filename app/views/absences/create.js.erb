@@ -10,21 +10,37 @@ $(document).ready(function () {
       $("#flash").html('<%= escape_javascript(render_flash_messages) %>');
       $("#flash").show();
 
-      // Reset the form
-      $('#new_absence').resetForm();
+      console.log("Hello");
+
+      try
+      {
+       // Reset the form
+      $('#new_absence').get(0).reset();
 
       // Reset the date fields to today
       $("#vacation_date_from, #vacation_date_to").val($.formatDate(new Date(), "dd/MM/yyyy"));
+      }
+      catch(err)
+        {
+        txt="There was an error on this page.\n\n";
+        txt+="Error description: " + err.message + "\n\n";
+        txt+="Click OK to continue.\n\n";
+        alert(txt);
+        }
+
 		
       var holiday_year_id = $("#holiday_year_id").val();
+      
       if (holiday_year_id == <%= @absence.holiday_year_id %>) {
-      	
+
+        console.log("Bexr2");
       	if (<%=@absence.absence_type_id%>==1){
 	        $('table#holidays').css('visibility', 'visible');
 	        $('table#holidays').show();
 	        $('table#holidays tbody').append('<%= escape_javascript(create_absence_row(@absence))%>');
 	        $("#days_remaining").html(" <%= @days_remaining %>");
 	      }else{
+          console.log("Add absence");
 	      	$('table#absences').css('visibility', 'visible');
 	      	$('table#absences').show();
 	        $('table#absences tbody').append('<%= escape_javascript(create_absence_row(@absence))%>');

@@ -1,3 +1,9 @@
+//= require jquery
+//= require jquery_ujs
+//= require jquery-ui
+//= require_self
+//= require_tree .
+
 // Place your application-specific JavaScript functions and classes here
 
 $(document).ready(function() {

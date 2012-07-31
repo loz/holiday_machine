@@ -16,6 +16,12 @@ module HolidayMachine
       g.test_framework :rspec
     end
 
+    # Enable the asset pipeline
+    config.assets.enabled = true
+
+    # Version of your assets, change this if you want to expire all your assets
+    config.assets.version = '1.0'
+
     #config.middleware.insert_before ActionDispatch::Cookies
 
     # Custom directories with classes and modules you want to be autoloadable.
@@ -44,5 +50,8 @@ module HolidayMachine
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+
+    Bundler.require(*Rails.groups(:assets => %w(development test))) if defined?(Bundler)
+
   end
 end

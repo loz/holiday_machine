@@ -57,6 +57,7 @@ class AbsencesController < ApplicationController
     manager = User.find_by_id(manager_id)
 
     respond_to do |format|
+      debugger
       if @absence.save
         unless manager.nil?
           HolidayMailer.holiday_request(current_user, manager, @absence).deliver

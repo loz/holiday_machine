@@ -10,7 +10,7 @@ HolidayMachine::Application.configure do
   config.action_controller.perform_caching = true
 
   # Specifies the header that your server uses for sending files
-#  config.action_dispatch.x_sendfile_header = "X-Sendfile"
+  #  config.action_dispatch.x_sendfile_header = "X-Sendfile"
   # For nginx:
   config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect'
 
@@ -18,12 +18,12 @@ HolidayMachine::Application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-  :address              => "smtp.gmail.com",
-  :port                 => 587,
-  :domain               => 'gmail.com',
-  :user_name            => 'holiday.machine',
-  :password             => 'E1eph4nt',
-  :authentication       => 'plain',
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :domain               => 'gmail.com',
+    :user_name            => 'holiday.machine',
+    :password             => 'E1eph4nt',
+    :authentication       => 'plain',
   :enable_starttls_auto => true  }
 
   config.middleware.use ExceptionNotifier,
@@ -63,5 +63,15 @@ HolidayMachine::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+
+
+  # Compress JavaScript and CSS
+  config.assets.compress = true
+
+  # Don't fallback to assets pipeline
+  config.assets.compile = false
+
+  # Generate digests for assets URLs
+  config.assets.digest = true
 
 end
