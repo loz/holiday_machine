@@ -5,7 +5,7 @@
     <%= csrf_meta_tag %>
     <%# We dont' want jquery UI css on the calendar as it screws up the styling/ layout %>
     <% if params[:controller] != 'calendar' %>
-      <%= stylesheet_link_tag "/javascripts/jquery-ui-1.8.12.south-street/css/south-street/jquery-ui-1.8.12.custom.css" %>
+    <%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/cupertino/jquery-ui.css" %>
     <% end %>
     <%#= stylesheet_link_tag "fullcalendar", "reveal", "application" %>
     <%= yield(:head) %>
