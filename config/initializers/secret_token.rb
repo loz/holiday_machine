@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-HolidayMachine::Application.config.secret_token = '4e82a8e264e746673fd95920138de80d7ad1b03c25a8b0c03fd83d58627a2ea08771703ed2ef6c07704e594dca1dbdba1d90ff161c869fba02495236ecd64e8e'
+HolidayMachine::Application.config.secret_token = '928eddc60f5168afd4c78089160fdb981ddd713ffa712a9e1b7fb3bd436d5ad46de2b24e428d569f73bdd9f5d1d0330d3610dac45bafc55176284e89f745beaf'

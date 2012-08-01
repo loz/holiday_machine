@@ -1,6 +1,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require fullcalendar
 //= require_self
 //= require_tree .
 
@@ -65,21 +66,21 @@ $(document).ready(function() {
     var m = date.getMonth();
     var y = date.getFullYear();
 
-    $('#calendar').fullCalendar({
-        header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: false
-        },
-        eventClick: function(calEvent, jsEvent, view) {
-            if (calEvent.type === 'bank-holiday') return false;
-            window.location = "/vacations/" + calEvent.id
-        },
-        theme: true,
-        events: "/calendar",
-        disableDragging: true,
-        weekends: false
-    });
+    // $('#calendar').fullCalendar({
+    //     header: {
+    //         left: 'prev,next today',
+    //         center: 'title',
+    //         right: false
+    //     },
+    //     eventClick: function(calEvent, jsEvent, view) {
+    //         if (calEvent.type === 'bank-holiday') return false;
+    //         window.location = "/vacations/" + calEvent.id
+    //     },
+    //     theme: true,
+    //     events: "/calendar",
+    //     disableDragging: true,
+    //     weekends: false
+    // });
 
     $('.fc-button-next, .fc-button-prev, .fc-button-today').bind('click', monthNavigation);
 
