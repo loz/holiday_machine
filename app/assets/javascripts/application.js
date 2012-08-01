@@ -1,8 +1,7 @@
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui
-//= require fullcalendar
 //= require_self
+//= require_tree ./jquery-ui-custom/js
 //= require_tree .
 
 // Place your application-specific JavaScript functions and classes here
@@ -14,7 +13,7 @@ $(document).ready(function() {
 	var myCustomConfirmBox;
 	$.rails.allowAction = function(element) {
 		var answer, callback, message;
-		message = element.data("confirm");
+		message = element.data("confirm");]
 		answer = false;
 		callback = void 0;
 		if (!message) {
@@ -52,6 +51,8 @@ $(document).ready(function() {
     });
 
     // Datepicker
+    // $.datepicker.setDefaults($.datepicker.regional['en']);
+   
     var datepicker_defaults = {
         dateFormat: 'dd/mm/yy',
         changeMonth: true,
@@ -65,6 +66,10 @@ $(document).ready(function() {
     var d = date.getDate();
     var m = date.getMonth();
     var y = date.getFullYear();
+
+    // $('#calendar').fullCalendar({
+    //     // put your options and callbacks here
+    // })
 
     // $('#calendar').fullCalendar({
     //     header: {
