@@ -56,7 +56,7 @@ class AbsencesController < ApplicationController
     manager_id = current_user.manager_id
     manager = User.find_by_id(manager_id)
 
-    respond_to do |format|
+    # respond_to do |format|
       if @absence.save
         unless manager.nil?
           HolidayMailer.holiday_request(current_user, manager, @absence).deliver
@@ -66,12 +66,14 @@ class AbsencesController < ApplicationController
         @days_remaining = user_days_per_year.days_remaining
 
         flash.now[:success] = "Successfully created time off."
-        format.js
+        redirect_to '/'
+        # format.js
       else
         flash.now[:error] = "There was a problem creating your request"
-        format.js
+        redirect_to '/'
+        # format.js
       end
-    end
+    # end
   end
 
   def update
