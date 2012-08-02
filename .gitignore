@@ -11,3 +11,7 @@ public/cache/*
 *.sqlite3
 .bundle/*
 .rvmrc
+*.DS_Store
+.sass-cache
+.swp
+latest.dump
