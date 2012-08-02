@@ -14,7 +14,6 @@ gem 'sass'
 gem 'compass'
 
 group :development, :test do
-  gem "thin"
   gem "debugger"
   gem 'rspec'
   gem 'rspec-rails'
