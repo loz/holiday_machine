@@ -5,6 +5,7 @@ class ReportsController < ApplicationController
 
 
   def index
+  	@absences = Absence.includes(:user).order('users.email ASC').all
   end
 
  end

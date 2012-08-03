@@ -1,6 +1,7 @@
 <div id="report-absences">
 	<table id="absences">
 		<thead>
+			<th>User</th>
 			<th>Absence Type</th>
 			<th>Start date</th>
 			<th>End date</th>
@@ -9,21 +10,15 @@
 			<th>Status</th>
 		</thead>
 		<tbody>
-			 content_tag_for :tr, absence do
-      content_tag(:td, absence.absence_type.name) +
-        content_tag(:td, show_date_with_details(absence)) +
-        content_tag(:td, show_date_with_details(absence, false)) +
-        content_tag(:td, absence.description) +
-        content_tag(:td, absence.working_days_used) +
-        content_tag(:td, holiday_status(absence)) +
-        content_tag(:td, :class => "actions") do
-        link_to('Delete', absence_path(absence), :method => :delete, :data => {:confirm => 'Are you sure you want to delete this request?'}, :remote => true)
-          end
 			<% @absences.each do |absence| %>
-
 				<tr>
-
-
+					<td><%=absence.user.full_name%></td>
+					<td><%=absence.absence_type.name%></td>
+					<td><%=absence.date_from.strftime('%d/%m/%Y')%></td>
+					<td><%=absence.date_to.strftime('%d/%m/%Y')%></td>
+					<td><%=absence.description%></td>
+					<td><%=absence.working_days_used%></td>
+					<td><%=absence.holiday_status.status%></td>
 				</tr>
 			<% end %>
 		</tbody>

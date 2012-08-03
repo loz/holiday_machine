@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
 
   devise :invitable, :database_authenticatable, :confirmable, :lockable, :recoverable,
-         :registerable, :trackable, :timeoutable, :validatable,
-         :token_authenticatable
+    :registerable, :trackable, :timeoutable, :validatable,
+    :token_authenticatable
 
   ## Callbacks
   before_update :add_inviting_manager
@@ -10,6 +10,9 @@ class User < ActiveRecord::Base
   after_destroy :delete_all_allowances
 
   ## Associations
+  belongs_to :manager, :class_name => 'User', :foreign_key => 'manager_id'
+  has_many :employees, :class_name => 'User', :foreign_key => "manager_id"
+
   belongs_to :user_type
   has_many :user_days
   has_many :absences
@@ -78,6 +81,16 @@ class User < ActiveRecord::Base
       self.manager_id = self.invited_by_id
       self.invited_by_id = nil
     end
+  end
+
+  def all_staff
+    all = []
+    self.employees.each do |user|
+      all << user
+      root_children = user.all_children.flatten
+      all << root_children unless root_children.empty?
+    end
+    return all.flatten
   end
 
 end
