@@ -18,4 +18,8 @@ class ApplicationController < ActionController::Base
     Absence.mark_as_taken current_user
   end
 
+  def authenticate_manager
+    redirect_to root_path unless current_user.user_type.name == 'Manager'
+  end
+
 end

@@ -12,6 +12,7 @@ HolidayMachine::Application.routes.draw do
   devise_for :users, :admin
   resources :home, :only => :index
   resources :admins, :only => :index
+  resources :reports, :only => :index
   root :to => 'absences#index'
   get "info/registration_message"
 end
