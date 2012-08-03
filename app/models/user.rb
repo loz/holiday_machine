@@ -87,7 +87,7 @@ class User < ActiveRecord::Base
     all = []
     self.employees.each do |user|
       all << user
-      root_children = user.all_children.flatten
+      root_children = user.all_staff.flatten
       all << root_children unless root_children.empty?
     end
     return all.flatten
