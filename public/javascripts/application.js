@@ -132,6 +132,15 @@ $(document).ready(function() {
         $(this).attr('target', '_blank');
     });
 
+    // For user days only, move out and create js specifically for this controller
+    $("#holiday_year_id").change(function() {
+      var year = $(this).val();
+      $(".holiday_year").each(function() {
+        $(this).val(year);
+      });
+    });
+
+
 });
 
 (function($) {

@@ -2,7 +2,10 @@
   <%= javascript_include_tag 'jquery.reveal', 'user-days' %>
 <% end %>
 
-<%= content_tag :h2, calendar_year(@selected_year) %>
+<%= simple_form_for 'holiday_year', :remote => true do |f| %>
+  <%= f.collection_select :id, HolidayYear.all, :id, :description, :selected => @selected_year.id %>
+<% end %>
+
 <div id="user_days_holder">
   <%= render :partial => "user_days_table" %>
 </div>
