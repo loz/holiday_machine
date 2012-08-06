@@ -12,6 +12,7 @@ gem 'client_side_validations'
 gem "exception_notification"
 gem 'sass'
 gem 'compass'
+gem 'acts_as_tree'
 
 group :development, :test do
   gem "debugger"

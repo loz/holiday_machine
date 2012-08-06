@@ -29,7 +29,8 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :user_day_link, "Manage holiday allowance", user_days_path, :if=>Proc.new{current_user.user_type_id.eql?(2)}
     primary.item :invite_link, 'Invite users', new_user_invitation_path, :if=>Proc.new{current_user.user_type_id.eql?(2)}
    # primary.item :settings_link, "Settings", user_settings_path
-    primary.item :issues_link, "Report issue", "https://github.com/etskelly/holiday_machine/issues", :class => 'blank_target'
+    primary.item :reports_link, 'View Reports', reports_path, :if=>Proc.new{current_user.user_type_id.eql?(2)}
+    # primary.item :issues_link, "Report issue", "https://github.com/etskelly/holiday_machine/issues", :class => 'blank_target'
   end
 
 =begin

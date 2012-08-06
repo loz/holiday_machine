@@ -1,0 +1,25 @@
+<div id="report-absences">
+	<table id="absences">
+		<thead>
+			<th>User</th>
+			<th>Absence Type</th>
+			<th>Start date</th>
+			<th>End date</th>
+			<th>Description</th>
+			<th>Working days</th>
+			<th>Status</th>
+		</thead>
+		<tbody>
+			<% current_user.absences.per_holiday_year(@current_year_id).each do |absence| %>
+				<%= render partial: 'absence_row', :locals => { :absence => absence } %>
+			<% end %>
+			<%= render partial: 'totals_row', :locals => { :user => current_user } %>
+			<% @users.each do |user| %>
+				<% user.absences.per_holiday_year(@current_year_id).each do |absence| %>
+					<%= render partial: 'absence_row', :locals => { :absence => absence }  %>
+				<% end %>
+				<%= render partial: 'totals_row', :locals => { :user => user } %>
+			<% end %>
+		</tbody>
+	</table>
+</div>
