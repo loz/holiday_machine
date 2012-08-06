@@ -7,9 +7,9 @@ class AdministerController < ApplicationController
     #TODO restrict holidays by year
     @statuses = HolidayStatus.all
     # @users = current_user.all_staff.includes(:absences).where('absences.holiday_year_id = ?', HolidayYear.current_year.id)
-    @users = User.get_team_users(current_user.id).includes(:absences)
+    @users = User.get_team_users(current_user.id).includes(:absences).where('absences.holiday_year_id = ?', HolidayYear.current_year.id)
     respond_to do |format|
-       format.html
+      format.html
     end
   end
 

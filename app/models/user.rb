@@ -30,9 +30,7 @@ class User < ActiveRecord::Base
 
   ## Scopes
   #Includes own manager
-  scope :get_team_users, lambda { |manager_id| where('(manager_id = ? or id = ?) and confirmed_at is not null', manager_id, manager_id) }
-
-  # TODO scope :get_all_team_users
+  scope :get_team_users, lambda { |manager_id| where('(manager_id = ? or users.id = ?) and confirmed_at is not null', manager_id, manager_id) }
 
   ## Instance methods
   def full_name

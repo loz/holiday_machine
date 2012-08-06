@@ -1,0 +1,9 @@
+<tr>
+	<td><%=absence.user.full_name%></td>
+	<td><%=absence.absence_type.name%></td>
+	<td><%=absence.date_from.strftime('%d/%m/%Y')%></td>
+	<td><%=absence.date_to.strftime('%d/%m/%Y')%></td>
+	<td><%=absence.description%></td>
+	<td><%=absence.working_days_used%></td>
+	<td><%=absence.holiday_status.status%></td>
+</tr>

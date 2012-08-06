@@ -10,16 +10,15 @@
 			<th>Status</th>
 		</thead>
 		<tbody>
-			<% @absences.each do |absence| %>
-				<tr>
-					<td><%=absence.user.full_name%></td>
-					<td><%=absence.absence_type.name%></td>
-					<td><%=absence.date_from.strftime('%d/%m/%Y')%></td>
-					<td><%=absence.date_to.strftime('%d/%m/%Y')%></td>
-					<td><%=absence.description%></td>
-					<td><%=absence.working_days_used%></td>
-					<td><%=absence.holiday_status.status%></td>
-				</tr>
+			<% current_user.absences.per_holiday_year(@current_year_id).each do |absence| %>
+				<%= render partial: 'absence_row', :locals => { :absence => absence } %>
+			<% end %>
+			<%= render partial: 'totals_row', :locals => { :user => current_user } %>
+			<% @users.each do |user| %>
+				<% user.absences.per_holiday_year(@current_year_id).each do |absence| %>
+					<%= render partial: 'absence_row', :locals => { :absence => absence }  %>
+				<% end %>
+				<%= render partial: 'totals_row', :locals => { :user => user } %>
 			<% end %>
 		</tbody>
 	</table>
