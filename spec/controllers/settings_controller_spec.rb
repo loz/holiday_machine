@@ -18,22 +18,6 @@ describe SettingsController do
     end
   end
 
-  describe "GET show" do
-    it "assigns the requested setting as @setting" do
-      Setting.stub(:find).with("37") { mock_setting }
-      get :show, :id => "37"
-      assigns(:setting).should be(mock_setting)
-    end
-  end
-
-  describe "GET new" do
-    it "assigns a new setting as @setting" do
-      Setting.stub(:new) { mock_setting }
-      get :new
-      assigns(:setting).should be(mock_setting)
-    end
-  end
-
   describe "GET edit" do
     it "assigns the requested setting as @setting" do
       Setting.stub(:find).with("37") { mock_setting }
@@ -59,12 +43,14 @@ describe SettingsController do
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved setting as @setting" do
+        pending "NOT supported, no :new template"
         Setting.stub(:new).with({'these' => 'params'}) { mock_setting(:save => false) }
         post :create, :setting => {'these' => 'params'}
         assigns(:setting).should be(mock_setting)
       end
 
       it "re-renders the 'new' template" do
+        pending "NOT supported, no :new template"
         Setting.stub(:new) { mock_setting(:save => false) }
         post :create, :setting => {}
         response.should render_template("new")
