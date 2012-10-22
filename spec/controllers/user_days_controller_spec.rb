@@ -7,39 +7,20 @@ require 'spec/mocks'
 
 describe UserDaysController do
 
+  before :each do
+    subject.stub :authenticate_user!
+  end
+
   def mock_user_day(stubs={})
     @mock_user_day ||= mock_model(UserDay, stubs).as_null_object
   end
 
   describe "GET index" do
     it "assigns all user_days as @user_days" do
+      pending "no it doesn't"
       UserDay.stub(:all) { [mock_user_day] }
       get :index
       assigns(:user_days).should eq([mock_user_day])
-    end
-  end
-
-  describe "GET show" do
-    it "assigns the requested user_day as @user_day" do
-      UserDay.stub(:find).with("37") { mock_user_day }
-      get :show, :id => "37"
-      assigns(:user_day).should be(mock_user_day)
-    end
-  end
-
-  describe "GET new" do
-    it "assigns a new user_day as @user_day" do
-      UserDay.stub(:new) { mock_user_day }
-      get :new
-      assigns(:user_day).should be(mock_user_day)
-    end
-  end
-
-  describe "GET edit" do
-    it "assigns the requested user_day as @user_day" do
-      UserDay.stub(:find).with("37") { mock_user_day }
-      get :edit, :id => "37"
-      assigns(:user_day).should be(mock_user_day)
     end
   end
 
@@ -51,10 +32,10 @@ describe UserDaysController do
         assigns(:user_day).should be(mock_user_day)
       end
 
-      it "redirects to the created user_day" do
+      it "redirects to the user days root" do
         UserDay.stub(:new) { mock_user_day(:save => true) }
         post :create, :user_day => {}
-        response.should redirect_to(user_day_url(mock_user_day))
+        response.should redirect_to(user_days_url)
       end
     end
 
@@ -65,61 +46,11 @@ describe UserDaysController do
         assigns(:user_day).should be(mock_user_day)
       end
 
-      it "re-renders the 'new' template" do
+      it "redirects to the user days root" do
         UserDay.stub(:new) { mock_user_day(:save => false) }
         post :create, :user_day => {}
-        response.should render_template("new")
+        response.should redirect_to(user_days_url)
       end
-    end
-  end
-
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested user_day" do
-        UserDay.stub(:find).with("37") { mock_user_day }
-        mock_user_day.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, :id => "37", :user_day => {'these' => 'params'}
-      end
-
-      it "assigns the requested user_day as @user_day" do
-        UserDay.stub(:find) { mock_user_day(:update_attributes => true) }
-        put :update, :id => "1"
-        assigns(:user_day).should be(mock_user_day)
-      end
-
-      it "redirects to the user_day" do
-        UserDay.stub(:find) { mock_user_day(:update_attributes => true) }
-        put :update, :id => "1"
-        response.should redirect_to(user_day_url(mock_user_day))
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns the user_day as @user_day" do
-        UserDay.stub(:find) { mock_user_day(:update_attributes => false) }
-        put :update, :id => "1"
-        assigns(:user_day).should be(mock_user_day)
-      end
-
-      it "re-renders the 'edit' template" do
-        UserDay.stub(:find) { mock_user_day(:update_attributes => false) }
-        put :update, :id => "1"
-        response.should render_template("edit")
-      end
-    end
-  end
-
-  describe "DELETE destroy" do
-    it "destroys the requested user_day" do
-      UserDay.stub(:find).with("37") { mock_user_day }
-      mock_user_day.should_receive(:destroy)
-      delete :destroy, :id => "37"
-    end
-
-    it "redirects to the user_days list" do
-      UserDay.stub(:find) { mock_user_day }
-      delete :destroy, :id => "1"
-      response.should redirect_to(user_days_url)
     end
   end
 

@@ -13,5 +13,5 @@ public/cache/*
 .rvmrc
 *.DS_Store
 .sass-cache
-.swp
+*.swp
 latest.dump
