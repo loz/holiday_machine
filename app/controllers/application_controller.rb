@@ -7,8 +7,10 @@ class ApplicationController < ActionController::Base
     absences_path
   end
 
-  def handler_exception(exception)
-     logger.error(" * Message   : #{exception.message}") unless exception.message.nil?
+  unless ["test", "developement"].include? Rails.env
+    def handler_exception(exception)
+      logger.error(" * Message   : #{exception.message}") unless exception.message.nil?
+    end
   end
 
 
