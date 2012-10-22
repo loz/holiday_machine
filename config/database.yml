@@ -7,12 +7,8 @@ development:
   password: admin
 
 test:
-  adapter: mysql2
-  encoding: utf8
-  database: holiday_test
-  pool: 5
-  username: root
-  password: admin
+  adapter: sqlite3
+  database: db/test.sqlite3
 
 production: 
   adapter: mysql2
